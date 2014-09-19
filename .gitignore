@@ -32,3 +32,16 @@
 
 # Composer PHAR
 /composer.phar
+
+/build/
+
+# phpunit
+/app/build/*
+
+# Files created by IDEs like Eclipse, Zend Studio, Netbeans, PHPStorm and TextMate2
+.buildpath
+.project
+.settings
+nbproject
+.idea
+.tm_properties
