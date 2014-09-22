@@ -1,0 +1,21 @@
+backend:
+    resource: "@BackendBundle/Resources/config/routing.yml"
+    prefix:   /admin/
+
+dashboard:
+    resource: "@DashboardBundle/Resources/config/routing.yml"
+    prefix:   /dashboard/
+
+index:
+    path: /
+    defaults: { _controller: "FrameworkBundle:Redirect:redirect", route: dashboard_homepage }
+
+login:
+    path: /login
+    defaults: { _controller: "BackendBundle:User:login" }
+    
+login_check:
+    path: /login_check
+    
+logout:
+    path: /logout

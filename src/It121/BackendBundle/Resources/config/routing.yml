@@ -1,0 +1,8 @@
+backend_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: "BackendBundle:Default:index" }
+
+user:
+     resource: "@BackendBundle/Resources/config/routing/user.yml"
+     prefix:   /user
+    

@@ -1,12 +1,28 @@
-security:
-    providers:
-        in_memory:
-            memory: ~
-
+security: 
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+        secured_area:
+            pattern:    ^/*
+            anonymous:  ~
+            form_login: 
+                login_path:  login
+                check_path:  login_check
+                use_referer: true
+                # default_target_path: /dashboard
+            logout:
+                path: logout
+            remember_me:
+                key:      fsb1234
+                lifetime: 3600
 
-        default:
-            anonymous: ~
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/dashboard/*, roles: [ROLE_RECRUITER, ROLE_APPOINTMENT_SETTER, ROLE_ADMINISTRATOR, ROLE_SUPER_USER] }
+        - { path: ^/backend/*, roles: [ROLE_ADMINISTRATOR] }
+        # You can use a regular expression for the languges '[a-z]{2}'
+    
+    providers:
+        users:
+            entity: { class: It121\BackendBundle\Entity\User, property: login }
+    
+    encoders:
+        It121\BackendBundle\Entity\User: { algorithm: sha512, iterations: 10 }

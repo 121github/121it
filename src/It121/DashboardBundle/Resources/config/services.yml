@@ -1,0 +1,7 @@
+parameters:
+#    dashboard.example.class: It121\DashboardBundle\Example
+
+services:
+#    dashboard.example:
+#        class: %dashboard.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}{% endblock %} | Fsb Calendar Management System</title>
+        
+		{% block stylesheets %}{% endblock %}
+        {# bootstrap css#}
+        <link href="{{ asset('bundles/jquery/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+        {# fonts awesome css#}
+        <link href="{{ asset('bundles/jquery/font-awesome-4.2.0/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet">
+        {# common css#}
+        <link href="{{ asset('bundles/backend/css/common.css') }}"	rel="stylesheet" type="text/css" />
+        
+        {# favicon#}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        
+        {% block javascripts %}
+			{# jquery Lib #}
+    		<script type="text/javascript" src="{{ asset('bundles/jquery/js/jquery-2.1.1.min.js') }}" ></script>
+    		{# bootstrap Lib #}
+    		<script type="text/javascript" src="{{ asset('bundles/jquery/js/bootstrap.js') }}"></script>
+    		{# common Lib #}
+    		<script type="text/javascript" src="{{ asset('bundles/backend/js/common.js') }}" ></script>
+		{% endblock %}
+		
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    <body>	
+    	<div class="wrap">
+			<div class="container">
+	    		{% block body %}{% endblock %}
+	    	</div>
+	    </div>
+	    <footer class="footer">
+	    	<div class="container">
+    			&copy; {{ 'now' | date('Y') }} - 121 It
+    		</div>
+		</footer>
     </body>
 </html>
+    

@@ -1,0 +1,26 @@
+{% extends '::base.html.twig' %}
+
+
+{% block stylesheets %}
+	<link href="{{ asset('bundles/backend/css/backend.css') }}"	rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block body %}
+
+	<div data-role="content">
+		
+		{# Info Messages #}
+		{% for type, flashMessage in app.session.flashbag.all() %}
+			<div class="message" id="message">
+				{% if flashMessage.title is defined %}
+		        	<strong>{{ flashMessage.title }}</strong>
+		        	{{ flashMessage.message }}
+		        {% else %}
+		        	{{ type }}
+		        {% endif %}
+		   	</div>
+		{% endfor %}
+		
+		{% block article %}{% endblock %}
+	</div><!-- /content -->
+{% endblock %}

@@ -1,0 +1,7 @@
+parameters:
+#    jquery.example.class: JQuery\JQueryBundle\Example
+
+services:
+#    jquery.example:
+#        class: %jquery.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
