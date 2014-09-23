@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new It121\BackendBundle\BackendBundle(),
             new JQuery\JQueryBundle\JqueryBundle(),
         	new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new It121\UserBundle\UserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

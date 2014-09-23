@@ -6,8 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 
-use It121\BackendBundle\Entity\User;
-use It121\BackendBundle\Form\UserType;
+use It121\UserBundle\Entity\User;
+use It121\UserBundle\Form\UserType;
 
 /**
  * User controller.
@@ -61,7 +61,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('BackendBundle:User')->findAll();
+        $entities = $em->getRepository('UserBundle:User')->findAll();
 
         return $this->render('BackendBundle:User:index.html.twig', array(
             'entities' => $entities,
@@ -133,7 +133,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BackendBundle:User')->find($id);
+        $entity = $em->getRepository('UserBundle:User')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -155,7 +155,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BackendBundle:User')->find($id);
+        $entity = $em->getRepository('UserBundle:User')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -197,7 +197,7 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('BackendBundle:User')->find($id);
+        $entity = $em->getRepository('UserBundle:User')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
@@ -230,7 +230,7 @@ class UserController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('BackendBundle:User')->find($id);
+            $entity = $em->getRepository('UserBundle:User')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find User entity.');

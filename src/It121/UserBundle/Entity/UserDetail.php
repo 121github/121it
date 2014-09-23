@@ -1,6 +1,6 @@
 <?php
 
-namespace It121\BackendBundle\Entity;
+namespace It121\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -68,7 +68,7 @@ class UserDetail
     /**
      * @var string
      *
-     * @ORM\OneToOne(targetEntity="It121\BackendBundle\Entity\User", inversedBy="userDetail")
+     * @ORM\OneToOne(targetEntity="It121\UserBundle\Entity\User", inversedBy="userDetail")
      */
     private $user;
 
@@ -237,10 +237,10 @@ class UserDetail
     /**
      * Set user
      *
-     * @param \It121\BackendBundle\Entity\User $user
+     * @param \It121\UserBundle\Entity\User $user
      * @return UserDetail
      */
-    public function setUser(\It121\BackendBundle\Entity\User $user = null)
+    public function setUser(\It121\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -250,7 +250,7 @@ class UserDetail
     /**
      * Get user
      *
-     * @return \It121\BackendBundle\Entity\User 
+     * @return \It121\UserBundle\Entity\User 
      */
     public function getUser()
     {

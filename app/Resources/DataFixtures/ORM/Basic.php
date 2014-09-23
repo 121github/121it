@@ -4,10 +4,10 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use It121\BackendBundle\Entity\User;
-use It121\BackendBundle\Entity\UserDetail;
-use It121\BackendBundle\Entity\UserRepository;
-use It121\BackendBundle\Entity\UserRole;
+use It121\UserBundle\Entity\User;
+use It121\UserBundle\Entity\UserDetail;
+use It121\UserBundle\Entity\UserRepository;
+use It121\UserBundle\Entity\UserRole;
 use It121\BackendBundle\Util\Util;
 
 /**

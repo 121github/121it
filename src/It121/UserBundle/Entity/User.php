@@ -1,6 +1,6 @@
 <?php
 
-namespace It121\BackendBundle\Entity;
+namespace It121\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  * User
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="It121\BackendBundle\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="It121\UserBundle\Entity\UserRepository")
  * @DoctrineAssert\UniqueEntity("login")
  */
 class User implements UserInterface
@@ -54,12 +54,12 @@ class User implements UserInterface
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="It121\BackendBundle\Entity\UserRole")
+     * @ORM\ManyToOne(targetEntity="It121\UserBundle\Entity\UserRole")
      */
     private $role;
 
     /**
-     * @ORM\OneToOne(targetEntity="It121\BackendBundle\Entity\UserDetail", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="It121\UserBundle\Entity\UserDetail", mappedBy="user")
      */
     private $userDetail;
     
@@ -215,10 +215,10 @@ class User implements UserInterface
     /**
      * Set userDetail
      *
-     * @param \It121\BackendBundle\Entity\UserDetail $userDetail
+     * @param \It121\UserBundle\Entity\UserDetail $userDetail
      * @return User
      */
-    public function setUserDetail(\It121\BackendBundle\Entity\UserDetail $userDetail = null)
+    public function setUserDetail(\It121\UserBundle\Entity\UserDetail $userDetail = null)
     {
     	$this->userDetail = $userDetail;
     
@@ -228,7 +228,7 @@ class User implements UserInterface
     /**
      * Get userDetail
      *
-     * @return \It121\BackendBundle\Entity\UserDetail
+     * @return \It121\UserBundle\Entity\UserDetail
      */
     public function getUserDetail()
     {
@@ -238,10 +238,10 @@ class User implements UserInterface
     /**
      * Set role
      *
-     * @param \It121\BackendBundle\Entity\UserRole $role
+     * @param \It121\UserBundle\Entity\UserRole $role
      * @return User
      */
-    public function setRole(\It121\BackendBundle\Entity\UserRole $role = null)
+    public function setRole(\It121\UserBundle\Entity\UserRole $role = null)
     {
     	$this->role = $role;
     
@@ -251,7 +251,7 @@ class User implements UserInterface
     /**
      * Get role
      *
-     * @return \It121\BackendBundle\Entity\UserRole
+     * @return \It121\UserBundle\Entity\UserRole
      */
     public function getRole()
     {

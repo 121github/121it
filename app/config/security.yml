@@ -22,7 +22,7 @@ security:
     
     providers:
         users:
-            entity: { class: It121\BackendBundle\Entity\User, property: login }
+            entity: { class: It121\UserBundle\Entity\User, property: login }
     
     encoders:
-        It121\BackendBundle\Entity\User: { algorithm: sha512, iterations: 10 }
+        It121\UserBundle\Entity\User: { algorithm: sha512, iterations: 10 }
