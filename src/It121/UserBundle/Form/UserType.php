@@ -1,6 +1,6 @@
 <?php
 
-namespace It121\BackendBundle\Form;
+namespace It121\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,7 +33,7 @@ class UserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'It121\BackendBundle\Entity\User'
+            'data_class' => 'It121\UserBundle\Entity\User'
         ));
     }
 
@@ -42,6 +42,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'it121_backendbundle_user';
+        return 'it121_userbundle_user';
     }
 }

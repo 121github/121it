@@ -1,53 +1,63 @@
-{% extends '::base.html.twig' %}
+{% extends '::backend.html.twig' %}
 
-{% block body -%}
-    <h1>User list</h1>
+{% block title %}User List{% endblock %}
 
-    <table class="records_list">
+{% block content -%}
+
+    <div style="margin-bottom: 10px;">
+    	<button class="btn btn-success fa fa-plus">New User</button>
+    </div>
+    
+   
+    <table class="table table-striped jumbotron">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Login</th>
-                <th>Salt</th>
-                <th>Password</th>
-                <th>Createdby</th>
-                <th>Createddate</th>
-                <th>Modifiedby</th>
-                <th>Modifieddate</th>
-                <th>Actions</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Connected</th>
+                <th style="text-align: right;">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('user_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">{{ entity.id }}</a></td>
                 <td>{{ entity.login }}</td>
-                <td>{{ entity.salt }}</td>
-                <td>{{ entity.password }}</td>
-                <td>{{ entity.createdBy }}</td>
-                <td>{% if entity.createdDate %}{{ entity.createdDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.modifiedBy }}</td>
-                <td>{% if entity.modifiedDate %}{{ entity.modifiedDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('user_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('user_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                <td>{{ entity.userDetail}}</td>
+                <td>{{ entity.userDetail.email}}</td>
+                <td>{{ entity.role}}</td>
+                <td style="text-align: center;"><a href="" class="fa fa-user"></a></td>
+                <td style="text-align: right;"><a href="#" class="pop-right fa fa-ellipsis-h fa-2x" 
+                		data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true"
+                		data-content='
+                					<a href="{{ path('user_show', { 'id': entity.id }) }}" class="fa fa-eye" data-toggle="modal" data-target="#show_{{ entity.id }}"></a><br />
+                					<a href="{{ path('user_edit', { 'id': entity.id }) }}" class="fa fa-edit" data-toggle="modal" data-target="#edit_{{ entity.id }}"></a><br />
+                					<a href="{{ path('user_edit', { 'id': entity.id }) }}" class="fa fa-trash-o"></a><br />
+                					<a href="" class="fa fa-power-off"></a>'>
+                	</a>
                 </td>
             </tr>
+            
+            <!-- Modal Show -->
+			<div class="modal fade" id="show_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			    </div>
+			  </div>
+			</div>
+			<!-- Modal Edit -->
+			<div class="modal fade" id="edit_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			    </div>
+			  </div>
+			</div>
+            
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('user_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+    
     {% endblock %}

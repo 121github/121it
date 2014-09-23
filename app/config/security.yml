@@ -16,8 +16,8 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/dashboard/*, roles: [ROLE_RECRUITER, ROLE_APPOINTMENT_SETTER, ROLE_ADMINISTRATOR, ROLE_SUPER_USER] }
-        - { path: ^/backend/*, roles: [ROLE_ADMINISTRATOR] }
+        - { path: ^/dashboard/*, roles: [ROLE_ADMINISTRATOR, ROLE_USER] }
+        - { path: ^/admin/*, roles: [ROLE_ADMINISTRATOR] }
         # You can use a regular expression for the languges '[a-z]{2}'
     
     providers:

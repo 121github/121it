@@ -6,64 +6,6 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Static navbar -->
-    <div class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Dashboard</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servers<span class="caret"></span></a>
-            	<ul class="dropdown-menu" role="menu">
-            		<li><a href="#">121WebHost</a>
-            	</ul>
-            </li>
-            <li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<span class="caret"></span></a>
-            	<ul class="dropdown-menu" role="menu">
-            		<li class="dropdown-header">Management</li>
-            		<li><a href="http://www.121leads.co.uk:9090" target="_blank">Phabricator</a>
-            		<li class="divider"></li>
-            		<li class="dropdown-header">Continuous Integration</li>
-            		<li><a href="http://www.121leads.co.uk:8080" target="_blank">Jenkins</a>
-            		<li class="divider"></li>
-            		<li class="dropdown-header">Developement</li>
-            		<li><a href="http://121webhost/fsb/web" target="_blank">Fsb</a>
-            		<li><a href="http://121webhost/121sys/web" target="_blank">121Sys</a>
-            	</ul>
-            </li>
-            <li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Enviroments<span class="caret"></span></a>
-            	<ul class="dropdown-menu" role="menu">
-            		<li><a href="#">Developement</a>
-            		<li><a href="#">Test</a>
-            		<li><a href="#">Pre-production</a>
-            		<li><a href="#">Production</a>
-            	</ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#" class="pop-bottom" data-container="body" data-toggle="popover" data-placement="bottom" title="Profile" data-content='{% include '::includes/profileDashboard.html.twig' %}' data-html="true">
-		       	<span class="glyphicon glyphicon-user"></span>
-		      </a>
-		    </li>
-		    
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
 	{# Info Messages #}
 	{% for type, flashMessage in app.session.flashbag.all() %}
 		<div class="message" id="message">

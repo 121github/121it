@@ -4,10 +4,7 @@
 
 {% block content -%}
       <div class="row">
-      
-      	<div class="col-md-3">  </div>
-      	
-      	<div class="col-md-6">
+		<div class="col-md-8">
 	      	<nav class="circular-menu">
 				<div class="circle">
 					<a href="#" class="pop-top slider fa fa-home fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='ASDASD' data-html="true"></a>
@@ -24,7 +21,7 @@
 			</nav>	
       	</div>
       	
-      	<div class="col-md-3">  
+      	<div class="col-md-4">  
       	
       		<div class="panel-group" id="accordion">
 				  <div class="panel panel-default">
@@ -38,16 +35,33 @@
 				    <div id="collapseOne" class="panel-collapse collapse in">
 				      <div class="panel-body">
 				        <table class="table table-hover">
-				      		<tr class="pop-left success" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status On</div><div>Last online 23 hours ago</div><div>Last check 4 seconds ago</div><div>Latency 0.01242</div>' data-html="true">
-							  <td><span class="fa fa-laptop fa-1x"></span></td>
-							  <td>121WebHost</td>
-							  <td><span class="btn fa fa-check fa-1x"></span></td>
-							</tr>
-							<tr class="pop-left danger" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status On</div><div>Last online 4 hours ago</div><div>Last check 10 seconds ago</div><div>Latency -</div>' data-html="true">
-							  <td><span class="fa fa-laptop fa-1x"></span></td>
-							  <td>121Backup</td>
-							  <td><span class="btn fa fa-close fa-1x"></span></td>
-							</tr>
+				        	{% for server in servers %}
+				        		{% if server.status.name == 'Ok' %}
+				        			{% set status = "success" %}
+				        			{% set icon_status = "fa-check" %}
+				        		{% elseif server.status.name == 'Error' %}
+				        			{% set status = "danger" %}
+				        			{% set icon_status = "fa-remove" %}
+				        		{% elseif server.status.name == 'Warning' %}
+				        			{% set status = "warning" %}
+				        			{% set icon_status = "fa-eye" %}
+				        		{% endif %}
+				        		
+				        		{% if server.type == 'Service' %}
+				        			{% set icon = "fa-plug" %}
+				        		{% elseif server.type == 'Server' %}
+				        			{% set icon = "fa-laptop" %}
+				        		{% elseif server.type == 'Website' %}
+				        			{% set icon = "fa-folder" %}
+				        		{% endif %}
+				        		
+				        		<tr class="pop-left {{ status }}" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status On</div><div>Last online {{ server.lastOnline|date('Y-m-d H:m:s') }}</div><div>Last check {{ server.lastCheck|date('Y-m-d H:m:s') }}</div><div>Latency {{ server.latency }}</div>' data-html="true">
+								  <td><span class="fa {{ icon }} fa-1x"></span></td>
+								  <td>{{ server.name }}</td>
+								  <td><span class="fa {{ icon_status }} fa-1x"></span></td>
+								  <td><a href="#" class="fa fa-refresh  fa-1x"></a></td>
+								</tr>
+				        	{% endfor %}
 				      	</table>
 				      </div>
 				    </div>

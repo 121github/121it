@@ -1,5 +1,5 @@
 backend_homepage:
-    path:     /hello/{name}
+    path:     /hello
     defaults: { _controller: "BackendBundle:Default:index" }
 
 user:
