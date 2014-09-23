@@ -28,7 +28,9 @@
     <body>	
     	<div class="wrap">
 			<div class="container">
-				{% include '::includes/menu.html.twig' %}
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					{% include '::includes/menu.html.twig' %}
+				{% endif %}
 	    		{% block body %}{% endblock %}
 	    	</div>
 	    </div>
