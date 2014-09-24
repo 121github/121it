@@ -6,17 +6,5 @@
 {% endblock %}
 
 {% block body %}
-	{# Info Messages #}
-	{% for type, flashMessage in app.session.flashbag.all() %}
-		<div class="message" id="message">
-			{% if flashMessage.title is defined %}
-	        	<strong>{{ flashMessage.title }}</strong>
-	        	{{ flashMessage.message }}
-	        {% else %}
-	        	{{ type }}
-	        {% endif %}
-	   	</div>
-	{% endfor %}
-	
 	{% block content %}{% endblock %}
 {% endblock %}

@@ -1,19 +1,70 @@
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" id="edit_form_{{ entity.id }}" role="form">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		<h4 class="modal-title" id="myModalLabel">User Edition</h4>
+		<h4 class="modal-title" id="myModalLabel">{{ "Edit User -  " ~ entity.userDetail  }}</h4>
 	</div>
 	<div class="modal-body">
+		  <div id="errors">
+		  	{{ form_errors(edit_form) }}
+		  </div>
+		  
+		  
 		  {{ form_errors(edit_form.login) }}
 		  <div class="form-group">
 		    <label class="col-sm-2 control-label">{{ form_label(edit_form.login) }}</label>
 		    <div class="col-sm-10">{{ form_widget(edit_form.login) }}</div>
 		  </div>
 		  
+		  {{ form_errors(edit_form.userDetail.firstname) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(edit_form.userDetail.firstname) }}</label>
+		    <div class="col-sm-10">{{ form_widget(edit_form.userDetail.firstname) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.userDetail.lastname) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(edit_form.userDetail.lastname) }}</label>
+		    <div class="col-sm-10">{{ form_widget(edit_form.userDetail.lastname) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.userDetail.email) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(edit_form.userDetail.email) }}</label>
+		    <div class="col-sm-10">{{ form_widget(edit_form.userDetail.email) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.userDetail.telephone) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(edit_form.userDetail.telephone) }}</label>
+		    <div class="col-sm-10">{{ form_widget(edit_form.userDetail.telephone) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.userDetail.mobile) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(edit_form.userDetail.mobile) }}</label>
+		    <div class="col-sm-10">{{ form_widget(edit_form.userDetail.mobile) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.role) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(edit_form.role) }}</label>
+		    <div class="col-sm-10">{{ form_widget(edit_form.role) }}</div>
+		  </div>
+		  
+		  {{ form_row(edit_form._token) }}
 	</div>
 	<div class="modal-footer">
 	    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-		<button type="submit" class="btn btn-success">Save</button>
+		<button type="submit" class="btn btn-success">Update</button>
 	</div>
 </form>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = "{{ path('user_update', {'id': entity.id}) }}";
+		var user_id = "{{ entity.id }}";
+		user.edit(user_id, url)
+	});
+</script>
     

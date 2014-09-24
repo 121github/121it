@@ -5,10 +5,12 @@ namespace It121\UserBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
+use It121\UserBundle\Form\UserDetailType;
 
 class UserType extends AbstractType
 {
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -16,14 +18,20 @@ class UserType extends AbstractType
     {
         $builder
             ->add('login')
-            ->add('salt')
-            ->add('password')
-            ->add('createdBy')
-            ->add('createdDate')
-            ->add('modifiedBy')
-            ->add('modifiedDate')
-            ->add('role')
-            ->add('userDetail')
+            ->add('password', 'repeated', array(
+				'type' => 'password',
+				'invalid_message' => 'Both passwords must be the same',
+				'options' => array('label' => 'Password')
+			))
+            ->add('role', 'entity', array(
+            		'class'         => 'It121\\UserBundle\\Entity\\UserRole',
+            		'empty_value'   => 'Select a role',
+            		'query_builder' => function(EntityRepository $repository) {
+            			return $repository->createQueryBuilder('r')
+            			->orderBy('r.name', 'ASC');
+            		},
+            ))
+            ->add('userDetail', new UserDetailType())
         ;
     }
     
@@ -33,7 +41,8 @@ class UserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'It121\UserBundle\Entity\User'
+            'data_class' => 'It121\UserBundle\Entity\User',
+			'validation_groups' => array('create', 'Default')
         ));
     }
 

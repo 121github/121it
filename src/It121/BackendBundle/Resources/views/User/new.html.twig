@@ -1,15 +1,75 @@
-{% extends '::base.html.twig' %}
+<form class="form-horizontal" id="new_form" role="form">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title" id="myModalLabel">New User</h4>
+	</div>
+	<div class="modal-body">
+		  <div id="errors">
+		  	{{ form_errors(form) }}
+		  </div>
+		  
+		  
+		  {{ form_errors(form.login) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(form.login) }}</label>
+		    <div class="col-sm-10">{{ form_widget(form.login) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.password) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(form.password) }}</label>
+		    <div class="col-sm-10">{{ form_widget(form.password) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.userDetail.firstname) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(form.userDetail.firstname) }}</label>
+		    <div class="col-sm-10">{{ form_widget(form.userDetail.firstname) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.userDetail.lastname) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(form.userDetail.lastname) }}</label>
+		    <div class="col-sm-10">{{ form_widget(form.userDetail.lastname) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.userDetail.email) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(form.userDetail.email) }}</label>
+		    <div class="col-sm-10">{{ form_widget(form.userDetail.email) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.userDetail.telephone) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(form.userDetail.telephone) }}</label>
+		    <div class="col-sm-10">{{ form_widget(form.userDetail.telephone) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.userDetail.mobile) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(form.userDetail.mobile) }}</label>
+		    <div class="col-sm-10">{{ form_widget(form.userDetail.mobile) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.role) }}
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">{{ form_label(form.role) }}</label>
+		    <div class="col-sm-10">{{ form_widget(form.role) }}</div>
+		  </div>
+		  
+		  {{ form_row(form._token) }}
+	</div>
+	<div class="modal-footer">
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		<button type="submit" class="btn btn-success">Save</button>
+	</div>
+</form>
 
-{% block body -%}
-    <h1>User creation</h1>
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('user') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
-{% endblock %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = "{{ path('user_create') }}";
+		user.create(url)
+	});
+</script>
+    

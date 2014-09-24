@@ -15,14 +15,14 @@
         {# favicon#}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         
-        {% block javascripts %}
+        {% block javascripts %}{% endblock %}
 			{# jquery Lib #}
     		<script type="text/javascript" src="{{ asset('bundles/jquery/js/jquery-2.1.1.min.js') }}" ></script>
     		{# bootstrap Lib #}
     		<script type="text/javascript" src="{{ asset('bundles/jquery/js/bootstrap.js') }}"></script>
     		{# common Lib #}
     		<script type="text/javascript" src="{{ asset('bundles/backend/js/common.js') }}" ></script>
-		{% endblock %}
+		
 		
     </head>
     <body>	
@@ -31,7 +31,11 @@
 				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 					{% include '::includes/menu.html.twig' %}
 				{% endif %}
+				
 	    		{% block body %}{% endblock %}
+	    		
+	    		{% include '::includes/messages.html.twig' %}
+				
 	    	</div>
 	    </div>
 	    <footer class="footer">

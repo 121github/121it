@@ -23,3 +23,38 @@ body {
   height:50px;
   width:100%;
 }
+
+body a:hover, a:visited {
+	text-decoration: none;
+}
+
+input {
+	width: 90%;
+}
+
+
+/* ===========================================================================
+   Messages
+   ======================================================================== */
+.message {
+    position: absolute;
+    bottom:50px;
+    left: 0px;
+    width: 100%;
+    margin: auto;
+    padding-bottom: 40px; /* give extra space for form */
+    text-align: center; 
+}
+.message .message_success {
+    position: absolute;
+    bottom: 0; left: 0px; right: 0px;
+    background-color: rgb(186, 214, 186);
+    padding: 15px;
+}
+
+.message .message_error {
+    position: absolute;
+    bottom: 0; left: 0px; right: 0px;
+    background-color: rgb(213, 164, 164);
+    padding: 15px;
+}

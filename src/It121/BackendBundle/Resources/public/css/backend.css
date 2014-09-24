@@ -9,8 +9,18 @@
 
 */
 
-#login {
+.login {
+	width: 50%;
 	margin: auto;
-	margin-top: 20%;
+	margin-top: 20px;
+}
+
+.login #logo {
+	width: 600px;
+	text-align: center;
+}
+
+.login #login-box {
+	margin-top: 30px;
 	width: 600px;
 }

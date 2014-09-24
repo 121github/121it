@@ -5,19 +5,12 @@
 	<link href="{{ asset('bundles/backend/css/backend.css') }}"	rel="stylesheet" type="text/css" />
 {% endblock %}
 
+{% block javascripts %}
+	{# user Lib #}
+    <script type="text/javascript" src="{{ asset('bundles/backend/js/user.js') }}" ></script>
+{% endblock %}
+
 {% block body %}
-	
-	{# Info Messages #}
-	{% for type, flashMessage in app.session.flashbag.all() %}
-		<div class="message" id="message">
-			{% if flashMessage.title is defined %}
-	        	<strong>{{ flashMessage.title }}</strong>
-	        	{{ flashMessage.message }}
-	        {% else %}
-	        	{{ type }}
-	        {% endif %}
-	   	</div>
-	{% endfor %}
-	
+
 	{% block content %}{% endblock %}
 {% endblock %}

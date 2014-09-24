@@ -57,7 +57,6 @@
     </table>
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-danger pull-left">Delete</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	<button type="button" class="btn btn-warning">Edit</button>
+	<a href="{{ path('user_remove', { 'id': entity.id }) }}" class="btn btn-danger pull-left" data-toggle="modal" data-target="#delete_{{ entity.id }}">Delete</a>
+	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 </div>
