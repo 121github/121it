@@ -5,4 +5,7 @@ backend_homepage:
 user:
      resource: "@BackendBundle/Resources/config/routing/user.yml"
      prefix:   /user
-    
+
+server:
+     resource: "@BackendBundle/Resources/config/routing/server.yml"
+     prefix:   /server    

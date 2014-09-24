@@ -1,0 +1,81 @@
+<form class="form-horizontal" id="edit_form_{{ entity.id }}" role="form">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title" id="myModalLabel">{{ "Edit Server -  " ~ entity.name  }}</h4>
+	</div>
+	<div class="modal-body">
+		  <div id="errors">
+		  	{{ form_errors(edit_form) }}
+		  </div>
+		  
+		  {{ form_errors(edit_form.name) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.name) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.name) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.domain) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.domain) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.domain) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.user) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.user) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.user) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.password) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.password) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.password) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.port) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.port) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.port) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.type) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.type) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.type) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.subtype) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.subtype) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.subtype) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.sendEmail) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.sendEmail) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.sendEmail) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.monitoring) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.monitoring) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.monitoring) }}</div>
+		  </div>
+		  
+		  {{ form_row(edit_form._token) }}
+	</div>
+	<div class="modal-footer">
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		<button type="submit" class="btn btn-success">Update</button>
+	</div>
+</form>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = "{{ path('server_update', {'id': entity.id}) }}";
+		var server_id = "{{ entity.id }}";
+		user.edit(server_id, url)
+	});
+</script>
+    

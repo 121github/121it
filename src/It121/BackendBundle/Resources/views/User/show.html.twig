@@ -59,4 +59,5 @@
 <div class="modal-footer">
 	<a href="{{ path('user_remove', { 'id': entity.id }) }}" class="btn btn-danger pull-left" data-toggle="modal" data-target="#delete_{{ entity.id }}">Delete</a>
 	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	<a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{ entity.id }}">Edit</a>
 </div>

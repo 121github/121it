@@ -1,0 +1,34 @@
+server:
+    path:     /
+    defaults: { _controller: "BackendBundle:Server:index" }
+
+server_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:Server:show" }
+
+server_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:Server:new" }
+
+server_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:Server:create" }
+    requirements: { _method: post }
+
+server_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:Server:edit" }
+
+server_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:Server:update" }
+    requirements: { _method: post|put }
+
+server_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "BackendBundle:Server:remove" }
+    
+server_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:Server:delete" }
+    requirements: { _method: post|delete }
