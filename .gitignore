@@ -37,6 +37,7 @@
 
 # phpunit
 /app/build/*
+!app/build/.gitkeep
 
 # Files created by IDEs like Eclipse, Zend Studio, Netbeans, PHPStorm and TextMate2
 .buildpath
