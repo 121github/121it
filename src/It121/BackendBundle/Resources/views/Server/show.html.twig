@@ -14,8 +14,12 @@
                 <td>{{ entity.name }}</td>
             </tr>
             <tr>
-                <th>Domain</th>
-                <td>{{ entity.domain }}</td>
+                <th>Domain/URL</th>
+                {% if entity.type == 'Website' %}
+                	<td><a href="{{ entity.domain}}" target="_blank">{{ entity.domain}}</a></td>
+                {% else %}
+                	<td>{{ entity.domain}}</td>
+                {% endif %}
             </tr>
             <tr>
                 <th>User</th>

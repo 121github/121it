@@ -75,7 +75,7 @@
 	$(document).ready(function(){
 		var url = "{{ path('server_update', {'id': entity.id}) }}";
 		var server_id = "{{ entity.id }}";
-		user.edit(server_id, url)
+		server.edit(server_id, url)
 	});
 </script>
     
