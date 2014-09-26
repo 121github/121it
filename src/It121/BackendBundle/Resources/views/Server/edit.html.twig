@@ -20,6 +20,12 @@
 		    <div class="col-sm-6">{{ form_widget(edit_form.domain) }}</div>
 		  </div>
 		  
+		  {{ form_errors(edit_form.path) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.path) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.path) }}</div>
+		  </div>
+		  
 		  {{ form_errors(edit_form.user) }}
 		  <div class="form-group">
 		    <label class="col-sm-4 control-label">{{ form_label(edit_form.user) }}</label>

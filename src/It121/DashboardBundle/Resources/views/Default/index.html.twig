@@ -55,7 +55,7 @@
 				        			{% set icon = "fa-folder" %}
 				        		{% endif %}
 				        		
-				        		<tr class="pop-left {{ status }}" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status On</div><div>Last online {{ server.lastOnline|date('Y-m-d H:m:s') }}</div><div>Last check {{ server.lastCheck|date('Y-m-d H:m:s') }}</div><div>Latency {{ server.latency }}</div>' data-html="true">
+				        		<tr class="pop-left {{ status }}" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status {{ server.status }}</div><div>Last online {{ server.lastOnline|date('Y-m-d H:m:s') }}</div><div>Last check {{ server.lastCheck|date('Y-m-d H:m:s') }}</div><div>Latency {{ server.latency }}</div>' data-html="true">
 								  <td><span class="fa {{ icon }} fa-1x"></span></td>
 								  <td>{{ server.name }}</td>
 								  <td><span class="fa {{ icon_status }} fa-1x"></span></td>

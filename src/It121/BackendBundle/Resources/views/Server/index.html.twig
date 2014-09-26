@@ -16,70 +16,73 @@
     </div>
     
    
-    <table class="table table-striped jumbotron">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Domain/URL</th>
-                <th>User</th>
-                <th>Password</th>
-                <th>Port</th>
-                <th>Type</th>
-                <th>Subtype</th>
-                <th>Status</th>
-                <th style="text-align: right;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('server_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                {% if entity.type == 'Website' %}
-                	<td><a href="{{ entity.domain}}" target="_blank">{{ entity.domain}}</a></td>
-                {% else %}
-                	<td>{{ entity.domain}}</td>
-                {% endif %}
-                <td>{{ entity.user}}</td>
-                <td>{{ entity.password}}</td>
-                <td>{{ entity.port}}</td>
-                <td>{{ entity.type}}</td>
-                <td>{{ entity.subtype}}</td>
-                <td>{{ entity.status}}</td>
-                <td style="text-align: right;"><a href="#" class="pop-right fa fa-ellipsis-h fa-2x" 
-                		data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true"
-                		data-content='
-                					<a href="{{ path('server_show', { 'id': entity.id }) }}" class="fa fa-eye" data-toggle="modal" data-target="#show_{{ entity.id }}"></a><br />
-                					<a href="{{ path('server_edit', { 'id': entity.id }) }}" class="fa fa-edit" data-toggle="modal" data-target="#edit_{{ entity.id }}"></a><br />
-                					<a href="{{ path('server_remove', { 'id': entity.id }) }}" class="fa fa-trash-o" data-toggle="modal" data-target="#delete_{{ entity.id }}"></a><br />'>
-                	</a>
-                </td>
-            </tr>
-            
-            <!-- Modal Show -->
-			<div class="modal fade" id="show_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			    </div>
-			  </div>
-			</div>
-			<!-- Modal Edit -->
-			<div class="modal fade" id="edit_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			    </div>
-			  </div>
-			</div>
-			<!-- Modal Edit -->
-			<div class="modal fade" id="delete_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			    </div>
-			  </div>
-			</div>
-        {% endfor %}
-        </tbody>
-    </table>
+   <div class="row">
+   		<div class="col-md-11">
+		    <table class="table table-striped jumbotron">
+		        <thead>
+		            <tr>
+		                <th>#</th>
+		                <th>Name</th>
+		                <th>Domain</th>
+		                <th>Path</th>
+		                <th>User</th>
+		                <th>Password</th>
+		                <th>Port</th>
+		                <th>Type</th>
+		                <th>Subtype</th>
+		                <th>Status</th>
+		                <th style="text-align: right;">Actions</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for entity in entities %}
+		            <tr>
+		                <td><a href="{{ path('server_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">{{ entity.id }}</a></td>
+		                <td><a href="{{ entity}}" target="_blank">{{ entity.name}}</a></td>
+		                <td>{{ entity.domain }}</td>
+		                <td>{{ entity.path }}</td>
+		                <td>{{ entity.user}}</td>
+		                <td>{{ entity.password}}</td>
+		                <td>{{ entity.port}}</td>
+		                <td>{{ entity.type}}</td>
+		                <td>{{ entity.subtype}}</td>
+		                <td>{{ entity.status}}</td>
+		                <td style="text-align: right;"><a href="#" class="pop-right fa fa-ellipsis-h fa-2x" 
+		                		data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true"
+		                		data-content='
+		                					<a href="{{ path('server_show', { 'id': entity.id }) }}" class="fa fa-eye" data-toggle="modal" data-target="#show_{{ entity.id }}"></a><br />
+		                					<a href="{{ path('server_edit', { 'id': entity.id }) }}" class="fa fa-edit" data-toggle="modal" data-target="#edit_{{ entity.id }}"></a><br />
+		                					<a href="{{ path('server_remove', { 'id': entity.id }) }}" class="fa fa-trash-o" data-toggle="modal" data-target="#delete_{{ entity.id }}"></a><br />'>
+		                	</a>
+		                </td>
+		            </tr>
+		            
+		            <!-- Modal Show -->
+					<div class="modal fade" id="show_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					    </div>
+					  </div>
+					</div>
+					<!-- Modal Edit -->
+					<div class="modal fade" id="edit_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					    </div>
+					  </div>
+					</div>
+					<!-- Modal Edit -->
+					<div class="modal fade" id="delete_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					    </div>
+					  </div>
+					</div>
+		        {% endfor %}
+		        </tbody>
+		    </table>
+		</div>
+		<div class="col-md-1"></div>
+	 </div>
     
     {% endblock %}

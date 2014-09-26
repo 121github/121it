@@ -20,6 +20,12 @@
 		    <div class="col-sm-6">{{ form_widget(form.domain) }}</div>
 		  </div>
 		  
+		  {{ form_errors(form.path) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(form.path) }}</label>
+		    <div class="col-sm-6">{{ form_widget(form.path) }}</div>
+		  </div>
+		  
 		  {{ form_errors(form.user) }}
 		  <div class="form-group">
 		    <label class="col-sm-4 control-label">{{ form_label(form.user) }}</label>

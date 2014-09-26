@@ -186,7 +186,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Test)
         $server = new Server();
         $server->setName('Voice Group Test');
-        $server->setDomain('http://121webhost/voicegroup/web/');
+        $server->setDomain('http://121webhost');
+        $server->setPath('voicegroup/web');
         $server->setPort(80);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
@@ -211,7 +212,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Management)
         $server = new Server();
         $server->setName('Phabricator');
-        $server->setDomain('http://www.121leads.co.uk/');
+        $server->setDomain('http://www.121leads.co.uk');
         $server->setPort(9090);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
@@ -235,7 +236,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Management)
         $server = new Server();
         $server->setName('Jenkins');
-        $server->setDomain('http://www.121leads.co.uk/');
+        $server->setDomain('http://www.121leads.co.uk');
         $server->setPort(8080);
         $server->setSendEmail(true);
         $server->setMonitoring(true);

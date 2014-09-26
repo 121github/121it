@@ -19,6 +19,7 @@ class ServerType extends AbstractType
         $builder
             ->add('name')
             ->add('domain')
+            ->add('path')
             ->add('user')
             ->add('password')
 			->add('port')

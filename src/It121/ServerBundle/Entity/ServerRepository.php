@@ -13,5 +13,62 @@ use Doctrine\ORM\EntityRepository;
 class ServerRepository extends EntityRepository
 {
 	
+	/**
+	 * Get the websites
+	 * 
+	 */
+	public function findWebsites() {
+		
+		$entityManager = $this->getEntityManager();
+		
+		//Get the website type
+		$websiteType = $entityManager->getRepository('ServerBundle:ServerType')->findOneBy(array(
+				'name' => 'Website'
+		));
+		
+		//Get the websites
+		return $entityManager->getRepository('ServerBundle:Server')->findBy(array(
+				'type' => $websiteType->getId()
+		));
+	}
+	
+	/**
+	 * Get the services
+	 *
+	 */
+	public function findServices() {
+	
+		$entityManager = $this->getEntityManager();
+	
+		//Get the website type
+		$websiteType = $entityManager->getRepository('ServerBundle:ServerType')->findOneBy(array(
+				'name' => 'Service'
+		));
+	
+		//Get the websites
+		return $entityManager->getRepository('ServerBundle:Server')->findBy(array(
+				'type' => $websiteType->getId()
+		));
+	}
+	
+	/**
+	 * Get the servers
+	 *
+	 */
+	public function findServers() {
+	
+		$entityManager = $this->getEntityManager();
+	
+		//Get the website type
+		$websiteType = $entityManager->getRepository('ServerBundle:ServerType')->findOneBy(array(
+				'name' => 'Server'
+		));
+	
+		//Get the websites
+		return $entityManager->getRepository('ServerBundle:Server')->findBy(array(
+				'type' => $websiteType->getId()
+		));
+	}
+	
 	
 }

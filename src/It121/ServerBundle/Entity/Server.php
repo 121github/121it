@@ -38,6 +38,13 @@ class Server
     /**
      * @var string
      *
+     * @ORM\Column(name="path", type="string", length=100, nullable=true)
+     */
+    private $path;
+    
+    /**
+     * @var string
+     *
      * @ORM\Column(name="user", type="string", length=100, nullable=true)
      */
     private $user;
@@ -160,7 +167,17 @@ class Server
      */
     public function __toString()
     {
-    	return $this->getName();
+    	return $this->getUrl();
+    }
+    
+    /**
+     * Get Url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+    	return $this->domain.":".$this->port."/".$this->path;
     }
 
     /**
@@ -609,5 +626,28 @@ class Server
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     * @return Server
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string 
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }
