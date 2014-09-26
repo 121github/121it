@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<meta content="width=device-width, initial-scale=1" name="viewport">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block title %}{% endblock %} | 121 IT Management System</title>
         
@@ -26,18 +27,18 @@
 		
     </head>
     <body>	
-    	<div class="wrap">
-			<div class="container">
-				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-					{% include '::includes/menu.html.twig' %}
-				{% endif %}
-				
-	    		{% block body %}{% endblock %}
-	    		
-	    		{% include '::includes/messages.html.twig' %}
-				
-	    	</div>
-	    </div>
+    		<div class="wrap">
+				<div class="container-fluid">
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						{% include '::includes/menu.html.twig' %}
+					{% endif %}
+					
+		    		{% block body %}{% endblock %}
+		    		
+		    		{% include '::includes/messages.html.twig' %}
+					
+		    	</div>
+		    </div>
 	    <footer class="footer">
 	    	<div class="container">
     			&copy; {{ 'now' | date('Y') }} - 121 It
