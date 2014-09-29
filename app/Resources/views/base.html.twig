@@ -8,6 +8,8 @@
 		{% block stylesheets %}{% endblock %}
         {# bootstrap css#}
         <link href="{{ asset('bundles/jquery/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+        {# bootstrap datepicker#}
+        <link href="{{ asset('bundles/jquery/css/bootstrap-datetimepicker.css') }}" type="text/css" rel="stylesheet">
         {# fonts awesome css#}
         <link href="{{ asset('bundles/jquery/font-awesome-4.2.0/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet">
         {# common css#}
@@ -21,6 +23,10 @@
     		<script type="text/javascript" src="{{ asset('bundles/jquery/js/jquery-2.1.1.min.js') }}" ></script>
     		{# bootstrap Lib #}
     		<script type="text/javascript" src="{{ asset('bundles/jquery/js/bootstrap.js') }}"></script>
+    		{# bootstrap datepicker Lib #}
+    		<script type="text/javascript" src="{{ asset('bundles/jquery/js/moment.js') }}"></script>
+    		<script type="text/javascript" src="{{ asset('bundles/jquery/js/bootstrap-datetimepicker.js') }}"></script>
+    		
     		{# common Lib #}
     		<script type="text/javascript" src="{{ asset('bundles/backend/js/common.js') }}" ></script>
 		

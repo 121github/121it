@@ -80,9 +80,9 @@ class ServerController extends Controller
      */
     public function createAction(Request $request)
     {
-    	$serverLogged = $this->get('security.context')->getToken()->getUser();
+    	$userLogged = $this->get('security.context')->getToken()->getUser();
     
-    	if (!$serverLogged) {
+    	if (!$userLogged) {
     		throw $this->createNotFoundException('Unable to find this user.');
     	}
     	 
@@ -93,7 +93,7 @@ class ServerController extends Controller
     	if ($form->isValid()) {
     		$eManager = $this->getDoctrine()->getManager();
     		 
-    		Util::setCreateAuditFields($server, $serverLogged->getId());
+    		Util::setCreateAuditFields($server, $userLogged->getId());
     		 
     		$eManager->persist($server);
     		$eManager->flush();
@@ -148,7 +148,7 @@ class ServerController extends Controller
     }
     
     /**
-     * Displays a form to create a new User entity.
+     * Displays a form to create a new Server entity.
      *
      */
     public function newAction()
@@ -219,9 +219,9 @@ class ServerController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-    	$serverLogged = $this->get('security.context')->getToken()->getUser();
+    	$userLogged = $this->get('security.context')->getToken()->getUser();
     	 
-    	if (!$serverLogged) {
+    	if (!$userLogged) {
     		throw $this->createNotFoundException('Unable to find this user.');
     	}
     	 
@@ -238,12 +238,10 @@ class ServerController extends Controller
     
     	$editForm->handleRequest($request);
     
-    	$originalPassword = $editForm->getData()->getPassword();
-    
     	$editForm->submit($request);
     	if ($editForm->isValid()) {
     
-    		Util::setModifyAuditFields($server, $serverLogged->getId());
+    		Util::setModifyAuditFields($server, $userLogged->getId());
     		 
     		$eManager->persist($server);
     		$eManager->flush();
@@ -253,7 +251,7 @@ class ServerController extends Controller
     				array(
     						'alert' => 'success',
     						'title' => 'Server Changed!',
-    						'message' => 'The user '.$server->getName().' has been updated'
+    						'message' => 'The project '.$server->getName().' has been updated'
     				)
     		);
     

@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
-use It121\UserBundle\Form\UserDetailType;
 
 class ServerType extends AbstractType
 {
@@ -39,8 +38,12 @@ class ServerType extends AbstractType
             			->orderBy('st.name', 'ASC');
             		},
             ))
-            ->add('sendEmail', 'checkbox')
-            ->add('monitoring', 'checkbox')
+            ->add('sendEmail', 'checkbox', array(
+            	'required' => false,
+            ))
+            ->add('monitoring', 'checkbox', array(
+            		'required' => false,
+            ))
         ;
     }
     

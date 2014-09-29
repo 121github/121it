@@ -20,7 +20,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		var url = "{{ path('user_delete', {'id': entity.id}) }}";
+		var url = "{{ path('server_delete', {'id': entity.id}) }}";
 		var server_id = "{{ entity.id }}";
 		server.remove(server_id, url)
 	});

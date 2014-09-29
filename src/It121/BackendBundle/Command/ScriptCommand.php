@@ -92,9 +92,13 @@ class ScriptCommand extends ContainerAwareCommand {
 			curl_setopt($ch, CURLOPT_URL, $server->getUrl());
 			curl_setopt($ch, CURLOPT_HEADER, 0);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			if ($server->getType()->getName() == "Service") {
+				curl_setopt($ch, CURLOPT_USERPWD, $server->getUser().":".$server->getPassword());
+			}
 				
 			$starttime=microtime(true);
 			$response=curl_exec($ch);
+			curl_close($ch);
 			$endtme=microtime(true);
 			$latency=$endtme-$starttime;
 			

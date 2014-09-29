@@ -8,4 +8,8 @@ user:
 
 server:
      resource: "@BackendBundle/Resources/config/routing/server.yml"
-     prefix:   /server    
+     prefix:   /server
+     
+project:
+     resource: "@BackendBundle/Resources/config/routing/project.yml"
+     prefix:   /project    

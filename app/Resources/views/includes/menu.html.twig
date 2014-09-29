@@ -18,15 +18,12 @@
 	            	<ul class="dropdown-menu" role="menu">
 	            		<li class="dropdown-header">Servers</li>
 	            		<li><a href="{{ path('server') }}"><span class="fa fa-laptop"></span> Server List</a>
-	            		<li><a href="#"><span class="fa fa-plus"></span> New Server</a>
 	            		<li class="divider"></li>
 	            		<li class="dropdown-header">Projects</li>
-	            		<li><a href="#"><span class="fa fa-folder"></span> Project List</a>
-	            		<li><a href="#"><span class="fa fa-plus"></span> New Project</a>
+	            		<li><a href="{{ path('project') }}"><span class="fa fa-folder"></span> Project List</a>
 	            		<li class="divider"></li>
 	            		<li class="dropdown-header">Users</li>
 	            		<li><a href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
-	            		<li><a href="#"><span class="fa fa-plus"></span> New User</a>
 	            	</ul>
 	            </li>
           	{% endif %}

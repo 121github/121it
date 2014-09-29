@@ -177,7 +177,14 @@ class Server
      */
     public function getUrl()
     {
-    	return $this->domain.":".$this->port."/".$this->path;
+    	$prefix = "";
+    	if ($this->getSubtype()->getName() == "FTP") {
+    		$prefix = "ftp://";
+    	}
+    	elseif ($this->getType()->getName() == "Website") {
+    		$prefix = "http://";
+    	}
+    	return $prefix.$this->domain.":".$this->port."/".$this->path;
     }
 
     /**
