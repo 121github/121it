@@ -21,6 +21,7 @@
 	            		<li class="divider"></li>
 	            		<li class="dropdown-header">Projects</li>
 	            		<li><a href="{{ path('project') }}"><span class="fa fa-folder"></span> Project List</a>
+	            		<li><a href="{{ path('projectgroup') }}"><span class="fa fa-folder"></span> Group List</a>
 	            		<li class="divider"></li>
 	            		<li class="dropdown-header">Users</li>
 	            		<li><a href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
@@ -28,26 +29,28 @@
 	            </li>
           	{% endif %}
             <li class="active"><a href="{{ path('dashboard_homepage') }}">Dashboard</a></li>
-            <li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servers<span class="caret"></span></a>
-            	<ul class="dropdown-menu" role="menu">
-            		<li><a href="#">121WebHost</a>
-            	</ul>
-            </li>
-            <li class="dropdown">
+            {% if serversMenu is defined %}
+	            <li class="dropdown">
+	            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servers<span class="caret"></span></a>
+	            	<ul class="dropdown-menu" role="menu">
+	            		<li><a href="#">121WebHost</a>
+	            	</ul>
+	            </li>
+	        {% endif %}
+            {% if projectsMenu is defined %}
+            	<li class="dropdown">
             	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<span class="caret"></span></a>
-            	<ul class="dropdown-menu" role="menu">
-            		<li class="dropdown-header">Management</li>
-            		<li><a href="http://www.121leads.co.uk:9090" target="_blank">Phabricator</a>
-            		<li class="divider"></li>
-            		<li class="dropdown-header">Continuous Integration</li>
-            		<li><a href="http://www.121leads.co.uk:8080" target="_blank">Jenkins</a>
-            		<li class="divider"></li>
-            		<li class="dropdown-header">Developement</li>
-            		<li><a href="http://121webhost/fsb/web" target="_blank">Fsb</a>
-            		<li><a href="http://121webhost/121sys/web" target="_blank">121Sys</a>
-            	</ul>
-            </li>
+	            	<ul class="dropdown-menu" role="menu">
+	            		{% for key,subtypes in projectsMenu %}
+	            			<li class="divider"></li>
+		            		<li class="dropdown-header">{{ key }}</li>
+		            		{% for keyProject,project in subtypes %}
+		            			<li><a href="{{ project.server.url }}" target="_blank">{{ project.name }}</a>
+		            		{% endfor %}
+		            	{% endfor %}
+	            	</ul>
+            	</li>
+            {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#about">About</a></li>

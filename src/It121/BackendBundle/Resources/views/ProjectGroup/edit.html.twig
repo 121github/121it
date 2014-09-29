@@ -1,0 +1,39 @@
+<form class="form-horizontal" id="edit_form_{{ entity.id }}" role="form">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title" id="myModalLabel">{{ "Edit Group -  " ~ entity.name  }}</h4>
+	</div>
+	<div class="modal-body">
+		  <div id="errors">
+		  	{{ form_errors(edit_form) }}
+		  </div>
+		  
+		  {{ form_errors(edit_form.name) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.name) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.name) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.description) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.description) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.description) }}</div>
+		  </div>
+		  
+		  {{ form_row(edit_form._token) }}
+	</div>
+	<div class="modal-footer">
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		<button type="submit" class="btn btn-success">Update</button>
+	</div>
+</form>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = "{{ path('projectgroup_update', {'id': entity.id}) }}";
+		var projectgroup_id = "{{ entity.id }}";
+		projectgroup.edit(projectgroup_id, url);
+	});
+</script>
+    

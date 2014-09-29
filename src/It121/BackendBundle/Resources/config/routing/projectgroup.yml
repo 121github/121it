@@ -1,0 +1,34 @@
+projectgroup:
+    path:     /
+    defaults: { _controller: "BackendBundle:ProjectGroup:index" }
+
+projectgroup_show:
+    path:     /{id}/show
+    defaults: { _controller: "BackendBundle:ProjectGroup:show" }
+
+projectgroup_new:
+    path:     /new
+    defaults: { _controller: "BackendBundle:ProjectGroup:new" }
+
+projectgroup_create:
+    path:     /create
+    defaults: { _controller: "BackendBundle:ProjectGroup:create" }
+    requirements: { _method: post }
+
+projectgroup_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BackendBundle:ProjectGroup:edit" }
+
+projectgroup_update:
+    path:     /{id}/update
+    defaults: { _controller: "BackendBundle:ProjectGroup:update" }
+    requirements: { _method: post|put }
+
+projectgroup_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "BackendBundle:ProjectGroup:remove" }
+    
+projectgroup_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BackendBundle:ProjectGroup:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,66 @@
+<form class="form-horizontal" id="new_form" role="form">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title" id="myModalLabel">New Project</h4>
+	</div>
+	<div class="modal-body">
+		  <div id="errors">
+		  	{{ form_errors(form) }}
+		  </div>
+		  
+		  {{ form_errors(form.name) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(form.name) }}</label>
+		    <div class="col-sm-6">{{ form_widget(form.name) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.group) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(form.group) }}</label>
+		    <div class="col-sm-6">{{ form_widget(form.group) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.startDate) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label form_datetime">{{ form_label(form.startDate) }}</label>
+		    <div class="col-sm-6">{{ form_widget(form.startDate) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.endDate) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(form.endDate) }}</label>
+		    <div class="col-sm-6">{{ form_widget(form.endDate) }}</div>
+		  </div>
+		  
+		  {{ form_errors(form.server) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(form.server) }}</label>
+		    <div class="col-sm-6">{{ form_widget(form.server) }}</div>
+		  </div>
+		  
+		  {{ form_row(form._token) }}
+	</div>
+	<div class="modal-footer">
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		<button type="submit" class="btn btn-success">Save</button>
+	</div>
+</form>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = "{{ path('project_create') }}";
+		project.create(url);
+	});
+</script>
+<script type="text/javascript">
+	$('#it121_projectbundle_project_startDate').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+	$('#it121_projectbundle_project_endDate').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+    $("#it121_projectbundle_project_startDate").on("dp.change",function (e) {
+       $('#it121_projectbundle_project_endDate').data("DateTimePicker").setMinDate(e.date);
+    });
+    $("#it121_projectbundle_project_endDate").on("dp.change",function (e) {
+       $('#it121_projectbundle_project_startDate').data("DateTimePicker").setMaxDate(e.date);
+    });
+</script>     
+    

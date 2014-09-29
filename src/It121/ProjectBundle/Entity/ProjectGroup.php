@@ -5,12 +5,12 @@ namespace It121\ProjectBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Project
+ * ProjectGroup
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="It121\ProjectBundle\Entity\ProjectRepository")
+ * @ORM\Entity
  */
-class Project
+class ProjectGroup
 {
     /**
      * @var integer
@@ -27,40 +27,14 @@ class Project
      * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="start_date", type="datetime")
-     */
-    private $startDate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="end_date", type="datetime", nullable=true)
-     */
-    private $endDate;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="last_deployment", type="datetime", nullable=true)
-     */
-    private $lastDeployment;
-
-    /**
-     * 
-     * @ORM\OneToOne(targetEntity="It121\ServerBundle\Entity\Server", inversedBy="project")
-     */
-    private $server;
     
     /**
+     * @var textarea
      *
-     * @ORM\ManyToOne(targetEntity="It121\ProjectBundle\Entity\ProjectGroup")
+     * @ORM\Column(name="description", type="text", nullable=true) 
      */
-    private $group;
-
+    private $description;
+    
     /**
      * @var integer
      *
@@ -97,7 +71,8 @@ class Project
     {
     	return $this->getName();
     }
-
+    
+    
     /**
      * Get id
      *
@@ -112,7 +87,7 @@ class Project
      * Set name
      *
      * @param string $name
-     * @return Project
+     * @return ProjectGroup
      */
     public function setName($name)
     {
@@ -132,79 +107,10 @@ class Project
     }
 
     /**
-     * Set startDate
-     *
-     * @param \DateTime $startDate
-     * @return Project
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-
-        return $this;
-    }
-
-    /**
-     * Get startDate
-     *
-     * @return \DateTime 
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * Set endDate
-     *
-     * @param \DateTime $endDate
-     * @return Project
-     */
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    /**
-     * Get endDate
-     *
-     * @return \DateTime 
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * Set lastDeployment
-     *
-     * @param \DateTime $lastDeployment
-     * @return Project
-     */
-    public function setLastDeployment($lastDeployment)
-    {
-        $this->lastDeployment = $lastDeployment;
-
-        return $this;
-    }
-
-    /**
-     * Get lastDeployment
-     *
-     * @return \DateTime 
-     */
-    public function getLastDeployment()
-    {
-        return $this->lastDeployment;
-    }
-
-    /**
      * Set createdBy
      *
      * @param integer $createdBy
-     * @return Project
+     * @return ProjectGroup
      */
     public function setCreatedBy($createdBy)
     {
@@ -227,7 +133,7 @@ class Project
      * Set createdDate
      *
      * @param \DateTime $createdDate
-     * @return Project
+     * @return ProjectGroup
      */
     public function setCreatedDate($createdDate)
     {
@@ -250,7 +156,7 @@ class Project
      * Set modifiedBy
      *
      * @param integer $modifiedBy
-     * @return Project
+     * @return ProjectGroup
      */
     public function setModifiedBy($modifiedBy)
     {
@@ -273,7 +179,7 @@ class Project
      * Set modifiedDate
      *
      * @param \DateTime $modifiedDate
-     * @return Project
+     * @return ProjectGroup
      */
     public function setModifiedDate($modifiedDate)
     {
@@ -292,51 +198,26 @@ class Project
         return $this->modifiedDate;
     }
 
-
     /**
-     * Set server
+     * Set description
      *
-     * @param \It121\ServerBundle\Entity\Server $server
-     * @return Project
+     * @param \textarea $description
+     * @return ProjectGroup
      */
-    public function setServer(\It121\ServerBundle\Entity\Server $server = null)
+    public function setDescription($description)
     {
-        $this->server = $server;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get server
+     * Get description
      *
-     * @return \It121\ServerBundle\Entity\Server 
+     * @return \textarea 
      */
-    public function getServer()
+    public function getDescription()
     {
-        return $this->server;
-    }
-
-
-    /**
-     * Set group
-     *
-     * @param \It121\ProjectBundle\Entity\ProjectGroup $group
-     * @return Project
-     */
-    public function setGroup(\It121\ProjectBundle\Entity\ProjectGroup $group = null)
-    {
-        $this->group = $group;
-
-        return $this;
-    }
-
-    /**
-     * Get group
-     *
-     * @return \It121\ProjectBundle\Entity\ProjectGroup 
-     */
-    public function getGroup()
-    {
-        return $this->group;
+        return $this->description;
     }
 }

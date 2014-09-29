@@ -14,6 +14,7 @@ use It121\ServerBundle\Entity\ServerSubtype;
 use It121\ServerBundle\Entity\Server;
 use It121\ServerBundle\Entity\ServerStatus;
 use It121\ProjectBundle\Entity\Project;
+use It121\ProjectBundle\Entity\ProjectGroup;
 
 /**
  * Basic version of the complete fixtures
@@ -127,6 +128,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         
         $manager->flush();
         
+        
         // Server Subtype for Service
         foreach (array('Email','FTP', ) as $name) {
         	$subtype = new ServerSubtype();
@@ -165,6 +167,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLatency(0.234556);
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
+        $manager->flush();
         
         //Create service (Email)
         $server = new Server();
@@ -182,12 +185,13 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLatency(0.014556);
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
+        $manager->flush();
         
         //Create website (Test)
         $server = new Server();
-        $server->setName('Voice Group Test');
-        $server->setDomain('http://121webhost');
-        $server->setPath('voicegroup/web');
+        $server->setName('CMS Test');
+        $server->setDomain('121webhost');
+        $server->setPath('test_env/cms/web');
         $server->setPort(80);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
@@ -200,19 +204,80 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
+        $projectGroup = new ProjectGroup();
+        $projectGroup->setName("CMS");
+        $projectGroup->setDescription("Calendar Management System");
+        Util::setCreateAuditFields($projectGroup, 1);
+        $manager->persist($projectGroup);
         $project = new Project();
-        $project->setName('Voice Group Test');
+        $project->setName('CMS Test');
+        $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
+        $manager->flush();
+        
+        //Create website (Production)
+        $server = new Server();
+        $server->setName('CMS_FSB');
+        $server->setDomain('121webhost');
+        $server->setPath('fsb/web');
+        $server->setPort(80);
+        $server->setSendEmail(true);
+        $server->setMonitoring(true);
+        $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Production')));
+        $server->setLastOnline(new DateTime('now - 8 hours'));
+        $server->setLastCheck(new DateTime('now - 25 seconds'));
+        $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
+        $server->setLatency(0.12356);
+        Util::setCreateAuditFields($server, 1);
+        $manager->persist($server);
+        //Create associated project
+        $project = new Project();
+        $project->setName('Cms_FSB');
+        $project->setGroup($projectGroup);
+        $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
+        $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setServer($server);
+        Util::setCreateAuditFields($project, 1);
+        $manager->persist($project);
+        $manager->flush();
+        
+        //Create website (Production)
+        $server = new Server();
+        $server->setName('CMS_VOICE GROUP');
+        $server->setDomain('121webhost');
+        $server->setPath('voicegroup/web');
+        $server->setPort(80);
+        $server->setSendEmail(true);
+        $server->setMonitoring(true);
+        $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Production')));
+        $server->setLastOnline(new DateTime('now - 8 hours'));
+        $server->setLastCheck(new DateTime('now - 25 seconds'));
+        $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
+        $server->setLatency(0.12356);
+        Util::setCreateAuditFields($server, 1);
+        $manager->persist($server);
+        //Create associated project
+        $project = new Project();
+        $project->setName('Cms_VOICE GROUP');
+        $project->setGroup($projectGroup);
+        $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
+        $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setServer($server);
+        Util::setCreateAuditFields($project, 1);
+        $manager->persist($project);
+        $manager->flush();
         
         
         //Create website (Management)
         $server = new Server();
         $server->setName('Phabricator');
-        $server->setDomain('http://www.121leads.co.uk');
+        $server->setDomain('www.121leads.co.uk');
         $server->setPort(9090);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
@@ -225,18 +290,25 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
+        $projectGroup = new ProjectGroup();
+        $projectGroup->setName("Phabricator");
+        $projectGroup->setDescription("Issues Management System");
+        Util::setCreateAuditFields($projectGroup, 1);
+        $manager->persist($projectGroup);
         $project = new Project();
         $project->setName('Phabricator');
+        $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-10 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-10 00:00:00'));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
+        $manager->flush();
         
         //Create website (Management)
         $server = new Server();
         $server->setName('Jenkins');
-        $server->setDomain('http://www.121leads.co.uk');
+        $server->setDomain('www.121leads.co.uk');
         $server->setPort(8080);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
@@ -249,8 +321,14 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
+        $projectGroup = new ProjectGroup();
+        $projectGroup->setName("Jenkins");
+        $projectGroup->setDescription("Continuous Integration Management System");
+        Util::setCreateAuditFields($projectGroup, 1);
+        $manager->persist($projectGroup);
         $project = new Project();
-        $project->setName('Phabricator');
+        $project->setName('Jenkins');
+        $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-10 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-10 00:00:00'));
         $project->setServer($server);

@@ -12,4 +12,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProjectRepository extends EntityRepository
 {
+	
+	/**
+	 * Get All ordered by subtype
+	 *
+	 *
+	 * @return array Projects
+	 */
+	public function findAllWithServer(){
+	
+		$eManager = $this->getEntityManager();
+	
+		$query = $eManager->createQueryBuilder()
+		->select('p')
+		->from('ProjectBundle:Project', 'p')
+		->innerJoin('p.server', 's')
+		->innerJoin('s.subtype', 'st')
+		->orderBy('st.id', 'ASC')
+		;
+	
+		$project_ar = $query->getQuery()->getResult();
+	
+		return $project_ar;
+	}
 }

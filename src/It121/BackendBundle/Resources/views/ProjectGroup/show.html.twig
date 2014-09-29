@@ -1,0 +1,47 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	<h4 class="modal-title" id="myModalLabel">{{ entity.name }}</h4>
+</div>
+<div class="modal-body">
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<th>#</th>
+				<td>{{ entity.id }}</td>
+			</tr>
+            <tr>
+                <th>Name</th>
+                <td>
+                	{{ entity.name}}
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>
+                	{{ entity.description}}
+                </td>
+            </tr>
+            <tr>
+                <th>Createdby</th>
+                <td>{{ entity.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Createddate</th>
+                <td>{{ entity.createdDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Modifiedby</th>
+                <td>{{ entity.modifiedBy }}</td>
+            </tr>
+            <tr>
+                <th>Modifieddate</th>
+                <td>{{ entity.modifiedDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+	<a href="{{ path('projectgroup_remove', { 'id': entity.id }) }}" class="btn btn-danger pull-left" data-toggle="modal" data-target="#delete_{{ entity.id }}">Delete</a>
+	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	<a href="{{ path('projectgroup_edit', { 'id': entity.id }) }}" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{ entity.id }}">Edit</a>
+</div>

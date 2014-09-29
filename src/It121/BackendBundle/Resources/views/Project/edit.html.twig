@@ -1,0 +1,67 @@
+<form class="form-horizontal" id="edit_form_{{ entity.id }}" role="form">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<h4 class="modal-title" id="myModalLabel">{{ "Edit Project -  " ~ entity.name  }}</h4>
+	</div>
+	<div class="modal-body">
+		  <div id="errors">
+		  	{{ form_errors(edit_form) }}
+		  </div>
+		  
+		  {{ form_errors(edit_form.name) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.name) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.name) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.group) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.group) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.group) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.startDate) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.startDate) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.startDate) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.endDate) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.endDate) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.endDate) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.server) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.server) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.server) }}</div>
+		  </div>
+		  
+		  {{ form_row(edit_form._token) }}
+	</div>
+	<div class="modal-footer">
+	    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		<button type="submit" class="btn btn-success">Update</button>
+	</div>
+</form>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = "{{ path('project_update', {'id': entity.id}) }}";
+		var project_id = "{{ entity.id }}";
+		project.edit(project_id, url);
+	});
+</script>
+<script type="text/javascript">
+	$('#it121_projectbundle_project_startDate').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+	$('#it121_projectbundle_project_endDate').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+    $("#it121_projectbundle_project_startDate").on("dp.change",function (e) {
+       $('#it121_projectbundle_project_endDate').data("DateTimePicker").setMinDate(e.date);
+    });
+    $("#it121_projectbundle_project_endDate").on("dp.change",function (e) {
+       $('#it121_projectbundle_project_startDate').data("DateTimePicker").setMaxDate(e.date);
+    });
+</script>    
+    

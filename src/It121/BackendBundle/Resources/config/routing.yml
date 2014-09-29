@@ -13,3 +13,7 @@ server:
 project:
      resource: "@BackendBundle/Resources/config/routing/project.yml"
      prefix:   /project    
+
+projectgroup:
+     resource: "@BackendBundle/Resources/config/routing/projectgroup.yml"
+     prefix:   /projectgroup   

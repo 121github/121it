@@ -1,0 +1,109 @@
+{% extends '::backend.html.twig' %}
+
+{% block title %}Project List{% endblock %}
+
+{% block content -%}
+
+    <div style="margin-bottom: 10px;">
+    	<a href="{{ path('project_new') }}" class="btn btn-success fa fa-plus" data-toggle="modal" data-target="#new" > New Project</a>
+    	<!-- Modal New Project -->
+		<div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    </div>
+		  </div>
+		</div>
+		
+		<a href="{{ path('projectgroup_new') }}" class="btn btn-warning fa fa-plus" data-toggle="modal" data-target="#new_group" > New Group</a>
+		<!-- Modal New Group -->
+		<div class="modal fade" id="new_group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    </div>
+		  </div>
+		</div>
+    </div>
+    
+   
+   <div class="row">
+   		<div class="col-md-11">
+		    <table class="table table-striped jumbotron">
+		        <thead>
+		            <tr>
+		                <th>#</th>
+		                <th>Name</th>
+		                <th>Group</th>
+		                <th>Start Date</th>
+		                <th>End Date</th>
+		                <th>Server</th>
+		                <th>Last Deployment</th>
+		                <th style="text-align: right;">Actions</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for entity in entities %}
+		            <tr>
+		                <td><a href="{{ path('project_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">{{ entity.id }}</a></td>
+		               	<td>
+		                	{% if (entity.server) %}
+		                		<a href="{{ entity.server}}" target="_blank">{{ entity.name}}</a>
+		                	{% else %}
+		                		{{ entity.name}}
+		                	{% endif %}
+		                </td>
+		                <td>{{ entity.group }}</td>
+		                <td>{{ entity.startDate|date('Y-m-d H:i:s') }}</td>
+		                <td>
+		                	{% if (entity.endDate is null) %}
+		                		{{ "-" }}
+		                	{% else %}
+								{{ entity.endDate|date('Y-m-d H:i:s') }}
+		                	{% endif %}
+		                </td>
+		                <td>{{ entity.server }}</td>
+		                <td>
+		                	{% if (entity.lastDeployment is null) %}
+		                		{{ "-" }}
+		                	{% else %}
+								{{ entity.lastDeployment|date('Y-m-d H:i:s') }}
+		                	{% endif %}
+		                </td>
+		                <td style="text-align: right;"><a href="#" class="pop-right fa fa-ellipsis-h fa-2x" 
+		                		data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true"
+		                		data-content='
+		                					<a href="{{ path('project_show', { 'id': entity.id }) }}" class="fa fa-eye" data-toggle="modal" data-target="#show_{{ entity.id }}"></a><br />
+		                					<a href="{{ path('project_edit', { 'id': entity.id }) }}" class="fa fa-edit" data-toggle="modal" data-target="#edit_{{ entity.id }}"></a><br />
+		                					<a href="{{ path('project_remove', { 'id': entity.id }) }}" class="fa fa-trash-o" data-toggle="modal" data-target="#delete_{{ entity.id }}"></a><br />'>
+		                	</a>
+		                </td>
+		            </tr>
+		            
+		            <!-- Modal Show -->
+					<div class="modal fade" id="show_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					    </div>
+					  </div>
+					</div>
+					<!-- Modal Edit -->
+					<div class="modal fade" id="edit_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					    </div>
+					  </div>
+					</div>
+					<!-- Modal Edit -->
+					<div class="modal fade" id="delete_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					    </div>
+					  </div>
+					</div>
+		        {% endfor %}
+		        </tbody>
+		    </table>
+		</div>
+		<div class="col-md-1"></div>
+	 </div>
+    
+    {% endblock %}

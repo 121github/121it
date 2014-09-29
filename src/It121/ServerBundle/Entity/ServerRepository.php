@@ -14,6 +14,29 @@ class ServerRepository extends EntityRepository
 {
 	
 	/**
+	 * Get the Query to find all the servers by a type
+	 *
+	 * @param ServerType $type Get the servers  by a type
+	 *
+	 * @return array Servers
+	 */
+	public function findServersByTypeQuery($type)
+	{
+		$eManager = $this->getEntityManager();
+	
+		$query = $eManager->createQueryBuilder()
+		->select('s')
+		->from('ServerBundle:Server', 's')
+		->innerJoin('s.type', 't')
+		->where('t.name = :type')
+		->orderBy('s.subtype', 'ASC')
+		->setParameter('type', $type)
+		;
+	
+		return $query;
+	}
+	
+	/**
 	 * Get the websites
 	 * 
 	 */
