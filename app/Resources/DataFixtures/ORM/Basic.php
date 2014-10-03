@@ -11,6 +11,7 @@ use It121\UserBundle\Entity\UserRole;
 use It121\BackendBundle\Util\Util;
 use It121\ServerBundle\Entity\ServerType;
 use It121\ServerBundle\Entity\ServerSubtype;
+use It121\ServerBundle\Entity\ServerEnvironment;
 use It121\ServerBundle\Entity\Server;
 use It121\ServerBundle\Entity\ServerStatus;
 use It121\ProjectBundle\Entity\Project;
@@ -139,7 +140,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         }
         
         // Server Subtype for Website
-        foreach (array('Developement','Test', 'Preproduction', 'Production', 'Management' ) as $name) {
+        foreach (array('Development', 'Management' ) as $name) {
         	$subtype = new ServerSubtype();
         	$subtype->setName($name);
         	$subtype->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
@@ -149,6 +150,16 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         
         $manager->flush();
         
+        
+        // Server Environments
+        foreach (array('Development','Test', 'Acceptance', 'Production') as $name) {
+        	$environment = new ServerEnvironment();
+        	$environment->setName($name);
+        	Util::setCreateAuditFields($environment, 1);
+        	$manager->persist($environment);
+        }
+        
+        $manager->flush();
         
         //Create service (FTP)
         $server = new Server();
@@ -196,7 +207,9 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setSendEmail(true);
         $server->setMonitoring(true);
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
-        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Test')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
+        $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Test')));
+        $server->setRssUrl('http://www.121leads.co.uk:8080/view/CMS_Fsb/job/Cms_test_deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -206,6 +219,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create associated project
         $projectGroup = new ProjectGroup();
         $projectGroup->setName("CMS");
+        $projectGroup->setRssUrl('http://www.121leads.co.uk:8080/view/CMS_Fsb/rssLatest');
         $projectGroup->setDescription("Calendar Management System");
         Util::setCreateAuditFields($projectGroup, 1);
         $manager->persist($projectGroup);
@@ -228,7 +242,9 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setSendEmail(true);
         $server->setMonitoring(true);
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
-        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Production')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
+        $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
+        $server->setRssUrl('http://www.121leads.co.uk:8080/view/CMS_Fsb/job/Fsb_deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -255,7 +271,9 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setSendEmail(true);
         $server->setMonitoring(true);
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
-        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Production')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
+        $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
+        $server->setRssUrl('http://www.121leads.co.uk:8080/view/CMS_Fsb/job/Voicegroup_deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));

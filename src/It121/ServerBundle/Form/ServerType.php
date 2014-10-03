@@ -38,6 +38,16 @@ class ServerType extends AbstractType
             			->orderBy('st.name', 'ASC');
             		},
             ))
+            ->add('environment', 'entity', array(
+            		'class'         => 'It121\\ServerBundle\\Entity\\ServerEnvironment',
+            		'empty_value'   => 'Select an environment',
+            		'query_builder' => function(EntityRepository $repository) {
+            			return $repository->createQueryBuilder('se')
+            			->orderBy('se.name', 'ASC');
+            		},
+            		'required' => false,
+            ))
+            ->add('rssUrl')
             ->add('sendEmail', 'checkbox', array(
             	'required' => false,
             ))

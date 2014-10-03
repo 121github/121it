@@ -14,6 +14,12 @@
 		    <div class="col-sm-6">{{ form_widget(edit_form.name) }}</div>
 		  </div>
 		  
+		  {{ form_errors(edit_form.rssUrl) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.rssUrl) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.rssUrl) }}</div>
+		  </div>
+		  
 		  {{ form_errors(edit_form.description) }}
 		  <div class="form-group">
 		    <label class="col-sm-4 control-label">{{ form_label(edit_form.description) }}</label>

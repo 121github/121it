@@ -56,6 +56,18 @@
 		    <div class="col-sm-6">{{ form_widget(edit_form.subtype) }}</div>
 		  </div>
 		  
+		  {{ form_errors(edit_form.environment) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.environment) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.environment) }}</div>
+		  </div>
+		  
+		  {{ form_errors(edit_form.rssUrl) }}
+		  <div class="form-group">
+		    <label class="col-sm-4 control-label">{{ form_label(edit_form.rssUrl) }}</label>
+		    <div class="col-sm-6">{{ form_widget(edit_form.rssUrl) }}</div>
+		  </div>
+		  
 		  {{ form_errors(edit_form.sendEmail) }}
 		  <div class="form-group">
 		    <label class="col-sm-4 control-label">{{ form_label(edit_form.sendEmail) }}</label>

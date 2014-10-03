@@ -75,7 +75,21 @@ class Server
      * @ORM\ManyToOne(targetEntity="It121\ServerBundle\Entity\ServerSubtype")
      */
     private $subtype;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="It121\ServerBundle\Entity\ServerEnvironment")
+     */
+    private $environment;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rss_url", type="string", length=255, nullable=true)
+     *
+     */
+    private $rssUrl;
+    
     /**
      * @var float
      *
@@ -495,6 +509,29 @@ class Server
     {
         return $this->subtype;
     }
+    
+    /**
+     * Set environment
+     *
+     * @param \It121\ServerBundle\Entity\ServerEnvironment $environment
+     * @return Server
+     */
+    public function setEnvironment(\It121\ServerBundle\Entity\ServerEnvironment $environment = null)
+    {
+    	$this->environment = $environment;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get environment
+     *
+     * @return \It121\ServerBundle\Entity\ServerEnvironment
+     */
+    public function getEnvironment()
+    {
+    	return $this->environment;
+    }
 
     
     /**
@@ -656,5 +693,28 @@ class Server
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set rssUrl
+     *
+     * @param string $rssUrl
+     * @return Server
+     */
+    public function setRssUrl($rssUrl)
+    {
+        $this->rssUrl = $rssUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get rssUrl
+     *
+     * @return string 
+     */
+    public function getRssUrl()
+    {
+        return $this->rssUrl;
     }
 }

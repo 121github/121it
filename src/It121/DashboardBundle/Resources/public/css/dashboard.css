@@ -23,8 +23,8 @@
 }
 
 .circle {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   
   -webkit-transform: scale(0);
@@ -63,9 +63,9 @@
 }
 
 .menu-button {
-  position: absolute;
-  top: calc(50% - 30px);
-  left: calc(50% - 30px);
+  position: fixed;
+  top: 16px;
+  left: 23px;
   text-decoration: none;
   text-align: center;
   color: #444;
@@ -75,11 +75,11 @@
   width: 40px;
   line-height: 40px;
   padding: 10px;
-  background: #dde;
+  background: transparent;
 }
 
 .menu-button:hover {
-  background-color: #eef;
+  background-color: transparent;
 }
 
 /* Author stuff */

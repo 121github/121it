@@ -1,16 +1,16 @@
 <?php
 
-namespace It121\ProjectBundle\Entity;
+namespace It121\ServerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ProjectGroup
+ * ServerEnvironment
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class ProjectGroup
+class ServerEnvironment
 {
     /**
      * @var integer
@@ -27,22 +27,8 @@ class ProjectGroup
      * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
-    
-    /**
-     * @var textarea
-     *
-     * @ORM\Column(name="description", type="text", nullable=true) 
-     */
-    private $description;
-    
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="rss_url", type="string", length=255, nullable=true)
-     *
-     */
-    private $rssUrl;
-    
+
+
     /**
      * @var integer
      *
@@ -80,7 +66,6 @@ class ProjectGroup
     	return $this->getName();
     }
     
-    
     /**
      * Get id
      *
@@ -95,7 +80,7 @@ class ProjectGroup
      * Set name
      *
      * @param string $name
-     * @return ProjectGroup
+     * @return ServerType
      */
     public function setName($name)
     {
@@ -118,7 +103,7 @@ class ProjectGroup
      * Set createdBy
      *
      * @param integer $createdBy
-     * @return ProjectGroup
+     * @return ServerType
      */
     public function setCreatedBy($createdBy)
     {
@@ -141,7 +126,7 @@ class ProjectGroup
      * Set createdDate
      *
      * @param \DateTime $createdDate
-     * @return ProjectGroup
+     * @return ServerType
      */
     public function setCreatedDate($createdDate)
     {
@@ -164,7 +149,7 @@ class ProjectGroup
      * Set modifiedBy
      *
      * @param integer $modifiedBy
-     * @return ProjectGroup
+     * @return ServerType
      */
     public function setModifiedBy($modifiedBy)
     {
@@ -187,7 +172,7 @@ class ProjectGroup
      * Set modifiedDate
      *
      * @param \DateTime $modifiedDate
-     * @return ProjectGroup
+     * @return ServerType
      */
     public function setModifiedDate($modifiedDate)
     {
@@ -204,51 +189,5 @@ class ProjectGroup
     public function getModifiedDate()
     {
         return $this->modifiedDate;
-    }
-
-    /**
-     * Set description
-     *
-     * @param \textarea $description
-     * @return ProjectGroup
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return \textarea 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set rssUrl
-     *
-     * @param string $rssUrl
-     * @return ProjectGroup
-     */
-    public function setRssUrl($rssUrl)
-    {
-        $this->rssUrl = $rssUrl;
-
-        return $this;
-    }
-
-    /**
-     * Get rssUrl
-     *
-     * @return string 
-     */
-    public function getRssUrl()
-    {
-        return $this->rssUrl;
     }
 }

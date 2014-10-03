@@ -10,9 +10,9 @@
 					<a href="#" class="pop-top slider fa fa-home fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='ASDASD' data-html="true"></a>
 					<a href="#" class="pop-right slider fa fa-tasks fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://www.121leads.co.uk:9090/">Phabricator</a>' data-html="true"></a>
 					<a href="#" class="pop-right slider fa fa-bolt fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://www.121leads.co.uk:8080/">Jenkins</a>' data-html="true"></a>
-					<a href="#" class="pop-right slider fa fa-gears fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Enviroments" data-content='Test' data-html="true"></a>
-					<a href="#" class="pop-bottom slider fa fa-folder fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Projects" data-content='Fsb' data-html="true"></a>
-					<a href="#" class="pop-bottom slider fa fa-laptop fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Servers" data-content='121Webhost' data-html="true"></a>
+					<a href="#" class="pop-right slider fa fa-gears fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Environments" data-content='{% include 'DashboardBundle:Default:includes/environments.html.twig' %}' data-html="true"></a>
+					<a href="#" class="pop-right slider fa fa-folder fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Projects" data-content='{% include 'DashboardBundle:Default:includes/projectsByGroup.html.twig' %}' data-html="true"></a>
+					<a href="#" class="pop-left slider fa fa-laptop fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Servers" data-content='121Webhost' data-html="true"></a>
 					<a href="#" class="pop-left slider fa fa-users fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="">Intranet</a>'' data-html="true"></a>
 					<a href="#" class="pop-left slider fa fa-asterisk fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='ASDASD' data-html="true"></a>
 					<a href="#" class="pop-left slider fa fa-asterisk fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='ASDASD' data-html="true"></a>
@@ -70,13 +70,32 @@
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
 				        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-				          Deployment
+				          Deployment (Continuous Integration)
 				        </a>
 				      </h4>
 				    </div>
 				    <div id="collapseTwo" class="panel-collapse collapse">
 				      <div class="panel-body">
-				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+				      	 <table class="table table-hover">
+					        {% for project in deployment %}
+					          	{% if project.status == 'stable' %}
+				        			{% set status = "success" %}
+				        			{% set icon_status = "fa-check" %}
+				        		{% elseif 'broken' in project.status %}
+				        			{% set status = "danger" %}
+				        			{% set icon_status = "fa-remove" %}
+				        		{% elseif project.status == 'back to normal' %}
+				        			{% set status = "warning" %}
+				        			{% set icon_status = "fa-eye" %}
+				        		{% endif %}
+					          	<tr class="pop-left {{ status }}" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status {{ project.status }}</div><div>Published {{ project.published|date('Y-m-d H:i:s') }}</div><div>Updated {{ project.updated|date('Y-m-d H:i:s') }}</div>' data-html="true">
+								  <td><span class="fa fa-gears fa-1x"></span></td>
+								  <td><a href="{{ project.link }}" target="_blank">{{ "#" ~ project.version }}</a></td>
+								  <td>{{ project.title }}</a></td>
+								  <td><span class="fa {{ icon_status }} fa-1x"></span></td>
+								</tr>
+					          {% endfor %}
+					  	</table>
 				      </div>
 				    </div>
 				  </div>

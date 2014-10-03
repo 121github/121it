@@ -1,0 +1,21 @@
+{# Projects By Group List #}
+{% if projectsMenu is defined %}
+    <div>
+        <table class="table table-hover">
+        	{% for key,groups in projectsMenu %}
+        		<th>{{ key }}</th>
+        		{% for keyProject,project in groups %}
+		        	<tr>
+		        		<td>{{ project.name }}</td>
+		        		<td>
+			            	{% if project.server %}
+			            		<a href="{{ project.server.url }}" target="_blank"><span class="fa fa-external-link"></span></a>
+			            	{% else %}
+			            	{% endif %}
+		            	</td>
+		            </tr>
+				{% endfor %}
+        	{% endfor %}
+      	</table>
+    </div>
+{% endif %}

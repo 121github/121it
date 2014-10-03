@@ -30,6 +30,7 @@
 		                <th>Port</th>
 		                <th>Type</th>
 		                <th>Subtype</th>
+		                <th>Environment</th>
 		                <th>Status</th>
 		                <th style="text-align: right;">Actions</th>
 		            </tr>
@@ -46,6 +47,9 @@
 		                <td>{{ entity.port}}</td>
 		                <td>{{ entity.type}}</td>
 		                <td>{{ entity.subtype}}</td>
+		                <td>
+		                	{{ entity.environment}}
+		                </td>
 		                <td>{{ entity.status}}</td>
 		                <td style="text-align: right;"><a href="#" class="pop-right fa fa-ellipsis-h fa-2x" 
 		                		data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true"

@@ -1,0 +1,12 @@
+{# Environments List #}
+{% if environments is defined %}
+    <div>
+        <table class="table table-hover">
+        	{% for environment in environments %}
+        		<tr>
+		        	<td><a href="#" >{{ environment.name }}</a></td>
+	            </tr>
+        	{% endfor %}
+      	</table>
+    </div>
+{% endif %}
