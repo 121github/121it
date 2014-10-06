@@ -198,7 +198,7 @@ class Server
     	elseif ($this->getType()->getName() == "Website") {
     		$prefix = "http://";
     	}
-    	elseif ($this->getPort() == 22) {
+    	if ($this->getSubtype()->getName() == "SFTP") {
     		$prefix = "sftp://";
     	}
     	elseif ($this->getPort() == 80) {
