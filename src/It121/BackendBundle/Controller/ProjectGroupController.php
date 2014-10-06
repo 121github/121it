@@ -10,7 +10,7 @@ use It121\BackendBundle\Util\Util;
 use It121\ProjectBundle\Entity\ProjectGroup;
 use It121\ProjectBundle\Form\ProjectGroupType;
 
-class ProjectGroupController extends Controller
+class ProjectGroupController extends DefaultController
 {
 	/******************************************************************************************************************************/
 	/******************************************************************************************************************************/
@@ -29,10 +29,13 @@ class ProjectGroupController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('ProjectBundle:ProjectGroup')->findAll();
+        
+        $options = array(
+        		'entities' => $entities,
+        );
+        $elementsForMenu = $this->getElementsForMenu();
 
-        return $this->render('BackendBundle:ProjectGroup:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render('BackendBundle:ProjectGroup:index.html.twig', array_merge($options, $elementsForMenu));
     }
     
     /******************************************************************************************************************************/

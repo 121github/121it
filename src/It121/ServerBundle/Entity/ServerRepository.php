@@ -35,6 +35,20 @@ class ServerRepository extends EntityRepository
 	
 		return $query;
 	}
+
+	/**
+	 * Get all the servers by a type
+	 *
+	 * @param ServerType $type Get the servers  by a type
+	 *
+	 * @return array Servers
+	 */
+	public function findServersByType($type)
+	{
+		$query = $this->findServersByTypeQuery($type);
+	
+		return $query->getQuery()->getResult();
+	}
 	
 	/**
 	 * Get the websites

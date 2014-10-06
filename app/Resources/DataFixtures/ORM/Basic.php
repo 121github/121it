@@ -119,7 +119,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         }
         
         // Server Type
-        foreach (array('Service','Server', 'Website',) as $name) {
+        foreach (array('Service', 'Website',) as $name) {
         	$type = new ServerType();
         	$type->setName($name);
         	Util::setCreateAuditFields($type, 1);
@@ -163,11 +163,30 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         
         //Create service (FTP)
         $server = new Server();
-        $server->setName('test.leadcontrol');
+        $server->setName('FTP test.leadcontrol');
         $server->setDomain('test.leadcontrol.co.uk');
         $server->setUser('devtest');
         $server->setPassword('dev123');
         $server->setPort(21);
+        $server->setSendEmail(false);
+        $server->setMonitoring(true);
+        $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Service')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'FTP')));
+        $server->setLastOnline(new DateTime('now - 2 hours'));
+        $server->setLastCheck(new DateTime('now - 25 seconds'));
+        $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
+        $server->setLatency(0.234556);
+        Util::setCreateAuditFields($server, 1);
+        $manager->persist($server);
+        $manager->flush();
+        
+        //Create service (SFTP)
+        $server = new Server();
+        $server->setName('SFTP 121webhost');
+        $server->setDomain('121webhost');
+        $server->setUser('esteban');
+        $server->setPassword('pass123');
+        $server->setPort(22);
         $server->setSendEmail(false);
         $server->setMonitoring(true);
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Service')));
@@ -209,7 +228,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Test')));
-        $server->setRssUrl('http://www.121leads.co.uk:8080/view/CMS_Fsb/job/Cms_test_deployment/rssAll');
+        $server->setRssUrl('http://121webhost:8080/view/CMS_Fsb/job/Cms_test_deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -219,7 +238,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create associated project
         $projectGroup = new ProjectGroup();
         $projectGroup->setName("CMS");
-        $projectGroup->setRssUrl('http://www.121leads.co.uk:8080/view/CMS_Fsb/rssLatest');
+        $projectGroup->setRssUrl('http://121webhost:8080/view/CMS_Fsb/rssLatest');
         $projectGroup->setDescription("Calendar Management System");
         Util::setCreateAuditFields($projectGroup, 1);
         $manager->persist($projectGroup);
@@ -244,7 +263,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
-        $server->setRssUrl('http://www.121leads.co.uk:8080/view/CMS_Fsb/job/Fsb_deployment/rssAll');
+        $server->setRssUrl('http://121webhost:8080/view/CMS_Fsb/job/Fsb_deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -273,7 +292,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
-        $server->setRssUrl('http://www.121leads.co.uk:8080/view/CMS_Fsb/job/Voicegroup_deployment/rssAll');
+        $server->setRssUrl('http://121webhost:8080/view/CMS_Fsb/job/Voicegroup_deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -295,7 +314,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Management)
         $server = new Server();
         $server->setName('Phabricator');
-        $server->setDomain('www.121leads.co.uk');
+        $server->setDomain('121webhost');
         $server->setPort(9090);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
@@ -326,7 +345,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Management)
         $server = new Server();
         $server->setName('Jenkins');
-        $server->setDomain('www.121leads.co.uk');
+        $server->setDomain('121webhost');
         $server->setPort(8080);
         $server->setSendEmail(true);
         $server->setMonitoring(true);

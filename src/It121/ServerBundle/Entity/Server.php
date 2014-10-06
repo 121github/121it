@@ -198,6 +198,12 @@ class Server
     	elseif ($this->getType()->getName() == "Website") {
     		$prefix = "http://";
     	}
+    	elseif ($this->getPort() == 22) {
+    		$prefix = "sftp://";
+    	}
+    	elseif ($this->getPort() == 80) {
+    		$prefix = "http://";
+    	}
     	return $prefix.$this->domain.":".$this->port."/".$this->path;
     }
 

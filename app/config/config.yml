@@ -64,6 +64,14 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
 
+# Parameters (global vars)
+parameters:
+    environment.development: "Development"
+    environment.test: "Test"
+    environment.acceptance: "Acceptance"
+    environment.production: "Production"
+    
+
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

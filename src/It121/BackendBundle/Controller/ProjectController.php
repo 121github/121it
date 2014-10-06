@@ -10,7 +10,7 @@ use It121\ServerBundle\Entity\Server;
 use It121\BackendBundle\Util\Util;
 use It121\ProjectBundle\Form\ProjectType;
 
-class ProjectController extends Controller
+class ProjectController extends DefaultController
 {
 	/******************************************************************************************************************************/
 	/******************************************************************************************************************************/
@@ -30,9 +30,12 @@ class ProjectController extends Controller
 
         $entities = $em->getRepository('ProjectBundle:Project')->findAll();
 
-        return $this->render('BackendBundle:Project:index.html.twig', array(
+        $options = array(
             'entities' => $entities,
-        ));
+        );
+        $elementsForMenu = $this->getElementsForMenu();
+        
+        return $this->render('BackendBundle:Project:index.html.twig',array_merge($options, $elementsForMenu));
     }
     
     /******************************************************************************************************************************/

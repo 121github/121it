@@ -7,13 +7,12 @@
 		<div class="col-md-8">
 	      	<nav class="circular-menu">
 				<div class="circle">
-					<a href="#" class="pop-top slider fa fa-home fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='ASDASD' data-html="true"></a>
-					<a href="#" class="pop-right slider fa fa-tasks fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://www.121leads.co.uk:9090/">Phabricator</a>' data-html="true"></a>
-					<a href="#" class="pop-right slider fa fa-bolt fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://www.121leads.co.uk:8080/">Jenkins</a>' data-html="true"></a>
+					<a href="#" class="pop-top slider fa fa-home fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://121customerinsight.co.uk">Comapny Website</a>'' data-html="true"></a>
+					<a href="#" class="pop-right slider fa fa-users fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://121webhost/intranet/">Intranet</a>'' data-html="true"></a>
+					<a href="#" class="pop-right slider fa fa-tasks fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Management" data-content='{% include 'DashboardBundle:Default:includes/managementProjectsByGroup.html.twig' %}' data-html="true"></a>
 					<a href="#" class="pop-right slider fa fa-gears fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Environments" data-content='{% include 'DashboardBundle:Default:includes/environments.html.twig' %}' data-html="true"></a>
-					<a href="#" class="pop-right slider fa fa-folder fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Projects" data-content='{% include 'DashboardBundle:Default:includes/projectsByGroup.html.twig' %}' data-html="true"></a>
-					<a href="#" class="pop-left slider fa fa-laptop fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Servers" data-content='121Webhost' data-html="true"></a>
-					<a href="#" class="pop-left slider fa fa-users fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="">Intranet</a>'' data-html="true"></a>
+					<a href="#" class="pop-bottom slider fa fa-folder fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Projects" data-content='{% include 'DashboardBundle:Default:includes/projectsByGroup.html.twig' %}' data-html="true"></a>
+					<a href="#" class="pop-left slider fa fa-laptop fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Servers" data-content='{% include 'DashboardBundle:Default:includes/services.html.twig' %}' data-html="true"></a>
 					<a href="#" class="pop-left slider fa fa-asterisk fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='ASDASD' data-html="true"></a>
 					<a href="#" class="pop-left slider fa fa-asterisk fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='ASDASD' data-html="true"></a>
 				</div>
@@ -27,7 +26,7 @@
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+				        <a data-toggle="collapse" data-parent='#accordion' href="#collapseOne">
 				          Servers
 				        </a>
 				      </h4>
@@ -48,8 +47,6 @@
 				        		{% endif %}
 				        		
 				        		{% if server.type == 'Service' %}
-				        			{% set icon = "fa-plug" %}
-				        		{% elseif server.type == 'Server' %}
 				        			{% set icon = "fa-laptop" %}
 				        		{% elseif server.type == 'Website' %}
 				        			{% set icon = "fa-folder" %}
@@ -69,7 +66,7 @@
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+				        <a data-toggle="collapse" data-parent='#accordion' href="#collapseTwo">
 				          Deployment (Continuous Integration)
 				        </a>
 				      </h4>
@@ -87,12 +84,20 @@
 				        		{% elseif project.status == 'back to normal' %}
 				        			{% set status = "warning" %}
 				        			{% set icon_status = "fa-eye" %}
+				        		{% elseif '?' in project.status %}
+				        			{% set status = "info" %}
 				        		{% endif %}
 					          	<tr class="pop-left {{ status }}" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status {{ project.status }}</div><div>Published {{ project.published|date('Y-m-d H:i:s') }}</div><div>Updated {{ project.updated|date('Y-m-d H:i:s') }}</div>' data-html="true">
 								  <td><span class="fa fa-gears fa-1x"></span></td>
 								  <td><a href="{{ project.link }}" target="_blank">{{ "#" ~ project.version }}</a></td>
 								  <td>{{ project.title }}</a></td>
-								  <td><span class="fa {{ icon_status }} fa-1x"></span></td>
+								  <td>
+								  	{% if status == "info" %}
+								  		<img alt="121CustomerInsight" src="{{ asset('bundles/backend/images/ajax-loader.gif') }}" width="25px;">
+								  	{% else %}
+								  		<span class="fa {{ icon_status }} fa-1x"></span>
+								  	{% endif %}
+								  </td>
 								</tr>
 					          {% endfor %}
 					  	</table>
@@ -102,7 +107,7 @@
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+				        <a data-toggle="collapse" data-parent='#accordion' href="#collapseThree">
 				          Current connection
 				        </a>
 				      </h4>
@@ -128,6 +133,8 @@
       	</div>
       	
       </div>
+      
+      {% include 'DashboardBundle:Default:includes/modalViews.html.twig' %}
       
       <script type="text/javascript">
 		var items = document.querySelectorAll('.circle a');

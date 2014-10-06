@@ -1,0 +1,44 @@
+<!-- MODAL VIEWS -->
+{# Project #}
+{% if projectsMenu is defined %}
+	{% for key,groups in projectsMenu %}
+		{% for keyProject,project in groups %}
+			<!-- Modal Show -->
+			<div class="modal fade" id="show_{{ project.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			    </div>
+			  </div>
+			</div>
+		{% endfor %}
+	{% endfor %}
+{% endif %}
+
+{# Management Project #}
+{% if managementProjectsMenu is defined %}
+	{% for key,groups in managementProjectsMenu %}
+		{% for keyProject,project in groups %}
+			<!-- Modal Show -->
+			<div class="modal fade" id="show_{{ project.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			    </div>
+			  </div>
+			</div>
+		{% endfor %}
+	{% endfor %}
+{% endif %}
+
+
+{# Service #}
+{% if servicesMenu is defined %}
+	{% for service in servicesMenu %}
+		<!-- Modal Show -->
+		<div class="modal fade" id="server_show_{{ service.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    </div>
+		  </div>
+		</div>
+	{% endfor %}
+{% endif %}

@@ -1,0 +1,69 @@
+{% extends '::dashboard.html.twig' %}
+
+{% block title %}{{ name ~  " Environment"}}{% endblock %}
+
+{% block content -%}
+
+<h1 class="title">{{ name ~  " Environment"}}</h1>
+
+<div class="row">
+   		<div class="col-md-8">
+		    <table class="table table-striped jumbotron">
+		        <thead>
+		            <tr>
+		                <th>#</th>
+		                <th>Project Name</th>
+		                <th>Group</th>
+		                <th>Server</th>
+		                <th>Status</th>
+		                <th style="text-align: right;">Actions</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for project in projects %}
+		            <tr>
+		                <td><a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" data-toggle="modal" data-target="#show_{{ project.id }}">{{ project.id }}</a></td>
+		               	<td>
+		                	{% if (project.server) %}
+		                		<a href="{{ project.server.url}}" target="_blank">{{ project.name}}</a>
+		                	{% else %}
+		                		{{ project.name}}
+		                	{% endif %}
+		                </td>
+		                <td>{{ project.group }}</td>
+		                <td>{{ project.server }}</td>
+		                <td>{{ project.server.status }}</td>
+		                <td style="text-align: right;"><a href="#" class="pop-right fa fa-ellipsis-h fa-2x" 
+		                		data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true"
+		                		data-content='
+		                					<a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" class="fa fa-eye" data-toggle="modal" data-target="#show_{{ project.id }}"></a><br />'>
+		                	</a>
+		                </td>
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+		    </table>
+		</div>
+		<div class="col-md-4">
+			<div class="panel-group" id="accordion">
+			  <div class="panel panel-default">
+			    <div class="panel-heading">
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" href="#collapseOne">
+			          Graphs
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse in">
+			      <div class="panel-body">
+			        
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	 </div>
+	 
+	 {% include 'DashboardBundle:Default:includes/modalViews.html.twig' %}
+    
+    {% endblock %}

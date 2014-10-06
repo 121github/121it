@@ -1,8 +1,8 @@
 {# Projects By Group List #}
-{% if projectsMenu is defined %}
+{% if managementProjectsMenu is defined %}
     <div>
         <table class="table table-hover">
-        	{% for key,groups in projectsMenu %}
+        	{% for key,groups in managementProjectsMenu %}
         		<th>{{ key }}</th>
         		{% for keyProject,project in groups %}
 		        	<tr>

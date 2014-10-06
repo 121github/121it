@@ -1,0 +1,12 @@
+{# Services List #}
+{% if servicesMenu is defined %}
+    <div>
+        <table class="table table-hover">
+        	{% for service in servicesMenu %}
+        		<tr>
+		        	<td><a href="{{ path('dashboard_server_show', { 'id': service.id }) }}" data-toggle="modal" data-target="#server_show_{{ service.id }}">{{ service.name }}</a></td>
+	            </tr>
+			{% endfor %}
+      	</table>
+    </div>
+{% endif %}

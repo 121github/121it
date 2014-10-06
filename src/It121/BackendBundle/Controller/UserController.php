@@ -19,7 +19,7 @@ use It121\UserBundle\Form\UserChangePasswordType;
  * User controller.
  *
  */
-class UserController extends Controller
+class UserController extends DefaultController
 {
 	
 	/******************************************************************************************************************************/
@@ -68,10 +68,13 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('UserBundle:User')->findAll();
+        
+        $options = array(
+        		'entities' => $entities,
+        );
+        $elementsForMenu = $this->getElementsForMenu();
 
-        return $this->render('BackendBundle:User:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render('BackendBundle:User:index.html.twig', array_merge($options, $elementsForMenu));
     }
     
     /******************************************************************************************************************************/

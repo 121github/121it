@@ -1,3 +1,15 @@
 dashboard_homepage:
     path:     /hello/
     defaults: { _controller: "DashboardBundle:Default:index" }
+    
+dashboard_environment:
+    path:     /environment/{name}
+    defaults: { _controller: "DashboardBundle:Default:environment" }
+
+dashboard_project_show:
+    path:     /{id}/project/show
+    defaults: { _controller: "DashboardBundle:Default:showProject" }
+    
+dashboard_server_show:
+    path:     /{id}/server/show
+    defaults: { _controller: "DashboardBundle:Default:showServer" }

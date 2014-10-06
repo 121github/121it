@@ -9,7 +9,7 @@ use It121\ServerBundle\Entity\Server;
 use It121\BackendBundle\Util\Util;
 use It121\ServerBundle\Form\ServerType;
 
-class ServerController extends Controller
+class ServerController extends DefaultController
 {
 	/******************************************************************************************************************************/
 	/******************************************************************************************************************************/
@@ -28,10 +28,13 @@ class ServerController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('ServerBundle:Server')->findAll();
-
-        return $this->render('BackendBundle:Server:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        
+        $options = array(
+        		'entities' => $entities,
+        );
+        $elementsForMenu = $this->getElementsForMenu();
+        
+        return $this->render('BackendBundle:Server:index.html.twig', array_merge($options, $elementsForMenu));
     }
     
     /******************************************************************************************************************************/

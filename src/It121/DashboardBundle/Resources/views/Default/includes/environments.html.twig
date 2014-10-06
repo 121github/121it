@@ -1,10 +1,10 @@
 {# Environments List #}
-{% if environments is defined %}
+{% if environmentsMenu is defined %}
     <div>
         <table class="table table-hover">
-        	{% for environment in environments %}
+        	{% for environment in environmentsMenu %}
         		<tr>
-		        	<td><a href="#" >{{ environment.name }}</a></td>
+		        	<td><a href="{{ path('dashboard_environment', {'name':environment.name}) }}" >{{ environment.name }}</a></td>
 	            </tr>
         	{% endfor %}
       	</table>
