@@ -310,6 +310,76 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $manager->persist($project);
         $manager->flush();
         
+        //Create website (Test)
+        $server = new Server();
+        $server->setName('121IT Test');
+        $server->setDomain('121webhost');
+        $server->setPath('test_env/121it/web');
+        $server->setPort(80);
+        $server->setSendEmail(true);
+        $server->setMonitoring(true);
+        $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
+        $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Test')));
+        $server->setRssUrl('http://www.121leads.co.uk:8080/view/121IT/job/121It_test_deployment/rssAll');
+        $server->setLastOnline(new DateTime('now - 8 hours'));
+        $server->setLastCheck(new DateTime('now - 25 seconds'));
+        $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
+        $server->setLatency(0.12356);
+        Util::setCreateAuditFields($server, 1);
+        $manager->persist($server);
+        //Create associated project
+        $projectGroup = new ProjectGroup();
+        $projectGroup->setName("121IT");
+        $projectGroup->setRssUrl('http://121webhost:8080/view/121IT/rssLatest');
+        $projectGroup->setDescription("IT Management System");
+        Util::setCreateAuditFields($projectGroup, 1);
+        $manager->persist($projectGroup);
+        $project = new Project();
+        $project->setName('121IT Test');
+        $project->setGroup($projectGroup);
+        $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
+        $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setServer($server);
+        Util::setCreateAuditFields($project, 1);
+        $manager->persist($project);
+        $manager->flush();
+        
+        //Create website (Test)
+        $server = new Server();
+        $server->setName('121Sys Test');
+        $server->setDomain('121webhost');
+        $server->setPath('121sys/web');
+        $server->setPort(80);
+        $server->setSendEmail(true);
+        $server->setMonitoring(true);
+        $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
+        $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Test')));
+        $server->setRssUrl('http://121webhost:8080/view/121Sys/job/121Sys_deployment/rssAll');
+        $server->setLastOnline(new DateTime('now - 8 hours'));
+        $server->setLastCheck(new DateTime('now - 25 seconds'));
+        $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
+        $server->setLatency(0.12356);
+        Util::setCreateAuditFields($server, 1);
+        $manager->persist($server);
+        //Create associated project
+        $projectGroup = new ProjectGroup();
+        $projectGroup->setName("121Sys");
+        $projectGroup->setRssUrl('http://121webhost:8080/view/121Sys/rssLatest');
+        $projectGroup->setDescription("Agent Management System");
+        Util::setCreateAuditFields($projectGroup, 1);
+        $manager->persist($projectGroup);
+        $project = new Project();
+        $project->setName('121Sys Test');
+        $project->setGroup($projectGroup);
+        $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
+        $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setServer($server);
+        Util::setCreateAuditFields($project, 1);
+        $manager->persist($project);
+        $manager->flush();
+        
         
         //Create website (Management)
         $server = new Server();
