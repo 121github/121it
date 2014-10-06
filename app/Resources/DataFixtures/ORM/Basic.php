@@ -131,7 +131,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         
         
         // Server Subtype for Service
-        foreach (array('Email','FTP', ) as $name) {
+        foreach (array('Email','FTP', 'SFTP', ) as $name) {
         	$subtype = new ServerSubtype();
         	$subtype->setName($name);
         	$subtype->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Service')));
@@ -190,7 +190,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setSendEmail(false);
         $server->setMonitoring(true);
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Service')));
-        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'FTP')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'SFTP')));
         $server->setLastOnline(new DateTime('now - 2 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
