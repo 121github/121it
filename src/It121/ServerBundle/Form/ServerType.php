@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
+use It121\ServerBundle\Form\EventListener\AddSubtypeFieldSubscriber;
+use It121\ServerBundle\Form\EventListener\AddTypeFieldSubscriber;
 
 class ServerType extends AbstractType
 {
@@ -15,6 +17,13 @@ class ServerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+    	$propertyPathToSubtype = 'subtype';
+    	
+    	$builder
+    	->addEventSubscriber(new AddSubtypeFieldSubscriber($propertyPathToSubtype))
+    	->addEventSubscriber(new AddTypeFieldSubscriber($propertyPathToSubtype))
+    	;
+    	
         $builder
             ->add('name')
             ->add('domain')
@@ -22,22 +31,6 @@ class ServerType extends AbstractType
             ->add('user')
             ->add('password')
 			->add('port')
-            ->add('type', 'entity', array(
-            		'class'         => 'It121\\ServerBundle\\Entity\\ServerType',
-            		'empty_value'   => 'Select a type',
-            		'query_builder' => function(EntityRepository $repository) {
-            			return $repository->createQueryBuilder('t')
-            			->orderBy('t.name', 'ASC');
-            		},
-            ))
-            ->add('subtype', 'entity', array(
-            		'class'         => 'It121\\ServerBundle\\Entity\\ServerSubtype',
-            		'empty_value'   => 'Select a subtype',
-            		'query_builder' => function(EntityRepository $repository) {
-            			return $repository->createQueryBuilder('st')
-            			->orderBy('st.name', 'ASC');
-            		},
-            ))
             ->add('environment', 'entity', array(
             		'class'         => 'It121\\ServerBundle\\Entity\\ServerEnvironment',
             		'empty_value'   => 'Select an environment',

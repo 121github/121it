@@ -32,3 +32,8 @@ server_delete:
     path:     /{id}/delete
     defaults: { _controller: "BackendBundle:Server:delete" }
     requirements: { _method: post|delete }
+
+select_subtypes:
+    path:     /subtypes
+    defaults: { _controller: "BackendBundle:Server:subtypes" }
+    requirements: { _method: post }

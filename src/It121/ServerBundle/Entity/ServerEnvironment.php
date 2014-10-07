@@ -28,7 +28,6 @@ class ServerEnvironment
      */
     private $name;
 
-
     /**
      * @var integer
      *

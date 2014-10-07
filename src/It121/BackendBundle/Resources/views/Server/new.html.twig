@@ -56,10 +56,12 @@
 		    <div class="col-sm-6">{{ form_widget(form.subtype) }}</div>
 		  </div>
 		  
-		  {{ form_errors(form.environment) }}
-		  <div class="form-group">
-		    <label class="col-sm-4 control-label">{{ form_label(form.environment) }}</label>
-		    <div class="col-sm-6">{{ form_widget(form.environment) }}</div>
+		  <div id="environment" style="display: none;">
+			  {{ form_errors(form.environment) }}
+			  <div class="form-group">
+			    <label class="col-sm-4 control-label">{{ form_label(form.environment) }}</label>
+			    <div class="col-sm-6">{{ form_widget(form.environment) }}</div>
+			  </div>
 		  </div>
 		  
 		  {{ form_errors(form.rssUrl) }}
@@ -91,8 +93,15 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+
+		server.select_subtypes("{{ path('select_subtypes') }}");
+		
 		var url = "{{ path('server_create') }}";
-		server.create(url)
+		server.create(url);
 	});
+</script>
+
+<script type="text/javascript">
+	
 </script>
     

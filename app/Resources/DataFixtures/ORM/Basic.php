@@ -349,7 +349,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server = new Server();
         $server->setName('121Sys Test');
         $server->setDomain('121webhost');
-        $server->setPath('121sys/web');
+        $server->setPath('121sys');
         $server->setPort(80);
         $server->setSendEmail(true);
         $server->setMonitoring(true);

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use It121\ServerBundle\Entity\Server;
 use It121\BackendBundle\Util\Util;
 use It121\ServerBundle\Form\ServerType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ServerController extends DefaultController
 {
@@ -65,6 +66,35 @@ class ServerController extends DefaultController
     			'entity'      => $entity,
     			'delete_form' => $deleteForm->createView(),
     	));
+    }
+    
+    
+    /******************************************************************************************************************************/
+    /******************************************************************************************************************************/
+    /******************************************************************************************************************************/
+    /******************************** FORM COMBO SUBTYPE ACTION *******************************************************************/
+    /******************************************************************************************************************************/
+    /******************************************************************************************************************************/
+    /******************************************************************************************************************************/
+    
+    public function subtypesAction(Request $request)
+    {
+    	$type_id = $request->request->get('type_id');
+    
+    	$em = $this->getDoctrine()->getManager();
+    	$subtypes = $em->getRepository('ServerBundle:ServerSubtype')->findBy(array(
+    		'type' => $type_id
+    	));
+    
+    	$result = array();
+    	foreach ($subtypes as $subtype) {
+    		array_push($result, array(
+    			'id' => $subtype->getId(),
+    			'name' => $subtype->getName(),    			
+    		));
+    	}
+    	
+    	return new JsonResponse($result);
     }
     
     

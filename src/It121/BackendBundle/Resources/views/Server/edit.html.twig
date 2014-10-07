@@ -56,10 +56,12 @@
 		    <div class="col-sm-6">{{ form_widget(edit_form.subtype) }}</div>
 		  </div>
 		  
-		  {{ form_errors(edit_form.environment) }}
-		  <div class="form-group">
-		    <label class="col-sm-4 control-label">{{ form_label(edit_form.environment) }}</label>
-		    <div class="col-sm-6">{{ form_widget(edit_form.environment) }}</div>
+		  <div id="environment" style="display: none;">
+			  {{ form_errors(edit_form.environment) }}
+			  <div class="form-group">
+			    <label class="col-sm-4 control-label">{{ form_label(edit_form.environment) }}</label>
+			    <div class="col-sm-6">{{ form_widget(edit_form.environment) }}</div>
+			  </div>
 		  </div>
 		  
 		  {{ form_errors(edit_form.rssUrl) }}
@@ -91,6 +93,8 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		server.select_subtypes("{{ path('select_subtypes') }}");
+		
 		var url = "{{ path('server_update', {'id': entity.id}) }}";
 		var server_id = "{{ entity.id }}";
 		server.edit(server_id, url)
