@@ -46,7 +46,7 @@
 		                <td><a href="{{ path('project_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">{{ entity.id }}</a></td>
 		               	<td>
 		                	{% if (entity.server) %}
-		                		<a href="{{ entity.server}}" target="_blank">{{ entity.name}}</a>
+		                		<a href="{{ entity.server.url}}" target="_blank">{{ entity.name}}</a>
 		                	{% else %}
 		                		{{ entity.name}}
 		                	{% endif %}
