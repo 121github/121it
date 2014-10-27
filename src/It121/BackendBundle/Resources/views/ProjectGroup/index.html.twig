@@ -5,16 +5,7 @@
 {% block content -%}
 
     <div style="margin-bottom: 10px;">
-    	<a href="{{ path('project_new') }}" class="btn btn-success fa fa-plus" data-toggle="modal" data-target="#new" > New Project</a>
-    	<!-- Modal New Project -->
-		<div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		    </div>
-		  </div>
-		</div>
-		
-		<a href="{{ path('projectgroup_new') }}" class="btn btn-warning fa fa-plus" data-toggle="modal" data-target="#new_group" > New Group</a>
+    	<a href="{{ path('projectgroup_new') }}" class="btn btn-warning fa fa-plus" data-toggle="modal" data-target="#new_group" > New Group</a>
 		<!-- Modal New Group -->
 		<div class="modal fade" id="new_group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">

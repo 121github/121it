@@ -31,14 +31,23 @@
 		                <th>Type</th>
 		                <th>Subtype</th>
 		                <th>Environment</th>
-		                <th>Status</th>
 		                <th style="text-align: right;">Actions</th>
 		            </tr>
 		        </thead>
 		        <tbody>
 		        {% for entity in entities %}
 		            <tr>
-		                <td><a href="{{ path('server_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">{{ entity.id }}</a></td>
+		                <td>
+		                	<a href="{{ path('server_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">
+		                		{% if entity.status.name == 'Ok' %}
+					        		<span class="fa fa-circle fa-2x" style="color: green;"></span>
+					        	{% elseif entity.status.name == 'Error' %}
+					        		<span class="fa fa-circle fa-2x" style="color: red;"></span>
+					        	{% elseif entity.status.name == 'Warning' %}
+					        		<span class="fa fa-circle fa-2x" style="color: #eea236;"></span>
+					        	{% endif %}		
+		                	</a>
+		                </td>
 		                <td><a href="{{ entity.url}}" target="_blank">{{ entity.name}}</a></td>
 		                <td>{{ entity.domain }}</td>
 		                <td>{{ entity.path }}</td>

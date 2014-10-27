@@ -16,6 +16,7 @@ use It121\ServerBundle\Entity\Server;
 use It121\ServerBundle\Entity\ServerStatus;
 use It121\ProjectBundle\Entity\Project;
 use It121\ProjectBundle\Entity\ProjectGroup;
+use It121\ProjectBundle\Entity\ProjectStatus;
 
 /**
  * Basic version of the complete fixtures
@@ -116,6 +117,14 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         	$status->setName($name);
         	Util::setCreateAuditFields($status, 1);
         	$manager->persist($status);
+        }
+        
+        // Project Status
+        foreach (array('Ok','Error', 'Warning', 'In Progress' ) as $name) {
+        	$projectStatus = new ProjectStatus();
+        	$projectStatus->setName($name);
+        	Util::setCreateAuditFields($projectStatus, 1);
+        	$manager->persist($projectStatus);
         }
         
         // Server Type
@@ -247,6 +256,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setStatus($manager->getRepository('ProjectBundle:ProjectStatus')->findOneBy(array('name' => 'Ok')));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
@@ -276,6 +286,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setStatus($manager->getRepository('ProjectBundle:ProjectStatus')->findOneBy(array('name' => 'Ok')));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
@@ -305,6 +316,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setStatus($manager->getRepository('ProjectBundle:ProjectStatus')->findOneBy(array('name' => 'Ok')));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
@@ -340,6 +352,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setStatus($manager->getRepository('ProjectBundle:ProjectStatus')->findOneBy(array('name' => 'Ok')));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
@@ -375,6 +388,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setStatus($manager->getRepository('ProjectBundle:ProjectStatus')->findOneBy(array('name' => 'In Progress')));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
@@ -404,6 +418,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setStatus($manager->getRepository('ProjectBundle:ProjectStatus')->findOneBy(array('name' => 'Warning')));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
@@ -433,6 +448,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setLastDeployment(new DateTime('2014-09-18 00:00:00'));
+        $project->setStatus($manager->getRepository('ProjectBundle:ProjectStatus')->findOneBy(array('name' => 'Error')));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
@@ -463,8 +479,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project = new Project();
         $project->setName('Phabricator');
         $project->setGroup($projectGroup);
-        $project->setStartDate(new DateTime('2014-09-10 00:00:00'));
-        $project->setLastDeployment(new DateTime('2014-09-10 00:00:00'));
+        $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
@@ -494,8 +509,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project = new Project();
         $project->setName('Jenkins');
         $project->setGroup($projectGroup);
-        $project->setStartDate(new DateTime('2014-09-10 00:00:00'));
-        $project->setLastDeployment(new DateTime('2014-09-10 00:00:00'));
+        $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);
@@ -527,8 +541,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $project = new Project();
         $project->setName('Alfresco');
         $project->setGroup($projectGroup);
-        $project->setStartDate(new DateTime('2014-09-10 00:00:00'));
-        $project->setLastDeployment(new DateTime('2014-09-10 00:00:00'));
+        $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setServer($server);
         Util::setCreateAuditFields($project, 1);
         $manager->persist($project);

@@ -51,6 +51,23 @@
                 	{% endif %}
                 </td>
             </tr>
+            {% if entity.status %}
+	            {% if entity.status.name == 'Ok' %}
+	        		{% set success="success" %}
+	        	{% elseif entity.status.name == 'Error' %}
+	        		{% set success="danger" %}
+	        	{% elseif entity.status.name == 'Warning' %}
+	        		{% set success="warning" %}
+	        	{% elseif entity.status.name == 'In Progress' %}
+			        {% set success="info" %}
+	        	{% endif %}
+	        {% else %}
+	        	{% set success="" %}
+	        {% endif %}	
+            <tr class="{{ success }}">
+                <th>Deployment Status</th>
+                <td>{{ entity.status }}</td>
+            </tr>
             <tr>
                 <th>Createdby</th>
                 <td>{{ entity.createdBy }}</td>

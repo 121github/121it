@@ -90,4 +90,26 @@ class ProjectRepository extends EntityRepository
 	
 		return $project_ar;
 	}
+	
+	/**
+	 * Get Projects with Environment
+	 *
+	 *
+	 * @return array Projects
+	 */
+	public function findWithEnvironment(){
+	
+		$eManager = $this->getEntityManager();
+	
+		$query = $eManager->createQueryBuilder()
+		->select('p')
+		->from('ProjectBundle:Project', 'p')
+		->innerJoin('p.server', 's')
+		->innerJoin('s.environment', 'e')
+		;
+	
+		$project_ar = $query->getQuery()->getResult();
+	
+		return $project_ar;
+	}
 }

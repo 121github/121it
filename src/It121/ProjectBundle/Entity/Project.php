@@ -43,6 +43,13 @@ class Project
     private $endDate;
 
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="It121\ProjectBundle\Entity\ProjectStatus")
+     *
+     */
+    private $status;
+    
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="last_deployment", type="datetime", nullable=true)
@@ -338,5 +345,28 @@ class Project
     public function getGroup()
     {
         return $this->group;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \It121\ProjectBundle\Entity\ProjectStatus $status
+     * @return Project
+     */
+    public function setStatus(\It121\ProjectBundle\Entity\ProjectStatus $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \It121\ProjectBundle\Entity\ProjectStatus 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

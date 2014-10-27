@@ -53,7 +53,14 @@
                 	{% endif %}
                	</td>
             </tr>
-            <tr>
+            {% if entity.status.name == 'Ok' %}
+        		{% set success="success" %}
+        	{% elseif entity.status.name == 'Error' %}
+        		{% set success="danger" %}
+        	{% elseif entity.status.name == 'Warning' %}
+        		{% set success="warning" %}
+        	{% endif %}	
+            <tr class="{{ success }}">
                 <th>Status</th>
                 <td>{{ entity.status }}</td>
             </tr>

@@ -13,15 +13,6 @@
 		    </div>
 		  </div>
 		</div>
-		
-		<a href="{{ path('projectgroup_new') }}" class="btn btn-warning fa fa-plus" data-toggle="modal" data-target="#new_group" > New Group</a>
-		<!-- Modal New Group -->
-		<div class="modal fade" id="new_group" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		    </div>
-		  </div>
-		</div>
     </div>
     
    
@@ -43,7 +34,21 @@
 		        <tbody>
 		        {% for entity in entities %}
 		            <tr>
-		                <td><a href="{{ path('project_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">{{ entity.id }}</a></td>
+		            	<td>
+		                	<a href="{{ path('project_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">
+		                		{% if entity.status %}
+						        	{% if ((entity.server.status.name == 'Ok') and (entity.status.name == 'Ok')) %}
+					        			<span class="fa fa-circle fa-2x" style="color: green;"></span>
+						        	{% elseif ((entity.server.status.name == 'Error') or (entity.status.name == 'Error')) %}
+						        		<span class="fa fa-circle fa-2x" style="color: red;"></span>
+						        	{% elseif ((entity.server.status.name == 'Warning') or (entity.status.name == 'Warning')) %}
+						        		<span class="fa fa-circle fa-2x" style="color: #eea236;"></span>
+						        	{% elseif (entity.status.name == 'In Progress') %}
+						        		<img alt="121CustomerInsight" src="{{ asset('bundles/backend/images/ajax-loader.gif') }}" width="25px;">
+						        	{% endif %}
+						        {% endif %}
+		                	</a>
+		                </td>
 		               	<td>
 		                	{% if (entity.server) %}
 		                		<a href="{{ entity.server.url}}" target="_blank">{{ entity.name}}</a>

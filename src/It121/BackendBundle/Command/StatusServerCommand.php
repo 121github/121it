@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use It121\BackendBundle\Util\Util;
 use It121\ServerBundle\Entity\Server;
 
-class ScriptCommand extends ContainerAwareCommand {
+class StatusServerCommand extends ContainerAwareCommand {
 	
 	/**
 	 * (non-PHPdoc)
