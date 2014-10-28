@@ -2,6 +2,9 @@
 {% if environmentsMenu is defined %}
     <div>
         <table class="table table-hover">
+        	<tr>
+	        	<td><a href="{{ path('dashboard_environment') }}" >{{ "All" }}</a></td>
+            </tr>
         	{% for environment in environmentsMenu %}
         		<tr>
 		        	<td><a href="{{ path('dashboard_environment', {'name':environment.name}) }}" >{{ environment.name }}</a></td>

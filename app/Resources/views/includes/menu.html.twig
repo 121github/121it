@@ -17,15 +17,28 @@
           		<li class="dropdown {{ (app.request.attributes.get('_route') in server)?'active' : '' }}">
 	            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
 	            	<ul class="dropdown-menu" role="menu">
-	            		<li class="dropdown-header">Servers</li>
-	            		<li class=" {{ (app.request.attributes.get('_route') == 'server')?'active' : '' }}"><a href="{{ path('server') }}"><span class="fa fa-laptop"></span> Server List</a>
+	            		<li>
+							<a class="trigger right-caret">{{ "Servers" }}</a>
+							<ul class="dropdown-menu sub-menu">
+								<li class=" {{ (app.request.attributes.get('_route') == 'server')?'active' : '' }}"><a href="{{ path('server') }}"><span class="fa fa-laptop"></span> Server List</a>
+							</ul>
+						</li>
 	            		<li class="divider"></li>
-	            		<li class="dropdown-header">Projects</li>
-	            		<li class=" {{ (app.request.attributes.get('_route') == 'project')?'active' : '' }}"><a href="{{ path('project') }}"><span class="fa fa-folder"></span> Project List</a>
-	            		<li class=" {{ (app.request.attributes.get('_route') == 'projectgroup')?'active' : '' }}"><a href="{{ path('projectgroup') }}"><span class="fa fa-folder-o"></span> Group List</a>
+	            		<li>
+							<a class="trigger right-caret">{{ "Projects" }}</a>
+							<ul class="dropdown-menu sub-menu">
+								<li class=" {{ (app.request.attributes.get('_route') == 'project')?'active' : '' }}"><a href="{{ path('project') }}"><span class="fa fa-folder"></span> Project List</a>
+								<li class="divider"></li>
+	            				<li class=" {{ (app.request.attributes.get('_route') == 'projectgroup')?'active' : '' }}"><a href="{{ path('projectgroup') }}"><span class="fa fa-folder-o"></span> Group List</a>
+							</ul>
+						</li>
 	            		<li class="divider"></li>
-	            		<li class="dropdown-header">Users</li>
-	            		<li class=" {{ (app.request.attributes.get('_route') == 'user')?'active' : '' }}"><a href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
+	            		<li>
+							<a class="trigger right-caret">{{ "Users" }}</a>
+							<ul class="dropdown-menu sub-menu">
+								<li class=" {{ (app.request.attributes.get('_route') == 'user')?'active' : '' }}"><a href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
+							</ul>
+						</li>
 	            	</ul>
 	            </li>
           	{% endif %}
@@ -35,12 +48,17 @@
             	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<span class="caret"></span></a>
 	            	<ul class="dropdown-menu" role="menu">
 	            		{% for key,groups in projectsMenu %}
-	            			<li class="divider"></li>
-		            		<li class="dropdown-header">{{ key }}</li>
-		            		{% for keyProject,project in groups %}
-		            			<li><a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" data-toggle="modal" data-target="#show_{{ project.id }}">{{ project.name }}</a></li>
-		            		{% endfor %}
-		            	{% endfor %}
+		            		<li>
+								<a class="trigger right-caret">{{ key }}</a>
+								{% if groups | length %}
+								<ul class="dropdown-menu sub-menu">
+									{% for keyProject,project in groups %}
+										<li><a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" data-toggle="modal" data-target="#show_{{ project.id }}">{{ project.name }}</a></li>
+									{% endfor %}
+								</ul>
+								{% endif %}
+							</li>
+						{% endfor %}
 	            	</ul>
             	</li>
             {% endif %}
@@ -49,6 +67,7 @@
             	<li class="dropdown {{ (app.request.attributes.get('_route') == 'dashboard_environment')?'active' : '' }}">
             	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Environments<span class="caret"></span></a>
 	            	<ul class="dropdown-menu" role="menu">
+	            		<li class=" {{ (name == "")?'active' : '' }}"><a href="{{ path('dashboard_environment') }}" >{{ "All" }}</a></li>
 	            		{% for environment in environmentsMenu %}
 	            			<li class=" {{ (name == environment.name)?'active' : '' }}"><a href="{{ path('dashboard_environment', {'name':environment.name}) }}" >{{ environment.name }}</a></li>
 		            	{% endfor %}
@@ -60,12 +79,17 @@
             	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Management<span class="caret"></span></a>
 	            	<ul class="dropdown-menu" role="menu">
 	            		{% for key,groups in managementProjectsMenu %}
-	            			<li class="divider"></li>
-		            		<li class="dropdown-header">{{ key }}</li>
-		            		{% for keyProject,project in groups %}
-		            			<li><a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" data-toggle="modal" data-target="#show_{{ project.id }}">{{ project.name }}</a></li>
-		            		{% endfor %}
-		            	{% endfor %}
+	            			<li>
+								<a class="trigger right-caret">{{ key }}</a>
+								{% if groups | length %}
+								<ul class="dropdown-menu sub-menu">
+									{% for keyProject,project in groups %}
+										<li><a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" data-toggle="modal" data-target="#show_{{ project.id }}">{{ project.name }}</a></li>
+									{% endfor %}
+								</ul>
+								{% endif %}
+							</li>
+						{% endfor %}
 	            	</ul>
             	</li>
             {% endif %}

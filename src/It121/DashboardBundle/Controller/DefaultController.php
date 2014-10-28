@@ -106,7 +106,13 @@ class DefaultController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
     
-    	$projects = $em->getRepository('ProjectBundle:Project')->findEnvironment($name);
+    	if ($name) {
+    		$projects = $em->getRepository('ProjectBundle:Project')->findEnvironment($name);
+    	}
+    	else {
+    		$projects = $em->getRepository('ProjectBundle:Project')->findWithEnvironment();
+    	}
+    	
     	
     	$options = array(
     			'projects' => $projects,

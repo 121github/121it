@@ -1,62 +1,109 @@
 {% extends '::dashboard.html.twig' %}
 
+{% set name = (name | length)?name:'All' %}
+
+{% set allActive = (name == "All")?'inactive' %}
+{% set developmentActive = ((name != "Development") and (name != "All"))?'inactive' %}
+{% set testActive = ((name != "Test") and (name != "All"))?'inactive' %}
+{% set acceptanceActive = ((name != "Acceptance") and (name != "All"))?'inactive' %}
+{% set productionActive = ((name != "Production") and (name != "All"))?'inactive' %}
+
+{% set developmentBtn = 'btn-info' %}
+{% set testBtn = 'btn-primary' %}
+{% set acceptanceBtn = 'btn-warning' %}
+{% set productionBtn = 'btn-success' %}
+
 {% block title %}{{ name ~  " Environment"}}{% endblock %}
 
 {% block content -%}
 
-<h1 class="title">{{ name ~  " Environment"}}</h1>
-
-<div class="row">
-   		<div class="col-md-10">
-		    <table class="table table-striped jumbotron">
-		        <thead>
-		            <tr>
-		                <th>#</th>
-		                <th>Project Name</th>
-		                <th>Group</th>
-		                <th>Server</th>
-		                <th>Status</th>
-		                <th style="text-align: right;">Actions</th>
-		            </tr>
-		        </thead>
-		        <tbody>
-		        {% for project in projects %}
-		            <tr>
-		                <td>
-		                	<a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" data-toggle="modal" data-target="#show_{{ project.id }}">
-				                {% if ((project.server.status.name == 'Ok') and (project.status.name == 'Ok')) %}
-					        		<span class="fa fa-circle fa-2x" style="color: green;"></span>
-					        	{% elseif ((project.server.status.name == 'Error') or (project.status.name == 'Error')) %}
-					        		<span class="fa fa-circle fa-2x" style="color: red;"></span>
-					        	{% elseif ((project.server.status.name == 'Warning') or (project.status.name == 'Warning')) %}
-					        		<span class="fa fa-circle fa-2x" style="color: #eea236;"></span>
-					        	{% elseif (project.status.name == 'In Progress') %}
-					        		<img alt="121CustomerInsight" src="{{ asset('bundles/backend/images/ajax-loader.gif') }}" width="25px;">
-					        	{% endif %}
-					        </a>
-				        </td>
-		               	<td>
-		                	{% if (project.server) %}
-		                		<a href="{{ project.server.url}}" target="_blank">{{ project.name}}</a>
-		                	{% else %}
-		                		{{ project.name}}
-		                	{% endif %}
-		                </td>
-		                <td>{{ project.group }}</td>
-		                <td>{{ project.server }}</td>
-		                <td>{{ project.server.status }}</td>
-		                <td style="text-align: right;"><a href="#" class="pop-right fa fa-ellipsis-h fa-2x" 
-		                		data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true"
-		                		data-content='
-		                					<a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" class="fa fa-eye" data-toggle="modal" data-target="#show_{{ project.id }}"></a><br />'>
-		                	</a>
-		                </td>
-		            </tr>
-		        {% endfor %}
-		        </tbody>
-		    </table>
-		</div>
-	 </div>
+<div class="panel panel-default">
+ <div class="panel-heading">
+ 	<h4 class="panel-title">Test Development Cycle</h4>
+ </div>
+ <div class="panel-body" style="padding: 40px;">
+	<div class="row">
+	   		<div class="col-md-2"> <a href="{{ path('dashboard_environment', {'name': 'Development'}) }}" class="btn {{ developmentBtn }} btn-lg btn-block {{ developmentActive }}">Unit Testing</a></div>
+	   		<div class="col-md-2"> <a href="{{ path('dashboard_environment', {'name': 'Test'}) }}" class="btn {{ testBtn }} btn-lg btn-block {{ testActive }}">Integration Testing</a></div>
+	   		<div class="col-md-2"> <a href="{{ path('dashboard_environment', {'name': 'Test'}) }}" class="btn {{ testBtn }} btn-lg btn-block {{ testActive }}">System Testing</a></div>
+	   		<div class="col-md-2"> <a href="{{ path('dashboard_environment', {'name': 'Acceptance'}) }}" class="btn {{ acceptanceBtn }} btn-lg btn-block {{ acceptanceActive }}">Load Testing</a></div>
+	   		<div class="col-md-2"> <a href="{{ path('dashboard_environment', {'name': 'Acceptance'}) }}" class="btn {{ acceptanceBtn }} btn-lg btn-block {{ acceptanceActive }}">UATs</a></div>
+	   		<div class="col-md-2"> <a href="{{ path('dashboard_environment', {'name': 'Production'}) }}" class="btn {{ productionBtn }} btn-lg btn-block {{ productionActive }}">Live</a></div>
+	</div>
+	<div class="row" style="margin-top: 30px;">
+		<div class="col-md-2"> <a href="{{ path('dashboard_environment', {'name': 'Development'}) }}" class="btn {{ developmentBtn }} btn-lg btn-block {{ developmentActive }}">Development</a></div>
+		<div class="col-md-4"> <a href="{{ path('dashboard_environment', {'name': 'Test'}) }}" class="btn {{ testBtn }} btn-lg btn-block {{ testActive }}">Test</a></div>
+		<div class="col-md-4"> <a href="{{ path('dashboard_environment', {'name': 'Acceptance'}) }}" class="btn {{ acceptanceBtn }} btn-lg btn-block {{ acceptanceActive }}">Acceptance</a></div>
+		<div class="col-md-2"> <a href="{{ path('dashboard_environment', {'name': 'Production'}) }}" class="btn {{ productionBtn }} btn-lg btn-block {{ productionActive }}">Production</a></div>
+	</div>
+	
+	<div class="row" style="margin-top: 30px;">
+	   		<div class="col-md-12">
+			    <table class="table table-striped jumbotron">
+			        <thead>
+			            <tr>
+			                <th>#</th>
+			                <th>Project Name</th>
+			                <th></th>
+			                <th>Group</th>
+			                <th>Server</th>
+			                <th style="text-align: right;">Actions</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        {% for project in projects %}
+			            <tr>
+			                <td>
+			                	<a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" data-toggle="modal" data-target="#show_{{ project.id }}">
+					                {% if ((project.server.status.name == 'Ok') and (project.status.name == 'Ok')) %}
+						        		<span class="fa fa-circle fa-2x" style="color: green;"></span>
+						        	{% elseif ((project.server.status.name == 'Error') or (project.status.name == 'Error')) %}
+						        		<span class="fa fa-circle fa-2x" style="color: red;"></span>
+						        	{% elseif ((project.server.status.name == 'Warning') or (project.status.name == 'Warning')) %}
+						        		<span class="fa fa-circle fa-2x" style="color: #eea236;"></span>
+						        	{% elseif (project.status.name == 'In Progress') %}
+						        		<img alt="121CustomerInsight" src="{{ asset('bundles/backend/images/ajax-loader.gif') }}" width="25px;">
+						        	{% endif %}
+						        </a>
+					        </td>
+			               	<td>
+			                	{% if (project.server) %}
+			                		<a href="{{ project.server.url}}" target="_blank">{{ project.name}}</a>
+			                	{% else %}
+			                		{{ project.name}}
+			                	{% endif %}
+			                </td>
+			                <td>
+			                	{% if (project.server.environment == "Development") %}
+			                		{% set color = 'btn-info' %}
+			                	{% elseif (project.server.environment == "Test") %}
+			                		{% set color = 'btn-primary' %}
+			                	{% elseif (project.server.environment == "Acceptance") %}
+			                		{% set color = 'btn-warning' %}
+			                	{% elseif (project.server.environment) %}
+			                		{% set color = 'btn-success' %}
+			                	{% endif %}
+			                	<a href="{{ path('dashboard_environment', {'name': project.server.environment }) }}" class="btn {{ color }} btn-xs">{{ project.server.environment }}</a>
+			                </td>
+			                <td>{{ project.group }}</td>
+			                <td>{{ project.server }}</td>
+			                <td style="text-align: right;"><a href="#" class="pop-right fa fa-ellipsis-h fa-2x" 
+			                		data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true"
+			                		data-content='
+			                					<a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" class="fa fa-eye" data-toggle="modal" data-target="#show_{{ project.id }}"></a><br />'>
+			                	</a>
+			                </td>
+			            </tr>
+			        {% endfor %}
+			        </tbody>
+			    </table>
+			</div>
+			<div class="col-md-4">
+				
+			</div>
+		 </div>
+	</div>
+</div>
 	 
 	 {% include 'DashboardBundle:Default:includes/modalViews.html.twig' %}
     
