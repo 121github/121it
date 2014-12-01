@@ -4,131 +4,171 @@
 
 {% block content -%}
       <div class="row">
-		<div class="col-md-8">
-	      	<nav class="circular-menu">
-				<div class="circle">
-					<a href="#" class="pop-top slider fa fa-home fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://121customerinsight.co.uk">Comapny Website</a>'' data-html="true"></a>
-					<a href="#" class="pop-right slider fa fa-users fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://121webhost/intranet/">Intranet</a>'' data-html="true"></a>
-					<a href="#" class="pop-right slider fa fa-tasks fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Management" data-content='{% include 'DashboardBundle:Default:includes/managementProjectsByGroup.html.twig' %}' data-html="true"></a>
-					<a href="#" class="pop-bottom slider fa fa-gears fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Environments" data-content='{% include 'DashboardBundle:Default:includes/environments.html.twig' %}' data-html="true"></a>
-					<a href="#" class="pop-left slider fa fa-folder fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Projects" data-content='{% include 'DashboardBundle:Default:includes/projectsByGroup.html.twig' %}' data-html="true"></a>
-					<a href="#" class="pop-left slider fa fa-laptop fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Servers" data-content='{% include 'DashboardBundle:Default:includes/services.html.twig' %}' data-html="true"></a>
-				</div>
-				<a href="" class="menu-button"></a>
-			</nav>	
-      	</div>
-      	
-      	<div class="col-md-4">  
-      	
-      		<div class="panel-group" id="accordion">
-				  <div class="panel panel-default">
-				    <div class="panel-heading">
-				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-parent='#accordion' href="#collapseOne">
-				          Servers
-				        </a>
-				      </h4>
-				    </div>
-				    <div id="collapseOne" class="panel-collapse collapse in">
-				      <div class="panel-body">
-				        <table class="table table-hover">
-				        	{% for server in servers %}
-				        		{% if server.status.name == 'Ok' %}
-				        			{% set status = "success" %}
-				        			{% set icon_status = "fa-check" %}
-				        		{% elseif server.status.name == 'Error' %}
-				        			{% set status = "danger" %}
-				        			{% set icon_status = "fa-remove" %}
-				        		{% elseif server.status.name == 'Warning' %}
-				        			{% set status = "warning" %}
-				        			{% set icon_status = "fa-eye" %}
-				        		{% endif %}
-				        		
-				        		{% if server.type == 'Service' %}
-				        			{% set icon = "fa-laptop" %}
-				        		{% elseif server.type == 'Website' %}
-				        			{% set icon = "fa-folder" %}
-				        		{% endif %}
-				        		
-				        		<tr class="pop-left {{ status }}" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status {{ server.status }}</div><div>Last online {{ server.lastOnline|date('Y-m-d H:i:s') }}</div><div>Last check {{ server.lastCheck|date('Y-m-d H:i:s') }}</div><div>Latency {{ server.latency }}</div>' data-html="true">
-								  <td><span class="fa {{ icon }} fa-1x"></span></td>
-								  <td>{{ server.name }}</td>
-								  <td><span class="fa {{ icon_status }} fa-1x"></span></td>
-								  <td><a href="#" class="fa fa-refresh  fa-1x"></a></td>
-								</tr>
-				        	{% endfor %}
-				      	</table>
-				      </div>
-				    </div>
-				  </div>
-				  <div class="panel panel-default">
-				    <div class="panel-heading">
-				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-parent='#accordion' href="#collapseTwo">
-				          Deployment (Continuous Integration)
-				        </a>
-				      </h4>
-				    </div>
-				    <div id="collapseTwo" class="panel-collapse collapse">
-				      <div class="panel-body">
-				      	 <table class="table table-hover">
-					        {% for project in deployment %}
-					          	{% if project.status == 'stable' %}
-				        			{% set status = "success" %}
-				        			{% set icon_status = "fa-check" %}
-				        		{% elseif 'broken' in project.status %}
-				        			{% set status = "danger" %}
-				        			{% set icon_status = "fa-remove" %}
-				        		{% elseif project.status == 'back to normal' %}
-				        			{% set status = "warning" %}
-				        			{% set icon_status = "fa-eye" %}
-				        		{% elseif '?' in project.status %}
-				        			{% set status = "info" %}
-				        		{% endif %}
-					          	<tr class="pop-left {{ status }}" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status {{ project.status }}</div><div>Published {{ project.published|date('Y-m-d H:i:s') }}</div><div>Updated {{ project.updated|date('Y-m-d H:i:s') }}</div>' data-html="true">
-								  <td><span class="fa fa-gears fa-1x"></span></td>
-								  <td><a href="{{ project.link }}" target="_blank">{{ "#" ~ project.version }}</a></td>
-								  <td>{{ project.title }}</a></td>
-								  <td>
-								  	{% if status == "info" %}
-								  		<img alt="121CustomerInsight" src="{{ asset('bundles/backend/images/ajax-loader.gif') }}" width="25px;">
-								  	{% else %}
-								  		<span class="fa {{ icon_status }} fa-1x"></span>
-								  	{% endif %}
-								  </td>
-								</tr>
-					          {% endfor %}
-					  	</table>
-				      </div>
-				    </div>
-				  </div>
-				  <div class="panel panel-default">
-				    <div class="panel-heading">
-				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-parent='#accordion' href="#collapseThree">
-				          Current connection
-				        </a>
-				      </h4>
-				    </div>
-				    <div id="collapseThree" class="panel-collapse collapse">
-				      <div class="panel-body">
-				      	<table class="table table-hover">
-				      		<tr class="pop-left" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='1hour 32minutes' data-html="true">
-							  <td><span class="glyphicon glyphicon-user"></span></td>
-							  <td>{{ app.security.getToken().getUser().getUserDetail() }}</td>
-							  <td><button class="btn btn-danger fa fa-remove fa-1x"></button></td>
-							</tr>
-							<tr class="pop-left" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='1hour 32minutes' data-html="true">
-							  <td><span class="glyphicon glyphicon-user"></span></td>
-							  <td>{{ app.security.getToken().getUser().getUserDetail() }}</td>
-							  <td><button class="btn btn-danger fa fa-remove fa-1x"></button></td>
-							</tr>
-				      	</table>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-      	</div>
+
+          {#<div class="col-md-8">#}
+          {#<nav class="circular-menu">#}
+          {#<div class="circle">#}
+          {#<a href="#" class="pop-top slider fa fa-home fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://121customerinsight.co.uk">Comapny Website</a>'' data-html="true"></a>#}
+          {#<a href="#" class="pop-right slider fa fa-users fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://121webhost/intranet/">Intranet</a>'' data-html="true"></a>#}
+          {#<a href="#" class="pop-right slider fa fa-tasks fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Management" data-content='{% include 'DashboardBundle:Default:includes/managementProjectsByGroup.html.twig' %}' data-html="true"></a>#}
+          {#<a href="#" class="pop-bottom slider fa fa-gears fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Environments" data-content='{% include 'DashboardBundle:Default:includes/environments.html.twig' %}' data-html="true"></a>#}
+          {#<a href="#" class="pop-left slider fa fa-folder fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Projects" data-content='{% include 'DashboardBundle:Default:includes/projectsByGroup.html.twig' %}' data-html="true"></a>#}
+          {#<a href="#" class="pop-left slider fa fa-laptop fa-2x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Servers" data-content='{% include 'DashboardBundle:Default:includes/services.html.twig' %}' data-html="true"></a>#}
+          {#</div>#}
+          {#<a href="" class="menu-button"></a>#}
+          {#</nav>	#}
+          {#</div>#}
+
+        <div class="col-md-4">
+            <div class="panel-group" id="accordion">
+                <br><br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="#" class="pop-right slider fa fa-folder fa-3x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Projects" data-content='{% include 'DashboardBundle:Default:includes/projectsByGroup.html.twig' %}' data-html="true"></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="pop-right slider fa fa-home fa-3x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://121customerinsight.co.uk">Comapny Website</a>'' data-html="true"></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="pop-right slider fa fa-users fa-3x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<a target="_blank" href="http://121webhost/intranet/">Intranet</a>'' data-html="true"></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="pop-right slider fa fa-gears fa-3x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Environments" data-content='{% include 'DashboardBundle:Default:includes/environments.html.twig' %}' data-html="true"></a>
+                    </div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="#" class="pop-right slider fa fa-tasks fa-3x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Management" data-content='{% include 'DashboardBundle:Default:includes/managementProjectsByGroup.html.twig' %}' data-html="true"></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="#" class="pop-right slider fa fa-laptop fa-3x" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="bottom" data-title="Servers" data-content='{% include 'DashboardBundle:Default:includes/services.html.twig' %}' data-html="true"></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="" class="menu-button"></a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="" class="menu-button"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseOne">
+                      Servers
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                  <div class="panel-body" style="max-height: 250px; overflow-y:scroll;">
+                    <table class="table table-hover">
+                        {% for server in servers %}
+                            {% if server.status.name == 'Ok' %}
+                                {% set status = "success" %}
+                                {% set icon_status = "fa-check" %}
+                            {% elseif server.status.name == 'Error' %}
+                                {% set status = "danger" %}
+                                {% set icon_status = "fa-remove" %}
+                            {% elseif server.status.name == 'Warning' %}
+                                {% set status = "warning" %}
+                                {% set icon_status = "fa-eye" %}
+                            {% endif %}
+
+                            {% if server.type == 'Service' %}
+                                {% set icon = "fa-laptop" %}
+                            {% elseif server.type == 'Website' %}
+                                {% set icon = "fa-folder" %}
+                            {% endif %}
+
+                            <tr class="pop-left {{ status }}" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status {{ server.status }}</div><div>Last online {{ server.lastOnline|date('Y-m-d H:i:s') }}</div><div>Last check {{ server.lastCheck|date('Y-m-d H:i:s') }}</div><div>Latency {{ server.latency }}</div>' data-html="true">
+                              <td><span class="fa {{ icon }} fa-1x"></span></td>
+                              <td>{{ server.name }}</td>
+                              <td><span class="fa {{ icon_status }} fa-1x"></span></td>
+                              <td><a href="#" class="fa fa-refresh  fa-1x"></a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseTwo">
+                      Deployment (Continuous Integration)
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse in">
+                  <div class="panel-body" style="max-height: 250px; overflow-y:scroll;">
+                     <table class="table table-hover">
+                        {% for project in deployment %}
+                            {% if project.status == 'stable' %}
+                                {% set status = "success" %}
+                                {% set icon_status = "fa-check" %}
+                            {% elseif 'broken' in project.status %}
+                                {% set status = "danger" %}
+                                {% set icon_status = "fa-remove" %}
+                            {% elseif project.status == 'back to normal' %}
+                                {% set status = "warning" %}
+                                {% set icon_status = "fa-eye" %}
+                            {% elseif '?' in project.status %}
+                                {% set status = "info" %}
+                            {% endif %}
+                            <tr class="pop-left {{ status }}" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='<div>Status {{ project.status }}</div><div>Published {{ project.published|date('Y-m-d H:i:s') }}</div><div>Updated {{ project.updated|date('Y-m-d H:i:s') }}</div>' data-html="true">
+                              <td><span class="fa fa-gears fa-1x"></span></td>
+                              <td><a href="{{ project.link }}" target="_blank">{{ "#" ~ project.version }}</a></td>
+                              <td>{{ project.title }}</a></td>
+                              <td>
+                                {% if status == "info" %}
+                                    <img alt="121CustomerInsight" src="{{ asset('bundles/backend/images/ajax-loader.gif') }}" width="25px;">
+                                {% else %}
+                                    <span class="fa {{ icon_status }} fa-1x"></span>
+                                {% endif %}
+                              </td>
+                            </tr>
+                          {% endfor %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseThree">
+                      Current connection
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse in">
+                  <div class="panel-body" style="max-height: 200px; overflow-y:scroll;">
+                    <table class="table table-hover">
+                        <tr class="pop-left" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='1hour 32minutes' data-html="true">
+                          <td><span class="glyphicon glyphicon-user"></span></td>
+                          <td>{{ app.security.getToken().getUser().getUserDetail() }}</td>
+                          <td><button class="btn btn-danger btn-xs fa fa-remove fa-1x"></button></td>
+                        </tr>
+                        <tr class="pop-left" data-trigger="hover" data-container="body" data-toggle="popover" data-placement="bottom" data-content='1hour 32minutes' data-html="true">
+                          <td><span class="glyphicon glyphicon-user"></span></td>
+                          <td>{{ app.security.getToken().getUser().getUserDetail() }}</td>
+                          <td><button class="btn btn-danger btn-xs fa fa-remove fa-1x"></button></td>
+                        </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
       	
       </div>
       
