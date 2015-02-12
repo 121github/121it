@@ -10,47 +10,61 @@
 */
 
 body {
-  background: #39D;
-  margin-top: 10px;
+    background: white;
+    margin-top: 10px;
 }
 
 .footer {
-  background: #e7e7e7;
-  padding-top:20px;
-  position:fixed;
-  left:0px;
-  bottom:0px;
-  height:50px;
-  width:100%;
+    background: #e7e7e7;
+    padding-top:20px;
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:50px;
+    width:100%;
 }
 
 body a:hover, a:visited {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 input {
-	width: 90%;
+    width: 90%;
 }
 
 
 /* ===========================================================================
    Menu
    ======================================================================== */
-   
+.navbar-default {
+    background-color: #4F4F4F;
+    border-color: #4F4F4F;
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #FFF;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+}
+
 .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus {
-	background-color: #e7e7e7;
-	color: black;
+    background-color: #e7e7e7;
+    color: black;
 }
 
 .dropdown-menu>li
 {	position:relative;
-	-webkit-user-select: none; /* Chrome/Safari */        
-	-moz-user-select: none; /* Firefox */
-	-ms-user-select: none; /* IE10+ */
-	/* Rules below not implemented in browsers yet */
-	-o-user-select: none;
-	user-select: none;
-	cursor:pointer;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
+    cursor:pointer;
 }
 .dropdown-menu .sub-menu {
     left: 100%;
@@ -58,20 +72,20 @@ input {
     top: -5px;
     display:none;
     margin-top: -1px;
-	border-top-left-radius:0;
-	border-bottom-left-radius:0;
-	border-left-color:#fff;
-	box-shadow:none;
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    border-left-color:#fff;
+    box-shadow:none;
 }
 .right-caret:after,.left-caret:after
- {	content:"";
+{	content:"";
     border-bottom: 5px solid transparent;
     border-top: 5px solid transparent;
     display: inline-block;
     height: 0;
     vertical-align: middle;
     width: 0;
-	margin-left:5px;
+    margin-left:5px;
 }
 .right-caret:after
 {	border-left: 5px solid #555;
@@ -91,7 +105,7 @@ input {
     width: 100%;
     margin: auto;
     padding-bottom: 40px; /* give extra space for form */
-    text-align: center; 
+    text-align: center;
 }
 .message .message_success {
     position: absolute;
@@ -111,11 +125,33 @@ input {
    Title
    ======================================================================== */
 .title {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
 
 .inactive {
-	opacity: 0.4;
+    opacity: 0.4;
     filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+
+/* ===========================================================================
+   Panels
+   ======================================================================== */
+.panel-default>.panel-heading {
+    color: #000;
+    font-weight: bold;
+    background-color: #E5E5E5;
+    border-color: #ddd;
+}
+
+/* ===========================================================================
+   Modal
+   ======================================================================== */
+.modal-header {
+    min-height: 16.43px;
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: rgba(48, 99, 144, 0.99);
+    color: #ffffff;
 }

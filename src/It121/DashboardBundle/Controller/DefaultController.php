@@ -76,9 +76,9 @@ class DefaultController extends Controller
     	$servers = $em->getRepository('ServerBundle:Server')->findBy(array(), array('type' => 'ASC'));
     	
     	//Get Rss for the Deployment in Jenkins
-    	$url = 'http://121webhost:8080/rssLatest';
+    	$url = 'http://121leads.co.uk:8080/rssLatest';
     	$username = 'estebanc';
-    	$password = 'esteban123P';
+    	$password = 'esteban123P83';
     	$deployment = $this->getRss($url, $username, $password);
     	
     	$options = array(
@@ -148,7 +148,7 @@ class DefaultController extends Controller
     	//Get Rss for the Deployment in Jenkins
     	$url = $entity->getServer()->getRssUrl();
     	$username = 'estebanc';
-    	$password = 'esteban123P';
+    	$password = 'esteban123P83';
     	$deployment = $this->getRss($url, $username, $password);
     
     	return $this->render('DashboardBundle:Project:show.html.twig', array(

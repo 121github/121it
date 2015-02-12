@@ -94,7 +94,7 @@ class StatusProjectCommand extends ContainerAwareCommand {
 		//Get Rss for the Deployment in Jenkins
 		$url = $project->getServer()->getRssUrl();
 		$username = 'estebanc';
-		$password = 'esteban123P';
+		$password = 'esteban123P83';
 		$deployment = $this->getRss($url, $username, $password);
 		
 		$publishDate = $deployment[0]['published'];
@@ -123,10 +123,10 @@ class StatusProjectCommand extends ContainerAwareCommand {
 				'name' => $status
 		)));
 		Util::setModifyAuditFields($project, 1);
-			
+
 		$entityManager->persist($project);
 		$entityManager->flush();
-		
+
 		return $success;
 	}
 	
