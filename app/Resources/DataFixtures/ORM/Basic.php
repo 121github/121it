@@ -192,7 +192,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create service (SFTP)
         $server = new Server();
         $server->setName('SFTP 121webhost');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setUser('esteban');
         $server->setPassword('pass123');
         $server->setPort(22);
@@ -229,7 +229,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Test)
         $server = new Server();
         $server->setName('CMS Test');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPath('test_env/cms/web');
         $server->setPort(80);
         $server->setSendEmail(true);
@@ -265,7 +265,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Production)
         $server = new Server();
         $server->setName('CMS_FSB');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPath('fsb/web');
         $server->setPort(80);
         $server->setSendEmail(true);
@@ -295,7 +295,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Production)
         $server = new Server();
         $server->setName('CMS_VOICE GROUP');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPath('voicegroup/web');
         $server->setPort(80);
         $server->setSendEmail(true);
@@ -325,7 +325,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Test)
         $server = new Server();
         $server->setName('121IT Test');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPath('test_env/121it/web');
         $server->setPort(80);
         $server->setSendEmail(true);
@@ -361,7 +361,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Test)
         $server = new Server();
         $server->setName('121Sys Test');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPath('test_env/121sys');
         $server->setPort(80);
         $server->setSendEmail(true);
@@ -397,7 +397,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Acceptance)
         $server = new Server();
         $server->setName('121Sys Acceptance');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPath('accept_env/121sys');
         $server->setPort(80);
         $server->setSendEmail(true);
@@ -427,7 +427,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Production)
         $server = new Server();
         $server->setName('121Sys Production');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPath('121sys');
         $server->setPort(80);
         $server->setSendEmail(true);
@@ -458,7 +458,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Management)
         $server = new Server();
         $server->setName('Phabricator');
-        $server->setDomain('www.121leads.co.uk');
+        $server->setDomain('10.10.1.13');
         $server->setPort(9090);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
@@ -488,7 +488,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Management)
         $server = new Server();
         $server->setName('YouTrack');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPort(8081);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
@@ -513,7 +513,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Management)
         $server = new Server();
         $server->setName('Jenkins');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPort(8080);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
@@ -544,7 +544,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Management)
         $server = new Server();
         $server->setName('Alfresco');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPath('share/page');
         $server->setPort(8181);
         $server->setSendEmail(true);
@@ -607,7 +607,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         //Create website (Management)
         $server = new Server();
         $server->setName('Munin');
-        $server->setDomain('121webhost');
+        $server->setDomain('10.10.1.13');
         $server->setPath('munin');
         $server->setPort(80);
         $server->setSendEmail(true);
