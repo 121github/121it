@@ -4,6 +4,10 @@
 {% block stylesheets %}
 	<link href="{{ asset('bundles/dashboard/css/dashboard.css') }}"	rel="stylesheet" type="text/css" />
 {% endblock %}
+{% block javascripts %}
+	{# dashboard Lib #}
+	<script type="text/javascript" src="{{ asset('bundles/dashboard/js/dashboard.js') }}" ></script>
+{% endblock %}
 
 {% block body %}
 	{% block content %}{% endblock %}

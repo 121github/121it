@@ -13,3 +13,13 @@ dashboard_project_show:
 dashboard_server_show:
     path:     /{id}/server/show
     defaults: { _controller: "DashboardBundle:Default:showServer" }
+
+dashboard_server_check:
+    path:     /servers/check
+    defaults: { _controller: "DashboardBundle:Default:checkServer" }
+    requirements: { _method: post }
+
+dashboard_deployment_check:
+    path:     /deployment/check
+    defaults: { _controller: "DashboardBundle:Default:checkDeployment" }
+    requirements: { _method: post }

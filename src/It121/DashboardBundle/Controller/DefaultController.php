@@ -2,7 +2,14 @@
 
 namespace It121\DashboardBundle\Controller;
 
+use It121\BackendBundle\Command\StatusProjectCommand;
+use It121\BackendBundle\Command\StatusServerCommand;
+use JMS\Serializer\SerializerBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -49,7 +56,7 @@ class DefaultController extends Controller
 			
 			$feed = file_get_contents($url, false, $context);
 			$xml = simplexml_load_string($feed);
-			
+
 			for ($i = 0; $i < count($xml->entry); $i++ ) {
 				$title = substr($xml->entry[$i]->title, 0, strpos($xml->entry[$i]->title, '#'));
 				$version = substr($xml->entry[$i]->title, strpos($xml->entry[$i]->title, '#')+1, strpos($xml->entry[$i]->title, '(')-strpos($xml->entry[$i]->title, '#')-2);
@@ -58,9 +65,9 @@ class DefaultController extends Controller
 				'title' => $title,
 				'version' => $version,
 				'status' => $status,
-				'link' =>  $xml->entry[$i]->link['href'],
-				'published' => $xml->entry[$i]->published,
-				'updated' => $xml->entry[$i]->updated,
+				'link' =>  substr($xml->entry[$i]->link['href'],0),
+				'published' => substr($xml->entry[$i]->published,0),
+				'updated' => substr($xml->entry[$i]->updated,0),
 				));
 			}	
 		}
@@ -70,21 +77,8 @@ class DefaultController extends Controller
 	
     public function indexAction()
     {
-    	$em = $this->getDoctrine()->getManager();
-    	
-    	//Get the servers
-    	$servers = $em->getRepository('ServerBundle:Server')->findBy(array(), array('type' => 'ASC'));
-    	
-    	//Get Rss for the Deployment in Jenkins
-    	$url = 'http://121leads.co.uk:8080/rssLatest';
-    	$username = 'estebanc';
-    	$password = 'esteban123P83';
-    	$deployment = $this->getRss($url, $username, $password);
-    	
-    	$options = array(
-    		'servers' => $servers,
-    		'deployment' => $deployment,
-    	);
+    	$options = array();
+
     	$elementsForMenu = $this->getElementsForMenu();
     	
     	return $this->render('DashboardBundle:Default:index.html.twig', array_merge($options, $elementsForMenu));
@@ -156,4 +150,95 @@ class DefaultController extends Controller
     			'deployment'      => $deployment,
     	));
     }
+
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+	/********************************  Check Server ACTION ************************************************************************/
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+
+	/**
+	 * Check server view
+	 *
+	 */
+	public function checkServerAction()
+	{
+
+		$em = $this->getDoctrine()->getManager();
+
+		//Run the servers check command
+		$command = new StatusServerCommand();
+		$command->setContainer($this->container);
+		$input = new ArrayInput(array());
+		$output = new NullOutput();
+		$resultCode = $command->run($input, $output);
+
+		//Get the servers
+		$servers = $em->getRepository('ServerBundle:Server')->findBy(array(), array('type' => 'ASC'));
+
+		$servers = array(
+			"success" => (!empty($servers)),
+			"data" => $servers
+		);
+
+		$serializer = SerializerBuilder::create()->build();
+		$servers = $serializer->serialize($servers, 'json');
+
+		$response = new Response($servers);
+
+		$response->headers->set('Content-Type', 'application/json');
+
+		return $response;
+	}
+
+
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+	/********************************  Check Deployment ACTION ********************************************************************/
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+
+	/**
+	 * Check Deployment view
+	 *
+	 */
+	public function checkDeploymentAction()
+	{
+
+		$em = $this->getDoctrine()->getManager();
+
+		//Run the servers check command
+		$command = new StatusProjectCommand();
+		$command->setContainer($this->container);
+		$input = new ArrayInput(array());
+		$output = new NullOutput();
+		$resultCode = $command->run($input, $output);
+
+		//Get Rss for the Deployment in Jenkins
+		$url = 'http://www.121leads.co.uk:8080/view/All/rssLatest';
+		$username = 'estebanc';
+		$password = 'esteban123P83';
+		$deployment = $this->getRss($url, $username, $password);
+
+		$serializer = SerializerBuilder::create()->build();
+
+		$deployment = array(
+			"success" => (!empty($deployment)),
+			"data" => $deployment
+		);
+
+		$deployment = $serializer->serialize($deployment, 'json');
+
+		$response = new Response($deployment);
+
+		$response->headers->set('Content-Type', 'application/json');
+
+		return $response;
+	}
 }
+
+
