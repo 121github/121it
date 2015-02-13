@@ -211,13 +211,6 @@ class DefaultController extends Controller
 
 		$em = $this->getDoctrine()->getManager();
 
-		//Run the servers check command
-		$command = new StatusProjectCommand();
-		$command->setContainer($this->container);
-		$input = new ArrayInput(array());
-		$output = new NullOutput();
-		$resultCode = $command->run($input, $output);
-
 		//Get Rss for the Deployment in Jenkins
 		$url = 'http://www.121leads.co.uk:8080/view/All/rssLatest';
 		$username = 'estebanc';
