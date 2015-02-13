@@ -23,14 +23,14 @@ var side_panel = {
 		});
 
 		side_panel.checkServerPanel();
-		setInterval(function(){
-			side_panel.checkServerPanel(); // this will run after every 5 seconds
-		}, 120000);
+		//setInterval(function(){
+		//	side_panel.checkServerPanel(); // this will run after every 5 seconds
+		//}, 120000);
 
 		side_panel.checkDeploymentPanel();
-		setInterval(function(){
-			side_panel.checkDeploymentPanel(); // this will run after every 5 seconds
-		}, 30000);
+		//setInterval(function(){
+		//	side_panel.checkDeploymentPanel(); // this will run after every 5 seconds
+		//}, 30000);
 
     },
 	setLoaderUrl: function(url) {
