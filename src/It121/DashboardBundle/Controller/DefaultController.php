@@ -212,7 +212,7 @@ class DefaultController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		//Get Rss for the Deployment in Jenkins
-		$url = 'http://www.121leads.co.uk:8080/view/All/rssLatest';
+		$url = 'http://10.10.1.13:8080/view/All/rssLatest';
 		$username = 'estebanc';
 		$password = 'esteban123P83';
 		$deployment = $this->getRss($url, $username, $password);
