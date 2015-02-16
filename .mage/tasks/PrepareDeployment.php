@@ -16,8 +16,7 @@ class PrepareDeployment extends AbstractTask
         $commandList = array(
             'mv app/config/parameters.yml.dist app/config/parameters.yml',
             'rm -rf app/config/parameters.yml.*',
-            'rm -rf web/app.php.*',
-            'chgrp -R www-data .'
+            'rm -rf web/app.php.*'
         );
 
         $command = implode(" && ", $commandList);
