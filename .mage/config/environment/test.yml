@@ -16,6 +16,7 @@ hosts:
     - 10.10.1.15
 tasks:
   pre-deploy:
+    - permissions_console
   on-deploy:
     - symfony2/cache-warmup: {env: prod}
     - symfony2/assets-install
