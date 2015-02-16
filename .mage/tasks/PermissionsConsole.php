@@ -8,7 +8,7 @@ class PermissionsConsole extends AbstractTask
 {
     public function getName()
     {
-        return 'Fixing file permissions';
+        return 'Fixing app/console file permissions';
     }
 
     public function run()
