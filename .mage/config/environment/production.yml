@@ -1,0 +1,25 @@
+#production
+deployment:
+  user: esteban
+  from: /var/lib/jenkins/jobs/121IT/workspace/
+  to: /var/www
+  excludes:
+    - app/cache/*
+    - app/logs/*
+    - web/bundles/*
+releases:
+  enabled: true
+  max: 10
+  symlink: 121it
+  directory: releases/121it_releases
+hosts:
+    - 10.10.1.13
+tasks:
+  pre-deploy:
+  on-deploy:
+    - permissionsConsole
+    - prepareDeployment
+    - symfony2/cache-warmup: {env: prod}
+    - symfony2/assets-install
+  post-release:
+  post-deploy:

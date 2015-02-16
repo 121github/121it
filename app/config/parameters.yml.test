@@ -4,7 +4,7 @@ parameters:
     database_port: null
     database_name: 121it
     database_user: 121it
-    database_password: 7zFUZRE7qzwzSVVX
+    database_password: NXWa5HmBstr3YRXe
 
     mailer_transport: smtp
     mailer_host: mail.leadcontrol.co.uk

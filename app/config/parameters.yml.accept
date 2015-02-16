@@ -4,7 +4,7 @@ parameters:
     database_port: null
     database_name: 121it_accept
     database_user: 121it_accept
-    database_password: 7zFUZRE7qzwzSVVX
+    database_password: nJwCuNBpJpUWu87B
 
 
     mailer_transport: smtp
