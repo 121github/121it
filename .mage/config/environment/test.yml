@@ -1,0 +1,24 @@
+#test
+deployment:
+  user: estebanc
+  from: /var/lib/jenkins/jobs/121IT/workspace/
+  to: /var/www/html
+  excludes:
+    - app/cache/*
+    - app/logs/*
+    - web/bundles/*
+releases:
+  enabled: true
+  max: 10
+  symlink: 121it
+  directory: 121it_releases
+hosts:
+  10.10.1.15
+tasks:
+  pre-deploy:
+  on-deploy:
+    - symfony2/cache-warmup: {env: prod}
+  post-release:
+    - purge-apc-cache
+  post-deploy:
+    - symfony2/assets-install
