@@ -18,8 +18,8 @@ tasks:
   pre-deploy:
   on-deploy:
     - permissionsConsole
-    - prepareDeployment
     - symfony2/cache-warmup: {env: prod}
     - symfony2/assets-install
+    - prepareDeployment
   post-release:
   post-deploy:
