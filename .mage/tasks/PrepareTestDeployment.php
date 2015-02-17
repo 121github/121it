@@ -18,8 +18,8 @@ class PrepareTestDeployment extends AbstractTask
             'rm -rf app/config/parameters.yml.*',
             'mv web/app.php.test web/app.php',
             'rm -rf web/app.php.*',
-            'setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs',
-            'setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs'
+            'setfacl -R -m u:www-data:rwx -m u:\`whoami\`:rwx app/cache app/logs',
+            'setfacl -dR -m u:www-data:rwx -m u:\`whoami\`:rwx app/cache app/logs'
         );
 
         $command = implode(" && ", $commandList);
