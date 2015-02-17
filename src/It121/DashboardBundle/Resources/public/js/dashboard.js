@@ -94,7 +94,6 @@ var side_panel = {
 		var status = "";
 		var icon_status = "";
 		var icon = "";
-		//var loader_url = "{{ asset('bundles/backend/images/ajax-loader.gif') }}";
 
 		var $tbody = $('.deployments').find('tbody');
 		$tbody.empty();
