@@ -6,61 +6,60 @@
     <div class="row">
         <div class="col-md-4">
             <div class="panel-group" id="accordion">
-                <br><br>
-
                 <div class="row">
-                    <div class="col-md-3">
-                        <a href="#" class="pop-right slider fa fa-folder fa-3x" data-trigger="focus"
-                           data-container="body" data-toggle="popover" data-placement="bottom" data-title="Projects"
-                           data-content='{% include 'DashboardBundle:Default:includes/projectsByGroup.html.twig' %}'
-                           data-html="true"></a>
+                    <div class="col-md-3"  style="color: #B0B0B0; margin-left: 15px; margin-bottom: 10px; width: 90%; padding: 5px; border-bottom: 1px solid #B0B0B0;">COMPANY</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3" style="padding: 5px; text-align: center">
+                        <a href="http://121customerinsight.co.uk" target="_blank">
+                            <span class="pop-right slider fa fa-home fa-3x" style="color:black"></span>
+                        </a>
+                        <div>121 Website</div>
                     </div>
-                    <div class="col-md-3">
-                        <a href="#" class="pop-right slider fa fa-home fa-3x" data-trigger="focus" data-container="body"
-                           data-toggle="popover" data-placement="bottom"
-                           data-content='<a target="_blank" href="http://121customerinsight.co.uk">Comapny Website</a>''
-                        data-html="true"></a>
+                    <div class="col-md-3" style="padding: 5px; text-align: center">
+                        <a href="http://121webhost/intranet" target="_blank">
+                            <span class="pop-right slider fa fa-users fa-3x"  style="color:black"></span>
+                        </a>
+                        <div>Intranet</div>
                     </div>
-                    <div class="col-md-3">
-                        <a href="#" class="pop-right slider fa fa-users fa-3x" data-trigger="focus"
-                           data-container="body" data-toggle="popover" data-placement="bottom"
-                           data-content='<a target="_blank" href="http://121webhost/intranet/">Intranet</a>''
-                        data-html="true"></a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="pop-right slider fa fa-gears fa-3x" data-trigger="focus"
-                           data-container="body" data-toggle="popover" data-placement="bottom" data-title="Environments"
-                           data-content='{% include 'DashboardBundle:Default:includes/environments.html.twig' %}'
-                           data-html="true"></a>
+                    <div class="col-md-3" style="padding: 5px; text-align: center">
+                        <a href="https://login.microsoftonline.com/" target="_blank">
+                            <span class="pop-right slider fa fa-inbox fa-3x" style="color:black"></span>
+                        </a>
+                        <div>Webmail</div>
                     </div>
                 </div>
                 <br><br>
-
                 <div class="row">
-                    <div class="col-md-3">
-                        <a href="#" class="pop-right slider fa fa-tasks fa-3x" data-trigger="focus"
-                           data-container="body" data-toggle="popover" data-placement="bottom" data-title="Management"
-                           data-content='{% include 'DashboardBundle:Default:includes/managementProjectsByGroup.html.twig' %}'
-                           data-html="true"></a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="#" class="pop-right slider fa fa-laptop fa-3x" data-trigger="focus"
-                           data-container="body" data-toggle="popover" data-placement="bottom" data-title="Servers"
-                           data-content='{% include 'DashboardBundle:Default:includes/services.html.twig' %}'
-                           data-html="true"></a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="" class="menu-button"></a>
-                    </div>
-                    <div class="col-md-3">
-                        <a href="" class="menu-button"></a>
-                    </div>
+                    <div class="col-md-3"  style="color: #B0B0B0; margin-left: 15px; margin-bottom: 10px; width: 90%; padding: 5px; border-bottom: 1px solid #B0B0B0;">MANAGEMENT</div>
+                </div>
+                <div class="row">
+                    {% for key,shortcut in shortcutManagementApps %}
+                        <div class="col-md-3" style="padding: 5px; text-align: center">
+                            <a href="{{ shortcut.url }}" target="_blank">
+                                <img src="{{ asset('bundles/backend/images/server/'~shortcut.logo) }}" height="40px">
+                            </a>
+                            <div>{{ shortcut.name }}</div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
-
+            <div class="row">
+                <div class="col-md-3"  style="color: #B0B0B0; margin-left: 15px; margin-bottom: 10px; width: 90%; padding: 5px; border-bottom: 1px solid #B0B0B0;">APPS</div>
+            </div>
+            <div class="row">
+                {% for key,shortcut in shortcutProductionApps %}
+                    <div class="col-md-3" style="padding: 5px; text-align: center">
+                        <a href="{{ shortcut.url }}" target="_blank">
+                            <img src="{{ asset('bundles/backend/images/server/'~shortcut.logo) }}" height="40px">
+                        </a>
+                        <div>{{ shortcut.name }}</div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
         <div class="col-md-4">

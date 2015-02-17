@@ -81,6 +81,17 @@
 		    <label class="col-sm-4 control-label">{{ form_label(edit_form.monitoring) }}</label>
 		    <div class="col-sm-6">{{ form_widget(edit_form.monitoring) }}</div>
 		  </div>
+
+		{{ form_errors(edit_form.shortcut) }}
+		<div class="form-group">
+			<label class="col-sm-4 control-label">{{ form_label(edit_form.shortcut) }}</label>
+			<div class="col-sm-6">{{ form_widget(edit_form.shortcut) }}</div>
+		</div>
+		{{ form_errors(edit_form.logo) }}
+		<div class="form-group">
+			<label class="col-sm-4 control-label">{{ form_label(edit_form.logo) }}</label>
+			<div class="col-sm-6">{{ form_widget(edit_form.logo) }}</div>
+		</div>
 		  
 		  {{ form_row(edit_form._token) }}
 	</div>

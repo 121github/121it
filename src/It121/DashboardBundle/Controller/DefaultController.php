@@ -77,7 +77,15 @@ class DefaultController extends Controller
 	
     public function indexAction()
     {
-    	$options = array();
+		$em = $this->getDoctrine()->getManager();
+
+		$shortcutProductionApps = $em->getRepository('ServerBundle:Server')->findWithShortcutProductionApps();
+		$shortcutManagementApps = $em->getRepository('ServerBundle:Server')->findWithShortcutManagementApps();
+
+		$options = array(
+			'shortcutProductionApps' => $shortcutProductionApps,
+			'shortcutManagementApps' => $shortcutManagementApps
+		);
 
     	$elementsForMenu = $this->getElementsForMenu();
     	

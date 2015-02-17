@@ -145,6 +145,20 @@ class Server
      * @ORM\Column(name="message", type="string", length=100, nullable=true)
      */
     private $message;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="logo", type="string", length=100, nullable=true)
+     */
+    private $logo;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="shortcut", type="boolean")
+     */
+    private $shortcut;
     
     /**
      * @var integer
@@ -173,7 +187,7 @@ class Server
      * @ORM\Column(name="modified_date", type="datetime")
      */
     private $modifiedDate;
-    
+
     
     /**
      *
@@ -722,5 +736,51 @@ class Server
     public function getRssUrl()
     {
         return $this->rssUrl;
+    }
+
+    /**
+     * Set logo
+     *
+     * @param string $logo
+     * @return Server
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return string
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * Set shortcut
+     *
+     * @param boolean $shortcut
+     * @return Server
+     */
+    public function setShortcut($shortcut)
+    {
+        $this->shortcut = $shortcut;
+
+        return $this;
+    }
+
+    /**
+     * Get shortcut
+     *
+     * @return boolean
+     */
+    public function getShortcut()
+    {
+        return $this->shortcut;
     }
 }

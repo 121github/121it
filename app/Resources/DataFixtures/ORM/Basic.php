@@ -185,6 +185,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
         $server->setLatency(0.234556);
+        $server->setShortcut(false);
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         $manager->flush();
@@ -204,6 +205,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
         $server->setLatency(0.234556);
+        $server->setShortcut(false);
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         $manager->flush();
@@ -222,6 +224,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
         $server->setLatency(0.014556);
+        $server->setShortcut(false);
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         $manager->flush();
@@ -242,6 +245,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
         $server->setLatency(0.12356);
+        $server->setShortcut(false);
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -278,6 +282,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
         $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('fsb.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -308,6 +314,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
         $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('voice_group.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -338,6 +346,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
         $server->setLatency(0.12356);
+        $server->setShortcut(false);
+        $server->setLogo('121.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -374,6 +384,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
         $server->setLatency(0.12356);
+        $server->setShortcut(false);
+        $server->setLogo('121.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -404,6 +416,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
         $server->setLatency(0.12356);
+        $server->setShortcut(false);
+        $server->setLogo('121.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -434,6 +448,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
         $server->setLatency(0.12356);
+        $server->setShortcut(false);
+        $server->setLogo('121.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -470,6 +486,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
         $server->setLatency(0.12356);
+        $server->setShortcut(false);
+        $server->setLogo('121.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -500,6 +518,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
         $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('121.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -528,6 +548,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Warning')));
         $server->setLatency(0.12356);
+        $server->setShortcut(false);
+        $server->setLogo('phabricator.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -558,6 +580,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Warning')));
         $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('youtrack.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -583,6 +607,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
         $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('jenkins.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -615,6 +641,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
         $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('alfresco.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -646,6 +674,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
         $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('spiceworks.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
@@ -678,6 +708,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
         $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('munin.png');
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project

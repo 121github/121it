@@ -106,6 +106,64 @@ class ServerRepository extends EntityRepository
 				'type' => $websiteType->getId()
 		));
 	}
+
+	/**
+	 * Get the shortcut production apps
+	 *
+	 */
+	public function findWithShortcutProductionApps() {
+
+		$entityManager = $this->getEntityManager();
+
+		//Get the website type
+		$websiteType = $entityManager->getRepository('ServerBundle:ServerType')->findOneBy(array(
+			'name' => 'Website'
+		));
+
+		//Get the development subtype
+		$developmentType = $entityManager->getRepository('ServerBundle:ServerSubType')->findOneBy(array(
+			'name' => 'Development'
+		));
+
+		//Get the production environment
+		$productionEnvironment = $entityManager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array(
+			'name' => 'Production'
+		));
+
+		//Get the shortcuts
+		return $entityManager->getRepository('ServerBundle:Server')->findBy(array(
+			'shortcut' => true,
+			'type' => $websiteType->getId(),
+			'subtype' => $developmentType->getId(),
+			'environment' => $productionEnvironment->getId()
+		));
+	}
+
+	/**
+	 * Get the shortcut management apps
+	 *
+	 */
+	public function findWithShortcutManagementApps() {
+
+		$entityManager = $this->getEntityManager();
+
+		//Get the website type
+		$websiteType = $entityManager->getRepository('ServerBundle:ServerType')->findOneBy(array(
+			'name' => 'Website'
+		));
+
+		//Get the development subtype
+		$developmentType = $entityManager->getRepository('ServerBundle:ServerSubType')->findOneBy(array(
+			'name' => 'Management'
+		));
+
+		//Get the shortcuts
+		return $entityManager->getRepository('ServerBundle:Server')->findBy(array(
+			'shortcut' => true,
+			'type' => $websiteType->getId(),
+			'subtype' => $developmentType->getId()
+		));
+	}
 	
 	
 }

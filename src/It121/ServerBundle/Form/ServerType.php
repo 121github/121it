@@ -28,6 +28,10 @@ class ServerType extends AbstractType
             ->add('name')
             ->add('domain')
             ->add('path')
+            ->add('logo')
+            ->add('shortcut', 'checkbox', array(
+                'required' => false,
+            ))
             ->add('user')
             ->add('password')
 			->add('port')
