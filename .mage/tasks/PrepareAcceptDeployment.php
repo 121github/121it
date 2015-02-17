@@ -17,7 +17,9 @@ class PrepareAcceptDeployment extends AbstractTask
             'mv app/config/parameters.yml.accept app/config/parameters.yml',
             'rm -rf app/config/parameters.yml.*',
             'mv web/app.php.accept web/app.php',
-            'rm -rf web/app.php.*'
+            'rm -rf web/app.php.*',
+            'setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs',
+            'setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs'
         );
 
         $command = implode(" && ", $commandList);

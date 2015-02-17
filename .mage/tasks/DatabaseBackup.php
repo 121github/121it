@@ -17,20 +17,22 @@ class DatabaseBackup extends AbstractTask
         $pass = $this->getParameter('pass');
         $host = $this->getParameter('host');
         $database = $this->getParameter('database');
-        $path = $this->getParameter('path');
 
-        $releaseId = $this->getReleaseId();
 
-        if ($user && $pass && $host && $database && $path) {
-            //$command = 'mysqldump -u cms_fsb -pNhE8qxYnnDtPT7fJ cms_fsb > /var/www/backup/fsb.sql';
-            Console::output($releaseId);
-            //$result = $this->runCommandRemote($command);
-            $result = true;
+        if ($user && $pass && $host && $database) {
+            $name = date('YmdHis');
+            $path =  'docs/db_bkp';
+            $command = 'mysqldump -u '.$user.' -p'.$pass.' '.$database.' > '.$path.'/'.$name.'.sql';
+            var_dump($command);
+            $result = $this->runCommandRemote($command);
+            //$result = false;
         }
         else {
             $result = false;
+            var_dump("Error executing the database backup");
         }
 
         return $result;
     }
 }
+
