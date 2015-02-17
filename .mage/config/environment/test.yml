@@ -23,4 +23,5 @@ tasks:
     - symfony2/assets-install
     - permissionsGroup
   post-release:
+    - databaseBackup: {user: 121it, pass: NXWa5HmBstr3YRXe, host: localhost, path: releases/121it_releases/database/}
   post-deploy:
