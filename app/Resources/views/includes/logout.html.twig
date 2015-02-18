@@ -1,8 +1,7 @@
-<div style="min-width: 100px;">
+<div>
 	<div>
-		<span>Do you want to continue?</span>
+		{{ app.security.getToken().getUser().getUserDetail().getFirstName() ~ ", do you want to continue logout?" }}
 	</div>
-	<div style="margin-top: 20px;">
-		<a href={{ path('logout') }} class="btn btn-warning">Yes</a>
-	</div>
+	<br />
+	<div><a href="{{ path('logout') }}" class="btn btn-warning">Yes</a></div>
 </div>

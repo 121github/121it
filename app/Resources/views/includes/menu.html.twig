@@ -12,37 +12,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-          	{% if is_granted('ROLE_ADMINISTRATOR') %}
-          		{% set server = ['server', 'project', 'projectgroup', 'user'] %}
-          		<li class="dropdown {{ (app.request.attributes.get('_route') in server)?'active' : '' }}">
-	            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
-	            	<ul class="dropdown-menu" role="menu">
-	            		<li>
-							<a class="trigger right-caret">{{ "Servers" }}</a>
-							<ul class="dropdown-menu sub-menu">
-								<li class=" {{ (app.request.attributes.get('_route') == 'server')?'active' : '' }}"><a href="{{ path('server') }}"><span class="fa fa-laptop"></span> Server List</a>
-							</ul>
-						</li>
-	            		<li class="divider"></li>
-	            		<li>
-							<a class="trigger right-caret">{{ "Projects" }}</a>
-							<ul class="dropdown-menu sub-menu">
-								<li class=" {{ (app.request.attributes.get('_route') == 'project')?'active' : '' }}"><a href="{{ path('project') }}"><span class="fa fa-folder"></span> Project List</a>
-								<li class="divider"></li>
-	            				<li class=" {{ (app.request.attributes.get('_route') == 'projectgroup')?'active' : '' }}"><a href="{{ path('projectgroup') }}"><span class="fa fa-folder-o"></span> Group List</a>
-							</ul>
-						</li>
-	            		<li class="divider"></li>
-	            		<li>
-							<a class="trigger right-caret">{{ "Users" }}</a>
-							<ul class="dropdown-menu sub-menu">
-								<li class=" {{ (app.request.attributes.get('_route') == 'user')?'active' : '' }}"><a href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
-							</ul>
-						</li>
-	            	</ul>
-	            </li>
-          	{% endif %}
-            <li class="{{ (app.request.attributes.get('_route') == 'dashboard_homepage')?'active' : '' }}"><a href="{{ path('dashboard_homepage') }}">Dashboard</a></li>
+          	<li class="{{ (app.request.attributes.get('_route') == 'dashboard_homepage')?'active' : '' }}"><a href="{{ path('dashboard_homepage') }}">Dashboard</a></li>
             {% if projectsMenu is defined %}
             	<li class="dropdown">
             	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<span class="caret"></span></a>
@@ -112,15 +82,51 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">
-					<span class="glyphicon glyphicon-dashboard side-panel-btn"></span>
+			  {% if is_granted('ROLE_ADMINISTRATOR') %}
+				  {% set server = ['server', 'project', 'projectgroup', 'user'] %}
+				  <li class="dropdown {{ (app.request.attributes.get('_route') in server)?'active' : '' }}">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
+					  <ul class="dropdown-menu" role="menu">
+						  <li>
+							  <a class="trigger right-caret">{{ "Servers" }}</a>
+							  <ul class="dropdown-menu sub-menu">
+								  <li class=" {{ (app.request.attributes.get('_route') == 'server')?'active' : '' }}"><a href="{{ path('server') }}"><span class="fa fa-laptop"></span> Server List</a>
+							  </ul>
+						  </li>
+						  <li class="divider"></li>
+						  <li>
+							  <a class="trigger right-caret">{{ "Projects" }}</a>
+							  <ul class="dropdown-menu sub-menu">
+								  <li class=" {{ (app.request.attributes.get('_route') == 'project')?'active' : '' }}"><a href="{{ path('project') }}"><span class="fa fa-folder"></span> Project List</a>
+								  <li class="divider"></li>
+								  <li class=" {{ (app.request.attributes.get('_route') == 'projectgroup')?'active' : '' }}"><a href="{{ path('projectgroup') }}"><span class="fa fa-folder-o"></span> Group List</a>
+							  </ul>
+						  </li>
+						  <li class="divider"></li>
+						  <li>
+							  <a class="trigger right-caret">{{ "Users" }}</a>
+							  <ul class="dropdown-menu sub-menu">
+								  <li class=" {{ (app.request.attributes.get('_route') == 'user')?'active' : '' }}"><a href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
+							  </ul>
+						  </li>
+					  </ul>
+				  </li>
+			  {% endif %}
+            <li class="side-panel-expand-btn"><a href="#">
+					<span class="glyphicon glyphicon-dashboard"></span>
 				</a>
 			</li>
-            <li><a href="#" class="pop-bottom" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus"  title="Profile" data-content='{% include '::includes/profileDashboard.html.twig' %}' data-html="true">
+			  <li class="side-panel-collect-btn active" style="display: none;"><a href="#">
+					  <span class="glyphicon glyphicon-dashboard"></span>
+				  </a>
+			  </li>
+            <li><a href="#" class="pop-bottom" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content='{% include '::includes/profileDashboard.html.twig' %}' data-html="true">
 		       	<span class="glyphicon glyphicon-user"></span>
 		      </a>
 		    </li>
-		    <li><a href={{ path('logout') }} class="pop-bottom fa fa-power-off" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus"  title="Logout" data-content='{% include '::includes/logout.html.twig' %}' data-html="true"></a>
+			  <li><a href="#" class="pop-bottom" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content='{% include '::includes/logout.html.twig' %}' data-html="true">
+					  <span class="fa fa-power-off"></span>
+				  </a>
 		    </li>
 		    
           </ul>

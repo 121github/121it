@@ -5,13 +5,20 @@ var loader_url = "";
 //PANEL SIDE
 var side_panel = {
     init: function() {
-		$(document).on("click", '.side-panel-btn', function(e) {
-			if($('.side-panel').css('display') == 'none') {
-				$('.side-panel').show();
-			}
-			else {
-				$('.side-panel').hide();
-			}
+		$(document).on("click", '.side-panel-expand-btn', function(e) {
+			$('.side-panel-expand-btn').hide();
+			$('.side-panel-collect-btn').show();
+			$('.side-panel').find('#collapseServer').collapse('show');
+			$('.side-panel').find('#collapseDeployment').collapse('show');
+			$('.side-panel').find('#collapseUsers').collapse('show');
+		});
+
+		$(document).on("click", '.side-panel-collect-btn', function(e) {
+			$('.side-panel-expand-btn').show();
+			$('.side-panel-collect-btn').hide();
+			$('.side-panel').find('#collapseServer').collapse('hide');
+			$('.side-panel').find('#collapseDeployment').collapse('hide');
+			$('.side-panel').find('#collapseUsers').collapse('hide');
 		});
 
 		$(document).on("click", '.server-check-btn', function(e) {
