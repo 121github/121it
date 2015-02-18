@@ -1,135 +1,200 @@
-	<!-- Static navbar -->
-    <div class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
+<!-- Static navbar -->
+<div class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{{ path('index') }}"><img alt="121CustomerInsight" src="{{ asset('bundles/backend/images/logo.png') }}" width="25px;"></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('index') }}"><img alt="121CustomerInsight"
+                                                                    src="{{ asset('bundles/backend/images/logo.png') }}"
+                                                                    width="25px;"></a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-          	<li class="{{ (app.request.attributes.get('_route') == 'dashboard_homepage')?'active' : '' }}"><a href="{{ path('dashboard_homepage') }}">Dashboard</a></li>
-            {% if projectsMenu is defined %}
-            	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<span class="caret"></span></a>
-	            	<ul class="dropdown-menu" role="menu">
-	            		{% for key,groups in projectsMenu %}
-		            		<li>
-								<a class="trigger right-caret">{{ key }}</a>
-								{% if groups | length %}
-								<ul class="dropdown-menu sub-menu">
-									{% for keyProject,project in groups %}
-										<li><a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" data-toggle="modal" data-target="#show_{{ project.id }}">{{ project.name }}</a></li>
-									{% endfor %}
-								</ul>
-								{% endif %}
-							</li>
-						{% endfor %}
-	            	</ul>
-            	</li>
-            {% endif %}
-            {% if environmentsMenu is defined %}
-            	{% set name = (app.request.attributes.get('_route_params').name is defined) ? app.request.attributes.get('_route_params').name : ''  %}
-            	<li class="dropdown {{ (app.request.attributes.get('_route') == 'dashboard_environment')?'active' : '' }}">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Environments<span class="caret"></span></a>
-	            	<ul class="dropdown-menu" role="menu">
-	            		<li class=" {{ (name == "")?'active' : '' }}"><a href="{{ path('dashboard_environment') }}" >{{ "All" }}</a></li>
-	            		{% for environment in environmentsMenu %}
-	            			<li class=" {{ (name == environment.name)?'active' : '' }}"><a href="{{ path('dashboard_environment', {'name':environment.name}) }}" >{{ environment.name }}</a></li>
-		            	{% endfor %}
-	            	</ul>
-            	</li>
-            {% endif %}
-            {% if managementProjectsMenu is defined %}
-            	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Management<span class="caret"></span></a>
-	            	<ul class="dropdown-menu" role="menu">
-	            		{% for key,groups in managementProjectsMenu %}
-	            			<li>
-								<a class="trigger right-caret">{{ key }}</a>
-								{% if groups | length %}
-								<ul class="dropdown-menu sub-menu">
-									{% for keyProject,project in groups %}
-										<li><a href="{{ path('dashboard_project_show', { 'id': project.id }) }}" data-toggle="modal" data-target="#show_{{ project.id }}">{{ project.name }}</a></li>
-									{% endfor %}
-								</ul>
-								{% endif %}
-							</li>
-						{% endfor %}
-	            	</ul>
-            	</li>
-            {% endif %}
-            {% if servicesMenu is defined %}
-            	<li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services<span class="caret"></span></a>
-	            	<ul class="dropdown-menu" role="menu">
-	            		{% for service in servicesMenu %}
-	            			<li><a href="{{ path('dashboard_server_show', { 'id': service.id }) }}" data-toggle="modal" data-target="#server_show_{{ service.id }}">{{ service.name }}</a></li>
-		            	{% endfor %}
-	            	</ul>
-            	</li>
-            {% endif %}
-            <li class="dropdown">
-            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servers<span class="caret"></span></a>
-	           	<ul class="dropdown-menu" role="menu">
-	            	<li><a href="http://10.10.1.13/munin/121/121Webhost.121/index.html" class="external" data-toggle="modal" data-target="#show_server">121Webhost</a></li>
-					<li><a href="http://10.10.1.13/munin/121/121Development.121/index.html" class="external" data-toggle="modal" data-target="#show_server">121Development</a></li>
-	            </ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-			  {% if is_granted('ROLE_ADMINISTRATOR') %}
-				  {% set server = ['server', 'project', 'projectgroup', 'user'] %}
-				  <li class="dropdown {{ (app.request.attributes.get('_route') in server)?'active' : '' }}">
-					  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
-					  <ul class="dropdown-menu" role="menu">
-						  <li>
-							  <a class="trigger right-caret">{{ "Servers" }}</a>
-							  <ul class="dropdown-menu sub-menu">
-								  <li class=" {{ (app.request.attributes.get('_route') == 'server')?'active' : '' }}"><a href="{{ path('server') }}"><span class="fa fa-laptop"></span> Server List</a>
-							  </ul>
-						  </li>
-						  <li class="divider"></li>
-						  <li>
-							  <a class="trigger right-caret">{{ "Projects" }}</a>
-							  <ul class="dropdown-menu sub-menu">
-								  <li class=" {{ (app.request.attributes.get('_route') == 'project')?'active' : '' }}"><a href="{{ path('project') }}"><span class="fa fa-folder"></span> Project List</a>
-								  <li class="divider"></li>
-								  <li class=" {{ (app.request.attributes.get('_route') == 'projectgroup')?'active' : '' }}"><a href="{{ path('projectgroup') }}"><span class="fa fa-folder-o"></span> Group List</a>
-							  </ul>
-						  </li>
-						  <li class="divider"></li>
-						  <li>
-							  <a class="trigger right-caret">{{ "Users" }}</a>
-							  <ul class="dropdown-menu sub-menu">
-								  <li class=" {{ (app.request.attributes.get('_route') == 'user')?'active' : '' }}"><a href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
-							  </ul>
-						  </li>
-					  </ul>
-				  </li>
-			  {% endif %}
-            <li class="side-panel-expand-btn"><a href="#">
-					<span class="glyphicon glyphicon-dashboard"></span>
-				</a>
-			</li>
-			  <li class="side-panel-collect-btn active" style="display: none;"><a href="#">
-					  <span class="glyphicon glyphicon-dashboard"></span>
-				  </a>
-			  </li>
-            <li><a href="#" class="pop-bottom" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content='{% include '::includes/profileDashboard.html.twig' %}' data-html="true">
-		       	<span class="glyphicon glyphicon-user"></span>
-		      </a>
-		    </li>
-			  <li><a href="#" class="pop-bottom" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content='{% include '::includes/logout.html.twig' %}' data-html="true">
-					  <span class="fa fa-power-off"></span>
-				  </a>
-		    </li>
-		    
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+            <ul class="nav navbar-nav">
+                <li class="{{ (app.request.attributes.get('_route') == 'dashboard_homepage')?'active' : '' }}"><a
+                            href="{{ path('dashboard_homepage') }}">Dashboard</a></li>
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  PROJECTS ***********************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                {% if projectsMenu is defined %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for key,groups in projectsMenu %}
+                                <li>
+                                    <a class="trigger right-caret">{{ key }}</a>
+                                    {% if groups | length %}
+                                        <ul class="dropdown-menu sub-menu">
+                                            {% for keyProject,project in groups %}
+                                                <li><a href="{{ path('dashboard_project_show', { 'id': project.id }) }}"
+                                                       data-toggle="modal"
+                                                       data-target="#show_{{ project.id }}">{{ project.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  ENVIRONMENTS *******************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                {% if environmentsMenu is defined %}
+                    {% set name = (app.request.attributes.get('_route_params').name is defined) ? app.request.attributes.get('_route_params').name : '' %}
+                    <li class="dropdown {{ (app.request.attributes.get('_route') == 'dashboard_environment')?'active' : '' }}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Environments<span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class=" {{ (name == "")?'active' : '' }}"><a
+                                        href="{{ path('dashboard_environment') }}">{{ "All" }}</a></li>
+                            {% for environment in environmentsMenu %}
+                                <li class=" {{ (name == environment.name)?'active' : '' }}"><a
+                                            href="{{ path('dashboard_environment', {'name':environment.name}) }}">{{ environment.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  MANAGEMENT **********************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                {% if managementProjectsMenu is defined %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Management<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for key,groups in managementProjectsMenu %}
+                                <li>
+                                    <a class="trigger right-caret">{{ key }}</a>
+                                    {% if groups | length %}
+                                        <ul class="dropdown-menu sub-menu">
+                                            {% for keyProject,project in groups %}
+                                                <li><a href="{{ path('dashboard_project_show', { 'id': project.id }) }}"
+                                                       data-toggle="modal"
+                                                       data-target="#show_{{ project.id }}">{{ project.name }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  SERVICES ***********************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                {% if servicesMenu is defined %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services<span
+                                    class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            {% for service in servicesMenu %}
+                                <li><a href="{{ path('dashboard_server_show', { 'id': service.id }) }}"
+                                       data-toggle="modal"
+                                       data-target="#server_show_{{ service.id }}">{{ service.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  SERVERS ************************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servers<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="http://10.10.1.13/munin/121/121Webhost.121/index.html" class="external"
+                               data-toggle="modal" data-target="#show_server">121Webhost</a></li>
+                        <li><a href="http://10.10.1.13/munin/121/121Development.121/index.html" class="external"
+                               data-toggle="modal" data-target="#show_server">121Development</a></li>
+                    </ul>
+                </li>
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  LOGS ***************************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logs<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="{{ path('call_logs') }}">Call Logs</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  ADMIN **************************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                {% if is_granted('ROLE_ADMINISTRATOR') %}
+                    {% set server = ['server', 'project', 'projectgroup', 'user'] %}
+                    <li class="dropdown {{ (app.request.attributes.get('_route') in server)?'active' : '' }}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a class="trigger right-caret">{{ "Servers" }}</a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li class=" {{ (app.request.attributes.get('_route') == 'server')?'active' : '' }}">
+                                        <a href="{{ path('server') }}"><span class="fa fa-laptop"></span> Server
+                                            List</a>
+                                </ul>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="trigger right-caret">{{ "Projects" }}</a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li class=" {{ (app.request.attributes.get('_route') == 'project')?'active' : '' }}">
+                                        <a href="{{ path('project') }}"><span class="fa fa-folder"></span> Project List</a>
+                                    <li class="divider"></li>
+                                    <li class=" {{ (app.request.attributes.get('_route') == 'projectgroup')?'active' : '' }}">
+                                        <a href="{{ path('projectgroup') }}"><span class="fa fa-folder-o"></span> Group
+                                            List</a>
+                                </ul>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="trigger right-caret">{{ "Users" }}</a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li class=" {{ (app.request.attributes.get('_route') == 'user')?'active' : '' }}"><a
+                                                href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  SHOW/HIDE PANEL ****************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                <li class="side-panel-expand-btn" style="display: none;"><a href="#">
+                        <span class="glyphicon glyphicon-dashboard"></span>
+                    </a>
+                </li>
+                <li class="side-panel-collect-btn active"><a href="#">
+                        <span class="glyphicon glyphicon-dashboard"></span>
+                    </a>
+                </li>
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  PROFILE ************************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                <li><a href="#" class="pop-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+                       data-trigger="focus" data-content='{% include '::includes/profileDashboard.html.twig' %}'
+                       data-html="true">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                </li>
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  LOGOUT *************************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                <li><a href="#" class="pop-bottom" data-container="body" data-toggle="popover" data-placement="bottom"
+                       data-trigger="focus" data-content='{% include '::includes/logout.html.twig' %}' data-html="true">
+                        <span class="fa fa-power-off"></span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
     </div>
+</div>

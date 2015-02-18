@@ -11,6 +11,7 @@ var side_panel = {
 			$('.side-panel').find('#collapseServer').collapse('show');
 			$('.side-panel').find('#collapseDeployment').collapse('show');
 			$('.side-panel').find('#collapseUsers').collapse('show');
+			$('.side-panel').find('#collapseCallLog').collapse('show');
 		});
 
 		$(document).on("click", '.side-panel-collect-btn', function(e) {
@@ -19,6 +20,7 @@ var side_panel = {
 			$('.side-panel').find('#collapseServer').collapse('hide');
 			$('.side-panel').find('#collapseDeployment').collapse('hide');
 			$('.side-panel').find('#collapseUsers').collapse('hide');
+			$('.side-panel').find('#collapseCallLog').collapse('hide');
 		});
 
 		$(document).on("click", '.server-check-btn', function(e) {
@@ -28,6 +30,12 @@ var side_panel = {
 		$(document).on("click", '.deployment-check-btn', function(e) {
 			side_panel.checkDeploymentPanel();
 		});
+
+		$(document).on("click", '.call-log-check-btn', function(e) {
+			side_panel.checkCallLogPanel();
+		});
+
+		side_panel.checkCallLogPanel();
 
 		side_panel.checkServerPanel();
 		setInterval(function(){
@@ -138,6 +146,41 @@ var side_panel = {
 								+ "<td>"
 								+ (status == "info"?"<img src='"+loader_url+"' width='25px;'>":"<span class='fa "+icon_status+" fa-1x'></span>")
 								+ "</td>"
+							+ "</tr>");
+					}
+				});
+			}
+			else {
+				$tbody
+					.append("<tr><td>"+response.data+"</td></tr>");
+			}
+		});
+	},
+	checkCallLogPanel: function() {
+		var url = "calllog/check";
+		var status = "";
+		var icon_status = "";
+		var icon = "";
+
+		var $tbody = $('.call-logs').find('tbody');
+		$tbody.empty();
+		$tbody.append("<td style='text-align: center'><img src='"+loader_url+"' width='50px;' ></td>")
+		$.ajax({
+			url: url,
+			type: "POST",
+			dataType: "JSON"
+		}).done(function (response) {
+			$tbody.empty();
+			if (response.success) {
+				$.each(response.data, function(i, call) {
+					if (response.data.length) {
+						var callDate = new Date(call.call_date);
+						var callDuration = new Date(call.duration);
+						$tbody
+							.append("<tr>"
+							+ "<td>"+call.name+"</td>"
+							+ "<td>"+callDate.toDateString()+"</td>"
+							+ "<td>"+callDuration.getUTCHours()+"h "+callDuration.getUTCMinutes()+"m "+callDuration.getUTCSeconds()+"s </td>"
 							+ "</tr>");
 					}
 				});

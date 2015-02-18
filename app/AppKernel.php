@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new It121\ServerBundle\ServerBundle(),
             new It121\ProjectBundle\ProjectBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
+            new It121\LogBundle\LogBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

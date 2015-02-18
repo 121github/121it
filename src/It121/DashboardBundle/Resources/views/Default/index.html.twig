@@ -69,6 +69,30 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseCallLog">
+                                    Last calls
+                                </a>
+                                <div class="pull-right">
+                                    <a href="#" class="fa fa-refresh  fa-1x call-log-check-btn"></a>
+                                </div>
+                            </h4>
+                        </div>
+                        <div id="collapseCallLog" class="panel-collapse collapse in">
+                            <div class="panel-body" style="max-height: 250px; overflow-y:scroll;">
+                                <table class="table table-hover call-logs">
+                                    <thead>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Duration</th>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
                                 <a data-toggle="collapse" href="#collapseServer">
                                     Servers
                                 </a>

@@ -742,6 +742,11 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
+        $projectGroup = new ProjectGroup();
+        $projectGroup->setName("Data Base");
+        $projectGroup->setDescription("Data Bases");
+        Util::setCreateAuditFields($projectGroup, 1);
+        $manager->persist($projectGroup);
         $project = new Project();
         $project->setName('DB Prod');
         $project->setGroup($projectGroup);
@@ -800,6 +805,11 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         Util::setCreateAuditFields($server, 1);
         $manager->persist($server);
         //Create associated project
+        $projectGroup = new ProjectGroup();
+        $projectGroup->setName("Web hosting");
+        $projectGroup->setDescription("Web hosting control panel");
+        Util::setCreateAuditFields($projectGroup, 1);
+        $manager->persist($projectGroup);
         $project = new Project();
         $project->setName('CPanel');
         $project->setGroup($projectGroup);

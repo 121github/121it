@@ -23,3 +23,12 @@ dashboard_deployment_check:
     path:     /deployment/check
     defaults: { _controller: "DashboardBundle:Default:checkDeployment" }
     requirements: { _method: post }
+
+dashboard_call_log_check:
+    path:     /calllog/check
+    defaults: { _controller: "DashboardBundle:Default:checkCallLog" }
+    requirements: { _method: post }
+
+dashboard_call_log:
+     resource: "@DashboardBundle/Resources/config/routing/calllog.yml"
+     prefix:   /log/call

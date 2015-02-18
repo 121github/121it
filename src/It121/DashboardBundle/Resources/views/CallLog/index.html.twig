@@ -1,0 +1,48 @@
+{% extends '::dashboard.html.twig' %}
+
+{% block title %}Call Log{% endblock %}
+
+{% block content -%}
+
+    <div style="margin-bottom: 10px;">
+    	<!-- Modal New -->
+		<div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    </div>
+		  </div>
+		</div>
+    </div>
+    
+   
+   <div class="row">
+   		<div class="col-md-12">
+		    <table class="table table-striped jumbotron">
+		        <thead>
+		            <tr>
+		                <th>Call Date</th>
+		                <th>Duration</th>
+		                <th>Call From</th>
+		                <th>Call To</th>
+		                <th>Name</th>
+						<th>File Name</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        {% for entity in entities %}
+		            <tr>
+		                <td>{{ entity.callDate|date('d/m/Y H:i:s') }}</td>
+		                <td>{{ entity.duration|date('H:i:s') }}</td>
+		                <td>{{ entity.callFrom}}</td>
+		                <td>{{ entity.callTo}}</td>
+		                <td>{{ entity.name}}</td>
+						<td>{{ entity.file}}</td>
+		            </tr>
+		        {% endfor %}
+		        </tbody>
+		    </table>
+		</div>
+		<div class="col-md-1"></div>
+	 </div>
+    
+    {% endblock %}

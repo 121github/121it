@@ -1,0 +1,3 @@
+call_logs:
+    path:     /
+    defaults: { _controller: "DashboardBundle:CallLog:index" }
