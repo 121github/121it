@@ -22,6 +22,16 @@ class CallLog
     private $id;
 
     /**
+     * Get inbound
+     *
+     * @return boolean
+     */
+    public function getInbound()
+    {
+        return $this->inbound;
+    }
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="call_date", type="datetime")
@@ -38,14 +48,14 @@ class CallLog
     /**
      * @var string
      *
-     * @ORM\Column(name="call_from", type="string", length=20)
+     * @ORM\Column(name="call_from", type="string", length=100)
      */
     private $callFrom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="call_to", type="string", length=20)
+     * @ORM\Column(name="call_to", type="string", length=100)
      */
     private $callTo;
 
@@ -99,6 +109,26 @@ class CallLog
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="inbound", type="boolean")
+     */
+    private $inbound;
+
+    /**
+     * Set inbound
+     *
+     * @param boolean $inbound
+     * @return CallLog
+     */
+    public function setInbound($inbound)
+    {
+        $this->inbound = $inbound;
+
+        return $this;
     }
 
     /**

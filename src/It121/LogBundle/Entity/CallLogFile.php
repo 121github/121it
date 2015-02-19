@@ -38,6 +38,13 @@ class CallLogFile
     /**
      * @var integer
      *
+     * @ORM\Column(name="unit", type="integer")
+     */
+    private $unit;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="created_by", type="integer")
      */
     private $createdBy;
@@ -126,6 +133,29 @@ class CallLogFile
     public function getFileDate()
     {
         return $this->fileDate;
+    }
+
+    /**
+     * Set unit
+     *
+     * @param integer $unit
+     * @return CallLog
+     */
+    public function setUnit($unit)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return integer
+     */
+    public function getUnit()
+    {
+        return $this->unit;
     }
 
     /**

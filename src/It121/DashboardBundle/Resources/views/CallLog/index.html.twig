@@ -20,23 +20,29 @@
 		    <table class="table table-striped jumbotron">
 		        <thead>
 		            <tr>
+						<th></th>
+						<th></th>
 		                <th>Call Date</th>
 		                <th>Duration</th>
 		                <th>Call From</th>
 		                <th>Call To</th>
 		                <th>Name</th>
 						<th>File Name</th>
+						<th>Unit</th>
 		            </tr>
 		        </thead>
 		        <tbody>
 		        {% for entity in entities %}
 		            <tr>
+						<td>{{ (entity.inbound)?"<span class='glyphicon glyphicon-arrow-up' style='color:green'></span>":"<span class='glyphicon glyphicon-arrow-down' style='color:red'></span>" }} </td>
+						<td>{{ (entity.inbound)?"Inbound":"Outbound" }} </td>
 		                <td>{{ entity.callDate|date('d/m/Y H:i:s') }}</td>
 		                <td>{{ entity.duration|date('H:i:s') }}</td>
 		                <td>{{ entity.callFrom}}</td>
 		                <td>{{ entity.callTo}}</td>
 		                <td>{{ entity.name}}</td>
 						<td>{{ entity.file}}</td>
+						<td>{{ entity.file.unit}}</td>
 		            </tr>
 		        {% endfor %}
 		        </tbody>

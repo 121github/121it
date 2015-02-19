@@ -24,3 +24,6 @@ parameters:
         name:        121 IT
         fullname:    121 IT Management System
         version:     1.0
+
+    call_logs_16:    '/mnt/mnt/121datasvr'
+    call_logs_31:    '/mnt/unit34phonesvr'
