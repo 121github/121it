@@ -19,30 +19,79 @@
    		<div class="col-md-12">
 		    <table class="table table-striped jumbotron">
 		        <thead>
+					<tr>
+						<th colspan="3" style="border-right: 1px solid #DDDDDD; text-align: center">Call</th>
+						<th colspan="3" style="border-right: 1px solid #DDDDDD; text-align: center">Time</th>
+						<th colspan="3" style="border-right: 1px solid #DDDDDD; text-align: center">Call From</th>
+						<th colspan="4" style="border-right: 1px solid #DDDDDD; text-align: center">Call To</th>
+						<th colspan="1" style="text-align: center">File</th>
+					</tr>
 		            <tr>
 						<th></th>
-						<th></th>
-		                <th>Call Date</th>
-		                <th>Duration</th>
-		                <th>Call From</th>
-		                <th>Call To</th>
-		                <th>Name</th>
-						<th>File Name</th>
-						<th>Unit</th>
+						<th style="text-align: center">Id</th>
+						<th style="border-right: 1px solid #DDDDDD; text-align: center">Date</th>
+		                <th title="Duration">D</th>
+						<th title="Ring Time">RT</th>
+						<th title="Total Time" style="border-right: 1px solid #DDDDDD">TT</th>
+		                <th>Tlf</th>
+						<th>Name</th>
+						<th style="border-right: 1px solid #DDDDDD">Ref</th>
+		                <th>Tlf</th>
+						<th>Ext</th>
+						<th>Name</th>
+						<th style="border-right: 1px solid #DDDDDD">Ref</th>
+		                <th style="text-align: center">Name</th>
 		            </tr>
 		        </thead>
 		        <tbody>
 		        {% for entity in entities %}
 		            <tr>
-						<td>{{ (entity.inbound)?"<span class='glyphicon glyphicon-arrow-up' style='color:green'></span>":"<span class='glyphicon glyphicon-arrow-down' style='color:red'></span>" }} </td>
-						<td>{{ (entity.inbound)?"Inbound":"Outbound" }} </td>
-		                <td>{{ entity.callDate|date('d/m/Y H:i:s') }}</td>
-		                <td>{{ entity.duration|date('H:i:s') }}</td>
-		                <td>{{ entity.callFrom}}</td>
-		                <td>{{ entity.callTo}}</td>
-		                <td>{{ entity.name}}</td>
-						<td>{{ entity.file}}</td>
-						<td>{{ entity.file.unit}}</td>
+						<td style="vertical-align: middle">
+							{{ (entity.inbound)?"<span class='glyphicon glyphicon-arrow-up' style='color:green'></span>":"<span class='glyphicon glyphicon-arrow-down' style='color:red'></span>" }}
+							{{ entity.file.unit}}
+							<span style="font-size: 9px; font-weight: bold">
+								{{ (entity.inbound)?"Inbound":"Outbound" }}
+							</span>
+						</td>
+						<td style="vertical-align: middle; font-size: 12px;">
+							{{ entity.callId }}
+						</td>
+						<td style="vertical-align: middle; font-size: 12px; border-right: 1px solid #DDDDDD">
+							{{ entity.callDate|date('d/m/Y H:i:s') }}
+						</td>
+						<td style="vertical-align: middle">
+							{{ entity.duration|date('U') }}
+						</td>
+						<td style="vertical-align: middle">
+							{{ entity.ringTime }}
+						</td>
+						<td style="vertical-align: middle; text-align: right; font-weight: bold; border-right: 1px solid #DDDDDD">
+							{{ entity.duration | date_modify("+"~entity.ringTime~" seconds")|date("U") }}
+						</td>
+						<td style="vertical-align: middle; font-weight: bold;">
+							{{ entity.callFrom}}
+						</td>
+						<td style="vertical-align: middle; font-size: 12px">
+							{{ entity.nameFrom}}
+						</td>
+						<td style="vertical-align: middle; font-size: 12px; border-right: 1px solid #DDDDDD">
+							{{ entity.refFrom}}
+						</td>
+						<td style="vertical-align: middle; font-weight: bold;">
+							{{ entity.callTo}}
+						</td>
+						<td style="vertical-align: middle; font-weight: bold;">
+							{{ (entity.callToExt)?entity.callToExt:"-" }}
+						</td>
+						<td style="vertical-align: middle; font-size: 12px;">
+							{{ entity.nameTo}}
+						</td>
+						<td style="vertical-align: middle; font-size: 12px; border-right: 1px solid #DDDDDD">
+							{{ entity.refTo}}
+						</td>
+						<td style="vertical-align: middle; font-size: 12px;">
+							{{ entity.file}}
+						</td>
 		            </tr>
 		        {% endfor %}
 		        </tbody>

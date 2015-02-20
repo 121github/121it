@@ -121,10 +121,11 @@ class CallLogCommand extends ContainerAwareCommand {
 	
 	
 	/**
-	 * Check method (common)
+	 * Check method (common) for each file
 	 */
 	private function check($file, $file_name, $unit) {
 		$em = $this->getContainer()->get('doctrine')->getManager();
+		$em121sys = $this->getContainer()->get('doctrine')->getManager('121sys');
 
 		$callLogFile = $em->getRepository('LogBundle:CallLogFile')->findOneBy(
 			array('name' => $file_name)
@@ -137,6 +138,18 @@ class CallLogCommand extends ContainerAwareCommand {
 			$callLogFile->setUnit($unit);
 
 			Util::setCreateAuditFields($callLogFile, 1);
+
+			//Save the callLogFile in the 121sys database
+			$callLogFile121sys = new \It121\CallSysBundle\Entity\CallLogFile();
+			$callLogFile121sys->setFileDate($callLogFile->getFileDate());
+			$callLogFile121sys->setName($callLogFile->getName());
+			$callLogFile121sys->setUnit($callLogFile->getUnit());
+			$em121sys->persist($callLogFile121sys);
+		}
+		else {
+			$callLogFile121sys = $em121sys->getRepository('CallSysBundle:CallLogFile')->findOneBy(
+				array('name' => $file_name)
+			);
 		}
 
 		Util::setModifyAuditFields($callLogFile, 1);
@@ -157,7 +170,6 @@ class CallLogCommand extends ContainerAwareCommand {
 		$aux = array();
 		foreach($file as $data) {
 			if (!isset($data[3])) {
-				var_dump($data);
 			}
 			if (!in_array($data[0]."_".$data[3],$callsInserted)) {
 				array_push($aux, $data);
@@ -165,28 +177,68 @@ class CallLogCommand extends ContainerAwareCommand {
 		}
 		$file = $aux;
 
-
 		//Process the data
 		foreach($file as $data) {
 
-			$callDate = new \DateTime(str_replace("/","-",$data[0]));
-			$inbound = ($data[4]=="I"?1:0);
-
 			$callLog = new CallLog();
+			$callDate = new \DateTime(str_replace("/","-",$data[0]));
+
 			$callLog->setCallDate($callDate);
 			$callLog->setDuration(new \DateTime($data[1]));
+			$callLog->setRingTime($data[2]);
 			$callLog->setCallFrom($data[3]);
-			$callLog->setInbound($inbound);
-			$callLog->setCallTo(($inbound?$data[6]."-".$data[5]:$data[6]));
-			$callLog->setName($data[12]);
+			$callLog->setInbound(($data[4]=="I"?1:0));
+			$callLog->setCallToExt(($data[4]=="I"?$data[5]:''));
+			$callLog->setCallTo($data[6]);
+			$callLog->setColH($data[7]);
+			$callLog->setColI($data[8]);
+			$callLog->setCallId($data[9]);
+			$callLog->setColK($data[10]);
+			$callLog->setRefFrom($data[11]);
+			$callLog->setNameFrom($data[12]);
+			$callLog->setRefTo($data[13]);
+			$callLog->setNameTo($data[14]);
+			$callLog->setColP($data[15]);
+			$callLog->setColQ($data[16]);
+			$callLog->setColR($data[17]);
+			$callLog->setColS($data[18]);
+			$callLog->setColT($data[19]);
+			$callLog->setColU($data[20]);
+			$callLog->setColV($data[21]);
+			$callLog->setColW($data[22]);
+			$callLog->setColX($data[23]);
+			$callLog->setColY($data[24]);
+			$callLog->setColZ($data[25]);
+			$callLog->setColAA($data[26]);
+			$callLog->setColAB($data[27]);
+			$callLog->setColAC($data[28]);
 			$callLog->setFile($callLogFile);
 
 			Util::setCreateAuditFields($callLog, 1);
 			Util::setModifyAuditFields($callLog, 1);
 
 			$em->persist($callLog);
+
+			//Persist the data in the 121sys database
+			$callLog121Sys = new \It121\CallSysBundle\Entity\CallLog();
+			$callLog121Sys->setCallDate($callLog->getCallDate());
+			$callLog121Sys->setDuration($callLog->getDuration());
+			$callLog121Sys->setRingTime($callLog->getRingTime());
+			$callLog121Sys->setCallFrom($callLog->getCallFrom());
+			$callLog121Sys->setInbound($callLog->getInbound());
+			$callLog121Sys->setCallToExt($callLog->getCallToExt());
+			$callLog121Sys->setCallTo($callLog->getCallTo());
+			$callLog121Sys->setCallId($callLog->getCallId());
+			$callLog121Sys->setRefFrom($callLog->getRefFrom());
+			$callLog121Sys->setNameFrom($callLog->getNameFrom());
+			$callLog121Sys->setRefTo($callLog->getRefTo());
+			$callLog121Sys->setNameTo($callLog->getNameTo());
+			$callLog121Sys->setFile($callLogFile121sys);
+
+			$em121sys->persist($callLog121Sys);
 		}
 		$em->flush();
+		$em121sys->flush();
 		
 		return count($file);
 	}

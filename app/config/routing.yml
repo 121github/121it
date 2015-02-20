@@ -1,3 +1,7 @@
+call_sys:
+    resource: "@CallSysBundle/Resources/config/routing.yml"
+    prefix:   /
+
 log:
     resource: "@LogBundle/Resources/config/routing.yml"
     prefix:   /

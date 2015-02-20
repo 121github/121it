@@ -6,6 +6,13 @@ parameters:
     database_user: 121it
     database_password: NXWa5HmBstr3YRXe
 
+    database_driver_121sys: pdo_mysql
+    database_host_121sys: 127.0.0.1
+    database_port_121sys: null
+    database_name_121sys: 121sys_test
+    database_user_121sys: 121sys_test
+    database_password_121sys: SRKuMbrmBGm8evZd
+
     mailer_transport: smtp
     mailer_host: mail.leadcontrol.co.uk
     mailer_user: admin@leadcontrol.co.uk
@@ -26,5 +33,5 @@ parameters:
         version:     1.0
 
 
-    call_logs_16:    '/mnt/mnt/121datasvr'
-    call_logs_31:    '/mnt/unit34phonesvr'
+    call_logs_16:    '/home/estebanc/logs/calllogs16'
+    call_logs_31:    '/home/estebanc/logs/calllogs31'

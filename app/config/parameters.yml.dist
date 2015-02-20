@@ -6,6 +6,13 @@ parameters:
     database_user: 121it
     database_password: 7zFUZRE7qzwzSVVX
 
+    database_driver_121sys: pdo_mysql
+    database_host_121sys: 127.0.0.1
+    database_port_121sys: null
+    database_name_121sys: 121sys
+    database_user_121sys: 121sys
+    database_password_121sys: Bu4XNm3Q6fqntySp
+
     mailer_transport: smtp
     mailer_host: mail.leadcontrol.co.uk
     mailer_user: admin@leadcontrol.co.uk

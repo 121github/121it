@@ -27,7 +27,7 @@ class CallLogController extends DefaultController
         $entities = $em->getRepository('LogBundle:CallLog')->findBy(
             array(),
             array('callDate' => 'DESC'),
-            50,
+            100,
             0
         );
 
