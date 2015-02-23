@@ -240,7 +240,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Test')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/01_Test/job/Cms_test_deployment/rssAll');
+        $server->setRssUrl('http://10.10.1.13:8080/view/01_Test/job/CMS_01%20Test%20Deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -277,7 +277,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/Fsb_deployment/rssAll');
+        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/CMS_03%20FSB%20Prod%20Deployment/');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -309,7 +309,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/Voicegroup_deployment/rssAll');
+        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/CMS_03%20VOICEGROUP%20Prod%20Deployment/');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -341,7 +341,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Test')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/01_Test/job/121It_test_deployment/rssAll');
+        $server->setRssUrl('http://10.10.1.13:8080/view/01_Test/job/121IT_01%20Test%20Deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -372,14 +372,14 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server = new Server();
         $server->setName('121IT Acceptance');
         $server->setDomain('10.10.1.13');
-        $server->setPath('accept_env/121it');
+        $server->setPath('accept_env/121it/web');
         $server->setPort(80);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Acceptance')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/02_Accept/job/121It_accept_deployment/rssAll');
+        $server->setRssUrl('http://10.10.1.13:8080/view/02_Accept/job/121IT_02%20Accept%20Deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -404,14 +404,14 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server = new Server();
         $server->setName('121IT Production');
         $server->setDomain('10.10.1.13');
-        $server->setPath('121it');
+        $server->setPath('121it/web');
         $server->setPort(80);
         $server->setSendEmail(true);
         $server->setMonitoring(true);
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/121It_deployment/rssAll');
+        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/121IT_03%20Prod%20Deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -443,7 +443,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Test')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/01_Test/job/121Sys_test_deployment/rssAll');
+        $server->setRssUrl('http://10.10.1.13:8080/view/01_Test/job/121SYS_01%20Test%20Deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -481,7 +481,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Acceptance')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/02_Accept/job/121Sys_accept_deployment/rssAll');
+        $server->setRssUrl('http://10.10.1.13:8080/view/02_Accept/job/121SYS_02%20Accept%20Deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -513,7 +513,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/121Sys_deployment/rssAll');
+        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/121SYS_03%20Prod%20Deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -812,6 +812,40 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $manager->persist($projectGroup);
         $project = new Project();
         $project->setName('CPanel');
+        $project->setGroup($projectGroup);
+        $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
+        $project->setServer($server);
+        Util::setCreateAuditFields($project, 1);
+        $manager->persist($project);
+
+        $manager->flush();
+
+        //Create website (Management)
+        $server = new Server();
+        $server->setName('Testlink');
+        $server->setDomain('10.10.1.13');
+        $server->setPath('testlink');
+        $server->setPort(80);
+        $server->setSendEmail(true);
+        $server->setMonitoring(true);
+        $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Management')));
+        $server->setLastOnline(new DateTime('now - 8 hours'));
+        $server->setLastCheck(new DateTime('now - 25 seconds'));
+        $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
+        $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('testlink.png');
+        Util::setCreateAuditFields($server, 1);
+        $manager->persist($server);
+        //Create associated project
+        $projectGroup = new ProjectGroup();
+        $projectGroup->setName("QA");
+        $projectGroup->setDescription("QA management system");
+        Util::setCreateAuditFields($projectGroup, 1);
+        $manager->persist($projectGroup);
+        $project = new Project();
+        $project->setName('Testlink');
         $project->setGroup($projectGroup);
         $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
         $project->setServer($server);

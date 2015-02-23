@@ -185,7 +185,7 @@ var side_panel = {
 							+ "<td>"+callInbound+"</td>"
 							+ "<td>"+call.name_from+"</td>"
 
-							+ "<td>"+callDate.getUTCDate()+"/"+callDate.getUTCMonth()+"/"+callDate.getUTCFullYear()+" "+callDate.toTimeString().substr(0,8)+"</td>"
+							+ "<td>"+callDate.toDateString()+"</td>"
 							+ "<td style='text-align: right'>"+hours+minutes+seconds+" </td>"
 							+ "<td>"+call.file.unit+"</td>"
 							+ "</tr>");

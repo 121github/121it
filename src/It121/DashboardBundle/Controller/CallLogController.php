@@ -20,20 +20,23 @@ class CallLogController extends DefaultController
      * Call Log List view
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request = null)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('LogBundle:CallLog')->findBy(
-            array(),
-            array('callDate' => 'DESC'),
-            100,
-            0
-        );
 
+        $dql   = "SELECT a FROM LogBundle:CallLog a ORDER BY a.callDate DESC";
+        $query = $em->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $entities = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1), /* page number */
+            100 /* limit per page */
+        );
         
         $options = array(
-        		'entities' => $entities,
+                'entities' => $entities
         );
         $elementsForMenu = $this->getElementsForMenu();
         

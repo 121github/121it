@@ -155,3 +155,27 @@ input {
     background-color: rgba(48, 99, 144, 0.99);
     color: #ffffff;
 }
+
+/* ===========================================================================
+   Pagination
+   ======================================================================== */
+
+.pagination a {
+    color: black;
+}
+
+.pagination .sorted a {
+    color: green;
+}
+
+.pagination .count {
+    font-size: 20px;
+}
+
+.pagination .navigation {
+    font-size: 20px;
+}
+
+.navigation .pagination .current {
+    color: green;
+}
