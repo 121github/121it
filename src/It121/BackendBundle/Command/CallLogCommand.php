@@ -36,36 +36,62 @@ class CallLogCommand extends ContainerAwareCommand {
 		$output->writeln("");
 
 		$entityManager = $this->getContainer()->get('doctrine')->getManager();
-		
-		if ($input->getOption('all')) {
-			$output->writeln("Checking all the files");
-			//Check the calls on Unit 16
-			$pathLogs = ($this->getContainer()->getParameter('call_logs_16'));
-			$tmpDir = 			$tmpDir ='docs/tmp/log/call/unit16';
-			$logFiles = $this->checkLogFiles($output, 16, $pathLogs, $tmpDir);
+
+		$startDate = new \DateTime('now');
+
+		$pathLogs16 = ($this->getContainer()->getParameter('call_logs_16'));
+		$tmpDir16 = $tmpDir ='docs/tmp/log/call/unit16';
+		$pathLogs31 = ($this->getContainer()->getParameter('call_logs_31'));
+		$tmpDir31 = 			$tmpDir ='docs/tmp/log/call/unit31';
+
+		//Check if exist any tmp file (the process is still running)
+		$filesTmp16 = glob($tmpDir.'/*.txt');
+		$filesTmp31 = glob($tmpDir.'/*.txt');
+		if (empty($filesTmp16) || empty($filesTmp31)) {
+			if ($input->getOption('all')) {
+				$output->writeln("Checking all the files");
+				//Check the calls on Unit 16
+				$output->writeln("");
+				$output->write("  UNIT 16: ");
+				$output->writeln("");
+				$this->checkLogFiles($output, 16, $pathLogs16, $tmpDir16);
+
+				//Check the calls on Unit 31
+				$output->writeln("");
+				$output->write("  UNIT 31: ");
+				$output->writeln("");
+				$this->checkLogFiles($output, 31, $pathLogs31, $tmpDir31);
+
+			}
+			else {
+				$output->writeln("Checking only the today log file...");
+
+				//Check the calls on Unit 16
+				$output->writeln("");
+				$output->write("  UNIT 16: ");
+				$output->writeln("");
+				$this->checkLogFiles($output, 16, $pathLogs16, $tmpDir16, date("Ymd"));
+
+
+
+				//Check the calls on Unit 31
+				$output->writeln("");
+				$output->write("  UNIT 31: ");
+				$output->writeln("");
+				$this->checkLogFiles($output, 31, $pathLogs31, $tmpDir31, date("Ymd"));
+			}
 		}
 		else {
-			$output->writeln("Checking only the today log file...");
-
-			//Check the calls on Unit 16
-			$output->writeln("");
-			$output->write("  UNIT 16: ");
-			$output->writeln("");
-			$pathLogs = ($this->getContainer()->getParameter('call_logs_16'));
-			$tmpDir = 			$tmpDir ='docs/tmp/log/call/unit16';
-			$this->checkLogFiles($output, 16, $pathLogs, $tmpDir, date("Ymd"));
-
-			//Check the calls on Unit 31
-			$output->writeln("");
-			$output->write("  UNIT 31: ");
-			$output->writeln("");
-			$pathLogs = ($this->getContainer()->getParameter('call_logs_31'));
-			$tmpDir = 			$tmpDir ='docs/tmp/log/call/unit31';
-			$this->checkLogFiles($output, 31, $pathLogs, $tmpDir, date("Ymd"));
+			$output->writeln("The process is still running");
 		}
+
+		$endDate = new \DateTime('now');
+		$totalTime = $startDate->diff($endDate);
+
 		$output->writeln("");
 		
-		$output->writeln("Call log checking End");
+		$output->write("Call log checking End");
+		$output->writeln(" (Finished in ".$totalTime->format('%H:%M:%S').") ");
 	}
 
 	/**
@@ -163,14 +189,14 @@ class CallLogCommand extends ContainerAwareCommand {
 			)
 		);
 
+		//Get the calls already inserted
 		$callsInserted = array();
 		foreach($callLog as $call) {
 			array_push($callsInserted,$call->getCallDate()->format("Y/m/d H:i:s")."_".$call->getCallFrom());
 		}
 		$aux = array();
 		foreach($file as $data) {
-			if (!isset($data[3])) {
-			}
+			//Keep to insert the new calls that are not inserted yet.
 			if (!in_array($data[0]."_".$data[3],$callsInserted)) {
 				array_push($aux, $data);
 			}
