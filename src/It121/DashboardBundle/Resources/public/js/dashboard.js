@@ -176,17 +176,17 @@ var side_panel = {
 					if (response.data.length) {
 						var callDate = new Date(call.call_date);
 						var callDuration = new Date(call.duration);
-						var hours = (callDuration.getUTCHours() > 0?callDuration.getUTCHours()+'h':'');
-						var minutes = (callDuration.getUTCMinutes() > 0?callDuration.getUTCMinutes()+'m':'');
-						var seconds = callDuration.getUTCSeconds()+'s';
+						var hours = ((callDuration.getHours()+1) > 0?(callDuration.getHours()+1)+'h':'');
+						var minutes = (callDuration.getMinutes() > 0?callDuration.getMinutes()+'m':'');
+						var seconds = callDuration.getSeconds()+'s';
 						var callInbound = (call.inbound?"<span class='glyphicon glyphicon-arrow-up' style='color:green'></span>":"<span class='glyphicon glyphicon-arrow-down' style='color:red'></span>");
 						$tbody
 							.append("<tr>"
 							+ "<td>"+callInbound+"</td>"
 							+ "<td>"+call.name_from+"</td>"
 
-							+ "<td>"+callDate.toTimeString().substr(0,8)+"</td>"
-							+ "<td style='text-align: right'>"+hours+minutes+seconds+" </td>"
+							+ "<td>"+callDate.toLocaleTimeString()+"</td>"
+							+ "<td style='text-align: right'>"+callDuration.toLocaleTimeString()+" </td>"
 							+ "<td>"+call.file.unit+"</td>"
 							+ "</tr>");
 					}

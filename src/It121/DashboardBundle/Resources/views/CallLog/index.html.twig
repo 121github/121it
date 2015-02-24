@@ -43,19 +43,43 @@
 						<th colspan="1" style="text-align: center">File</th>
 					</tr>
 		            <tr>
-						<th {% if entities.isSorted('a.inbound') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'I/O', 'a.inbound') }}</th>
-						<th style="text-align: center" {% if entities.isSorted('a.callId') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Id', 'a.callId') }}</th>
-						<th style="border-right: 1px solid #DDDDDD; text-align: center" {% if entities.isSorted('a.callDate') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Date', 'a.callDate') }}</th>
-		                <th title="Duration" {% if entities.isSorted('a.duration') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'D', 'a.duration') }}</th>
-						<th title="Ring Time" {% if entities.isSorted('a.ringTime') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'RT', 'a.ringTime') }}</th>
+						<th {% if entities.isSorted('a.inbound') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'I/O', 'a.inbound') }}
+                        </th>
+                        <th style="text-align: center" {% if entities.isSorted('a.callId') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'Id', 'a.callId') }}
+                        </th>
+						<th style="border-right: 1px solid #DDDDDD; text-align: center" {% if entities.isSorted('a.callDate') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'Date', 'a.callDate') }}
+                        </th>
+		                <th title="Duration" {% if entities.isSorted('a.duration') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'D', 'a.duration') }}
+                        </th>
+						<th title="Ring Time" {% if entities.isSorted('a.ringTime') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'RT', 'a.ringTime') }}
+                        </th>
 						<th title="Total Time" style="border-right: 1px solid #DDDDDD">TT</th>
-		                <th {% if entities.isSorted('a.callFrom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Tlf', 'a.callFrom') }}</th>
-						<th {% if entities.isSorted('a.nameFrom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Name', 'a.nameFrom') }}</th>
-						<th style="border-right: 1px solid #DDDDDD" {% if entities.isSorted('a.refFrom') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Ref', 'a.refFrom') }}</th>
-		                <th {% if entities.isSorted('a.callTo') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Tlf', 'a.callTo') }}</th>
-						<th {% if entities.isSorted('a.callToExt') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Ext', 'a.callToExt') }}</th>
-						<th {% if entities.isSorted('a.nameTo') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Name', 'a.nameTo') }}</th>
-						<th style="border-right: 1px solid #DDDDDD" {% if entities.isSorted('a.refTo') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Ref', 'a.refTo') }}</th>
+		                <th {% if entities.isSorted('a.callFrom') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'Tlf', 'a.callFrom') }}
+                        </th>
+						<th {% if entities.isSorted('a.nameFrom') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'Name', 'a.nameFrom') }}
+                        </th>
+						<th style="border-right: 1px solid #DDDDDD" {% if entities.isSorted('a.refFrom') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'Ref', 'a.refFrom') }}
+                        </th>
+		                <th {% if entities.isSorted('a.callTo') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'Tlf', 'a.callTo') }}
+                        </th>
+						<th {% if entities.isSorted('a.callToExt') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'Ext', 'a.callToExt') }}
+                        </th>
+						<th {% if entities.isSorted('a.nameTo') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'Name', 'a.nameTo') }}
+                        </th>
+						<th style="border-right: 1px solid #DDDDDD" {% if entities.isSorted('a.refTo') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(entities, 'Ref', 'a.refTo') }}
+                        </th>
 		                <th style="text-align: center">Name</th>
 		            </tr>
 		        </thead>
@@ -75,14 +99,14 @@
 						<td style="vertical-align: middle; font-size: 12px; border-right: 1px solid #DDDDDD">
 							{{ entity.callDate|date('d/m/Y H:i:s') }}
 						</td>
-						<td style="vertical-align: middle">
-							{{ entity.duration|date('U') }}
+						<td style="vertical-align: middle; font-size: 12px;">
+							{{ entity.duration|date('H:i:s') }}
 						</td>
-						<td style="vertical-align: middle">
-							{{ entity.ringTime }}
+						<td style="vertical-align: middle; font-size: 12px;">
+							{{ "00:"~entity.ringTime|date('i:s') }}
 						</td>
 						<td style="vertical-align: middle; text-align: right; font-weight: bold; border-right: 1px solid #DDDDDD">
-							{{ entity.duration | date_modify("+"~entity.ringTime~" seconds")|date("U") }}
+							{{ entity.duration | date_modify("+"~entity.ringTime~" seconds")|date("H:i:s") }}
 						</td>
 						<td style="vertical-align: middle; font-weight: bold;">
 							{{ entity.callFrom}}
