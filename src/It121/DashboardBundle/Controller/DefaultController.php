@@ -177,11 +177,11 @@ class DefaultController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 		//Run the servers check command
-		$command = new StatusServerCommand();
-		$command->setContainer($this->container);
-		$input = new ArrayInput(array());
-		$output = new NullOutput();
-		$resultCode = $command->run($input, $output);
+//		$command = new StatusServerCommand();
+//		$command->setContainer($this->container);
+//		$input = new ArrayInput(array());
+//		$output = new NullOutput();
+//		$resultCode = $command->run($input, $output);
 
 		//Get the servers
 		$servers = $em->getRepository('ServerBundle:Server')->findBy(array(), array('type' => 'ASC'));
@@ -282,6 +282,46 @@ class DefaultController extends Controller
 
 		return $response;
 	}
+
+    /******************************************************************************************************************************/
+    /******************************************************************************************************************************/
+    /******************************************************************************************************************************/
+    /********************************  Check Today Call Log ACTION **********************************************************************/
+    /******************************************************************************************************************************/
+    /******************************************************************************************************************************/
+    /******************************************************************************************************************************/
+
+    /**
+     * Check Today Call Log view
+     *
+     */
+    public function checkTodayCallLogAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        //Get the today calls
+
+        $todayDate = new \DateTime('now');
+        $day = $todayDate->format('Y-m-d').'%';
+        $todayCalls = $em->getRepository('LogBundle:CallLog')->findNumCallsByDay($day);
+
+
+        $serializer = SerializerBuilder::create()->build();
+
+        $todayCalls = array(
+            "success" => (!empty($todayCalls)),
+            "data" => $todayCalls
+        );
+
+        $todayCalls = $serializer->serialize($todayCalls, 'json');
+
+        $response = new Response($todayCalls);
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
 }
 
 

@@ -29,6 +29,11 @@ dashboard_call_log_check:
     defaults: { _controller: "DashboardBundle:Default:checkCallLog" }
     requirements: { _method: post }
 
+dashboard_today_call_log_check:
+    path:     /todaycalllog/check
+    defaults: { _controller: "DashboardBundle:Default:checkTodayCallLog" }
+    requirements: { _method: post }
+
 dashboard_call_log:
      resource: "@DashboardBundle/Resources/config/routing/calllog.yml"
      prefix:   /log/call

@@ -31,6 +31,20 @@
                 </div>
                 <br><br>
                 <div class="row">
+                    <div class="col-md-3"  style="color: #B0B0B0; margin-left: 15px; margin-bottom: 10px; width: 90%; padding: 5px; border-bottom: 1px solid #B0B0B0;">APPS</div>
+                </div>
+                <div class="row">
+                    {% for key,shortcut in shortcutProductionApps %}
+                        <div class="col-md-3" style="padding: 5px; text-align: center">
+                            <a href="{{ shortcut.url }}" target="_blank">
+                                <img src="{{ asset('bundles/backend/images/server/'~shortcut.logo) }}" height="40px">
+                            </a>
+                            <div>{{ shortcut.name }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br><br>
+                <div class="row">
                     <div class="col-md-3"  style="color: #B0B0B0; margin-left: 15px; margin-bottom: 10px; width: 90%; padding: 5px; border-bottom: 1px solid #B0B0B0;">MANAGEMENT</div>
                 </div>
                 <div class="row">
@@ -47,23 +61,49 @@
         </div>
 
         <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-3"  style="color: #B0B0B0; margin-left: 15px; margin-bottom: 10px; width: 90%; padding: 5px; border-bottom: 1px solid #B0B0B0;">APPS</div>
-            </div>
-            <div class="row">
-                {% for key,shortcut in shortcutProductionApps %}
-                    <div class="col-md-3" style="padding: 5px; text-align: center">
-                        <a href="{{ shortcut.url }}" target="_blank">
-                            <img src="{{ asset('bundles/backend/images/server/'~shortcut.logo) }}" height="40px">
-                        </a>
-                        <div>{{ shortcut.name }}</div>
+            <div class="side-panel">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseCallLog">
+                                    Today calls
+                                </a>
+                                <div class="pull-right">
+                                    <a href="#" class="fa fa-refresh  fa-1x call-today-check-btn"></a>
+                                </div>
+                            </h4>
+                        </div>
+                        <div id="collapseCallLog" class="panel-collapse collapse in">
+                            <div class="panel-body today-calls" style="max-height: 250px; overflow-y:scroll;">
+                                <div id="today-calls" style="height:250px; width:300px;"></div>
+                            </div>
+                        </div>
                     </div>
-                {% endfor %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapseDeployment">
+                                    Deployment (Continuous Integration)
+                                </a>
+
+                                <div class="pull-right"><a href="#" class="fa fa-refresh  fa-1x deployment-check-btn"></a>
+                                </div>
+                            </h4>
+                        </div>
+                        <div id="collapseDeployment" class="panel-collapse collapse in">
+                            <div class="panel-body" style="max-height: 250px; overflow-y:scroll;">
+                                <table class="table table-hover deployments">
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="col-md-4">
-
             <div class="side-panel">
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
@@ -106,25 +146,6 @@
                         <div id="collapseServer" class="panel-collapse collapse in">
                             <div class="panel-body" style="max-height: 250px; overflow-y:scroll;">
                                 <table class="table table-hover servers">
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapseDeployment">
-                                    Deployment (Continuous Integration)
-                                </a>
-
-                                <div class="pull-right"><a href="#" class="fa fa-refresh  fa-1x deployment-check-btn"></a>
-                                </div>
-                            </h4>
-                        </div>
-                        <div id="collapseDeployment" class="panel-collapse collapse">
-                            <div class="panel-body" style="max-height: 250px; overflow-y:scroll;">
-                                <table class="table table-hover deployments">
                                     <tbody></tbody>
                                 </table>
                             </div>

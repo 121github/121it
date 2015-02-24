@@ -15,6 +15,9 @@
         {# common css#}
         <link href="{{ asset('bundles/backend/css/common.css') }}"	rel="stylesheet" type="text/css" />
         {# normalize css#}
+
+        {# jqplot css#}
+        <link href="{{ asset('bundles/jquery/js/jqplot/jquery.jqplot.min.css') }}"	rel="stylesheet" type="text/css" />
         
         {# favicon#}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -30,6 +33,18 @@
     		
     		{# common Lib #}
     		<script type="text/javascript" src="{{ asset('bundles/backend/js/common.js') }}" ></script>
+        {# jplot Lib #}
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jquery.jqplot.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.highlighter.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.cursor.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.dateAxisRenderer.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.categoryAxisRenderer.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.barRenderer.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.pointLabels.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.canvasTextRenderer.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.canvasAxisLabelRenderer.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.pieRenderer.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jquery/js/jqplot/jqplot.donutRenderer.min.js') }}"></script>
 		
 		
     </head>

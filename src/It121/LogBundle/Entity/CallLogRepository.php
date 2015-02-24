@@ -12,4 +12,24 @@ use Doctrine\ORM\EntityRepository;
  */
 class CallLogRepository extends EntityRepository
 {
+
+    /**
+     * Find today call log
+     */
+    public function findNumCallsByDay($day) {
+
+        $em = $this->getEntityManager();
+
+        $repo = $em->getRepository('LogBundle:CallLog');
+        $query = $repo->createQueryBuilder('c')
+            ->select('f.unit, COUNT(c) num')
+            ->innerJoin('c.file', 'f')
+            ->where('c.callDate LIKE :day')
+            ->orderBy('c.callDate', 'DESC')
+            ->groupBy('f.unit')
+            ->setParameter('day', $day)
+        ;
+
+        return $query->getQuery()->getResult();
+    }
 }

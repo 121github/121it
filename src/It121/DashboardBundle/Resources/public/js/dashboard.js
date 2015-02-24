@@ -35,16 +35,28 @@ var side_panel = {
 			side_panel.checkCallLogPanel();
 		});
 
+        $(document).on("click", '.call-today-check-btn', function(e) {
+            side_panel.checkTodayCallLogPanel();
+        });
+
 		side_panel.checkCallLogPanel();
+        setInterval(function(){
+            side_panel.checkCallLogPanel(); // this will run after every 30 seconds
+        }, 30000);
+
+        side_panel.checkTodayCallLogPanel();
+        setInterval(function(){
+            side_panel.checkTodayCallLogPanel(); // this will run after every 30 seconds
+        }, 30000);
 
 		side_panel.checkServerPanel();
 		setInterval(function(){
-			side_panel.checkServerPanel(); // this will run after every 5 seconds
-		}, 120000);
+			side_panel.checkServerPanel(); // this will run after every 30 seconds
+		}, 30000);
 
 		side_panel.checkDeploymentPanel();
 		setInterval(function(){
-			side_panel.checkDeploymentPanel(); // this will run after every 5 seconds
+			side_panel.checkDeploymentPanel(); // this will run after every 30 seconds
 		}, 30000);
 
     },
@@ -158,9 +170,6 @@ var side_panel = {
 	},
 	checkCallLogPanel: function() {
 		var url = "calllog/check";
-		var status = "";
-		var icon_status = "";
-		var icon = "";
 
 		var $tbody = $('.call-logs').find('tbody');
 		$tbody.empty();
@@ -197,7 +206,41 @@ var side_panel = {
 					.append("<tr><td>"+response.data+"</td></tr>");
 			}
 		});
-	}
+	},
+    checkTodayCallLogPanel: function() {
+        var url = "todaycalllog/check";
 
-
+        var $body = $('.call-logs').find('.today-calls');
+        $body.empty();
+        $body.append("<span style='text-align: center'><img src='"+loader_url+"' width='50px;' ></span>")
+        $.ajax({
+            url: url,
+            type: "POST",
+            dataType: "JSON"
+        }).done(function (response) {
+            $body.empty();
+            if (response.success) {
+                var data_ar = [];
+                $.each(response.data, function(i, data) {
+                    if (response.data.length) {
+                        data_ar.push(['Unit '+data.unit, parseInt(data.num)]);
+                    }
+                });
+                var plot1 = jQuery.jqplot ('today-calls', [data_ar],
+                    {
+                        seriesDefaults: {
+                            // Make this a pie chart.
+                            renderer: jQuery.jqplot.PieRenderer,
+                            rendererOptions: {
+                                // Put data labels on the pie slices.
+                                // By default, labels show the percentage of the slice.
+                                showDataLabels: true
+                            }
+                        },
+                        legend: { show:true, location: 'e' }
+                    }
+                );
+            }
+        });
+    }
 }
