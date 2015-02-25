@@ -210,15 +210,15 @@ var side_panel = {
     checkTodayCallLogPanel: function() {
         var url = "todaycalllog/check";
 
-        var $body = $('.call-logs').find('.today-calls');
-        $body.empty();
+        var $body = $('#today-calls');
+        $('#today-calls').html("")
         $body.append("<span style='text-align: center'><img src='"+loader_url+"' width='50px;' ></span>")
         $.ajax({
             url: url,
             type: "POST",
             dataType: "JSON"
         }).done(function (response) {
-            $body.empty();
+            $('#today-calls').html("")
             var s1 = [];
             var s2 = [];
             var ticks = [];
