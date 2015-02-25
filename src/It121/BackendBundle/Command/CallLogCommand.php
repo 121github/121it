@@ -126,11 +126,10 @@ class CallLogCommand extends ContainerAwareCommand {
 			//Process the file
 			$file_name = substr($file, strrpos($file,"/")+1);
 			$csv = $this->parseCSV($file);
-			$numInserted = $this->check($csv, $file_name, $unit);
+			$numInserted = $this->check($csv, $file_name, $unit, $output);
 
 			$endDate = new \DateTime('now');
 			$totalTime = $startDate->diff($endDate);
-			$output->write(" OK. ");
 			$output->writeln("");
 			$output->write("\t\t\t # Finished in ".$totalTime->format('%H:%M:%S').". ");
 			$output->writeln("");
@@ -149,7 +148,7 @@ class CallLogCommand extends ContainerAwareCommand {
 	/**
 	 * Check method (common) for each file
 	 */
-	private function check($file, $file_name, $unit) {
+	private function check($file, $file_name, $unit, $output) {
 		$em = $this->getContainer()->get('doctrine')->getManager();
 		$em121sys = $this->getContainer()->get('doctrine')->getManager('121sys');
 
@@ -197,7 +196,45 @@ class CallLogCommand extends ContainerAwareCommand {
 		$aux = array();
 		foreach($file as $data) {
 			//Keep to insert the new calls that are not inserted yet.
-			if (!in_array($data[0]."_".$data[3],$callsInserted)) {
+            if (!isset($data[0]) ||
+                !isset($data[1]) ||
+                !isset($data[2]) ||
+                !isset($data[3]) ||
+                !isset($data[4]) ||
+                !isset($data[5]) ||
+                !isset($data[6]) ||
+                !isset($data[7]) ||
+                !isset($data[8]) ||
+                !isset($data[9]) ||
+                !isset($data[10]) ||
+                !isset($data[11]) ||
+                !isset($data[12]) ||
+                !isset($data[13]) ||
+                !isset($data[14]) ||
+                !isset($data[15]) ||
+                !isset($data[16]) ||
+                !isset($data[17]) ||
+                !isset($data[18]) ||
+                !isset($data[19]) ||
+                !isset($data[20]) ||
+                !isset($data[21]) ||
+                !isset($data[22]) ||
+                !isset($data[23]) ||
+                !isset($data[24]) ||
+                !isset($data[25]) ||
+                !isset($data[26]) ||
+                !isset($data[27]) ||
+                !isset($data[28])
+            ) {
+                $output->writeln("");
+                $output->write("\t\t\t   - Filed line -> ");
+                foreach($data as $col) {
+                    $output->write($col." | ");
+                }
+
+                //Write the failed lines into the logerr
+            }
+			else if (!in_array($data[0]."_".$data[3],$callsInserted)) {
 				array_push($aux, $data);
 			}
 		}

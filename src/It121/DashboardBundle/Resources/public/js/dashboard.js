@@ -219,28 +219,64 @@ var side_panel = {
             dataType: "JSON"
         }).done(function (response) {
             $body.empty();
+            var s1 = [];
+            var s2 = [];
+            var ticks = [];
             if (response.success) {
-                var data_ar = [];
                 $.each(response.data, function(i, data) {
                     if (response.data.length) {
-                        data_ar.push(['Unit '+data.unit, parseInt(data.num)]);
+                        if (!data.inbound) {
+                            s1.push(parseInt(data.num));
+                        }
+                        else {
+                            s2.push(parseInt(data.num));
+                        }
+                        if($.inArray("Unit "+data.unit, ticks) === -1) {
+                            ticks.push("Unit "+data.unit);
+                        }
                     }
                 });
-                var plot1 = jQuery.jqplot ('today-calls', [data_ar],
-                    {
-                        seriesDefaults: {
-                            // Make this a pie chart.
-                            renderer: jQuery.jqplot.PieRenderer,
-                            rendererOptions: {
-                                // Put data labels on the pie slices.
-                                // By default, labels show the percentage of the slice.
-                                showDataLabels: true
-                            }
-                        },
-                        legend: { show:true, location: 'e' }
-                    }
-                );
             }
+            else {
+                s1.push(0,0);
+                s1.push(0,0);
+            }
+
+
+            var plot = $.jqplot('today-calls', [s1, s2], {
+                // Tell the plot to stack the bars.
+                stackSeries: true,
+                captureRightClick: true,
+                seriesDefaults:{
+                    renderer:$.jqplot.BarRenderer,
+                    rendererOptions: {
+                        // Put a 30 pixel margin between bars.
+                        barMargin: 30,
+                        // Highlight bars when mouse button pressed.
+                        // Disables default highlighting on mouse over.
+                        highlightMouseDown: true
+                    },
+                    pointLabels: {show: true}
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: ticks
+                    },
+                    yaxis: {
+                        // Don't pad out the bottom of the data range.  By default,
+                        // axes scaled as if data extended 10% above and below the
+                        // actual range to prevent data points right on grid boundaries.
+                        // Don't want to do that here.
+                        padMin: 0
+                    }
+                },
+                legend: {
+                    show: false,
+                    location: 'e',
+                    placement: 'outside'
+                }
+            });
         });
     }
 }
