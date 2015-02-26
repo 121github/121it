@@ -239,7 +239,9 @@ var side_panel = {
             }
             else {
                 s1.push(0,0);
-                s1.push(0,0);
+                ticks.push("Unit 16");
+                s2.push(0,0);
+                ticks.push("Unit 31");
             }
 
 
