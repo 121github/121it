@@ -277,7 +277,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/CMS_03%20FSB%20Prod%20Deployment/');
+        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/CMS_03%20FSB%20Prod%20Deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));
@@ -309,7 +309,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
         $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Development')));
         $server->setEnvironment($manager->getRepository('ServerBundle:ServerEnvironment')->findOneBy(array('name' => 'Production')));
-        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/CMS_03%20VOICEGROUP%20Prod%20Deployment/');
+        $server->setRssUrl('http://10.10.1.13:8080/view/03_Prod/job/CMS_03%20VOICEGROUP%20Prod%20Deployment/rssAll');
         $server->setLastOnline(new DateTime('now - 8 hours'));
         $server->setLastCheck(new DateTime('now - 25 seconds'));
         $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Error')));

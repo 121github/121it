@@ -8,7 +8,7 @@ class PermissionsGroup extends AbstractTask
 {
     public function getName()
     {
-        return 'Fixing app/console file permissions';
+        return 'Changing the files group to www-data';
     }
 
     public function run()

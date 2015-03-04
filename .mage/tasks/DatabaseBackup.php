@@ -21,8 +21,15 @@ class DatabaseBackup extends AbstractTask
 
         if ($user && $pass && $host && $database) {
             $name = date('YmdHis');
-            $path =  'docs/db_bkp';
-            $command = 'mysqldump -u '.$user.' -p'.$pass.' '.$database.' > '.$path.'/'.$name.'.sql';
+            $path =  '../backup';
+
+            $commandList = array(
+                'mkdir -p ../backup',
+                'mysqldump -u '.$user.' -p'.$pass.' '.$database.' > '.$path.'/'.$name.'.sql'
+            );
+
+            $command = implode(" && ", $commandList);
+
             $result = $this->runCommandRemote($command);
         }
         else {

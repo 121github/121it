@@ -1,6 +1,6 @@
 #production
 deployment:
-  user: esteban
+  user: samba
   from: /var/lib/jenkins/jobs/121IT/workspace/
   to: /var/www
   excludes:
