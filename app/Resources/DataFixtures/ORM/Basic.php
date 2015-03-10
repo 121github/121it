@@ -882,6 +882,40 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $manager->persist($project);
 
         $manager->flush();
+
+        //Create website (Management)
+        $server = new Server();
+        $server->setName('GrayLog2');
+        $server->setDomain('10.10.1.13');
+        $server->setPath('');
+        $server->setPort(9000);
+        $server->setSendEmail(true);
+        $server->setMonitoring(true);
+        $server->setType($manager->getRepository('ServerBundle:ServerType')->findOneBy(array('name' => 'Website')));
+        $server->setSubtype($manager->getRepository('ServerBundle:ServerSubtype')->findOneBy(array('name' => 'Management')));
+        $server->setLastOnline(new DateTime('now - 8 hours'));
+        $server->setLastCheck(new DateTime('now - 25 seconds'));
+        $server->setStatus($manager->getRepository('ServerBundle:ServerStatus')->findOneBy(array('name' => 'Ok')));
+        $server->setLatency(0.12356);
+        $server->setShortcut(true);
+        $server->setLogo('graylog2.png');
+        Util::setCreateAuditFields($server, 1);
+        $manager->persist($server);
+        //Create associated project
+        $projectGroup = new ProjectGroup();
+        $projectGroup->setName("Logs");
+        $projectGroup->setDescription("Log Management System");
+        Util::setCreateAuditFields($projectGroup, 1);
+        $manager->persist($projectGroup);
+        $project = new Project();
+        $project->setName('GrayLog2');
+        $project->setGroup($projectGroup);
+        $project->setStartDate(new DateTime('2014-09-18 00:00:00'));
+        $project->setServer($server);
+        Util::setCreateAuditFields($project, 1);
+        $manager->persist($project);
+
+        $manager->flush();
         
     }
     
