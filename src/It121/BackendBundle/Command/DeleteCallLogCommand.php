@@ -55,7 +55,7 @@ class DeleteCallLogCommand extends ContainerAwareCommand {
             }
             else {
                 $date = (new \DateTime('now - '.$days.' days'))->format("Y-m-d");
-                $output->write("<comment>\t Deleting the call logs from the ".$database." database older than ".($days+1)." days (".$date.")...</comment>");
+                $output->write("<comment>\t Deleting the call logs from the ".$database." database older than ".($days)." days (".$date.")...</comment>");
 
                 $num_del = $this->deleteCallLog($database, $date);
                 $output->writeln(($num_del>0?"<info>":"<error>")." ".$num_del." call logs deleted".($num_del>0?"</info>":"</error>"));
