@@ -32,4 +32,21 @@ class CallLogRepository extends EntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    /**
+     * Delete old call logs older than the date
+     */
+    public function deleteOldCallLogs($date) {
+
+        $em = $this->getEntityManager();
+
+        $repo = $em->getRepository('LogBundle:CallLog');
+        $query = $repo->createQueryBuilder('c')
+            ->delete()
+            ->where('c.callDate <= :date')
+            ->setParameter('date', $date." 00:00:00")
+        ;
+
+        return $query->getQuery()->getResult();
+    }
 }

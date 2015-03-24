@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CallLog
  *
  * @ORM\Table(name="call_log")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="It121\CallSysBundle\Entity\CallLogRepository")
  */
 class CallLog
 {

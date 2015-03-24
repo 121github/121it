@@ -21,7 +21,7 @@ class CallLogCommand extends ContainerAwareCommand {
 	protected function configure() {
 		$this
 		->setName('log:calls:check')
-		->setDescription('Check the server status')
+		->setDescription('Check the call logs')
 		->addOption('all', null, InputOption::VALUE_NONE, 'If set, check all the files')
 		;
 	}
