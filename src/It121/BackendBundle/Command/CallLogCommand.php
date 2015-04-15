@@ -83,6 +83,7 @@ class CallLogCommand extends ContainerAwareCommand {
 		}
 		else {
 			$output->writeln("The process is still running");
+			throw new \ErrorException('The process is still running');
 		}
 
 		$endDate = new \DateTime('now');
