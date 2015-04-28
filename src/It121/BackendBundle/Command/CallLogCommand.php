@@ -179,7 +179,8 @@ class CallLogCommand extends ContainerAwareCommand {
 		if (!$callLogFile) {
 			$callLogFile = new CallLogFile();
 			$callLogFile->setName($file_name);
-			$callLogFile->setFileDate(new \DateTime(substr($file_name, strrpos($file_name,".txt")-8,8)));
+			$fileDate = substr($file_name, strrpos($file_name,".txt")-8,8);
+			$callLogFile->setFileDate(new \DateTime($fileDate));
 			$callLogFile->setUnit($unit);
 
 			Util::setCreateAuditFields($callLogFile, 1);
@@ -267,7 +268,13 @@ class CallLogCommand extends ContainerAwareCommand {
 			$callDate = new \DateTime(str_replace("/","-",$data[0]));
 
 			$callLog->setCallDate($callDate);
-			$callLog->setDuration(new \DateTime($data[1]));
+
+			//Reformat the duration if it is necessary
+			$hours = (intval(substr($data[1],0,2))<=24?substr($data[1],0,2):'08');
+			$minutes = (intval(substr($data[1],3,2))<=60?substr($data[1],3,2):'00');
+			$seconds = (intval(substr($data[1],6,2))<=60?substr($data[1],6,2):'00');
+
+			$callLog->setDuration(new \DateTime($hours.":".$minutes.":".$seconds));
 			$callLog->setRingTime($data[2]);
 			$callLog->setCallFrom($data[3]);
 			$callLog->setInbound(($data[4]=="I"?1:0));
