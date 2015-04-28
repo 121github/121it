@@ -23,6 +23,7 @@ class CallLogCommand extends ContainerAwareCommand {
 		->setName('log:calls:check')
 		->setDescription('Check the call logs')
 		->addOption('all', null, InputOption::VALUE_NONE, 'If set, check all the files')
+		->addOption('date', null, InputOption::VALUE_REQUIRED, 'If set, check the files in the specific date (Ymd)')
 		;
 	}
 	
@@ -62,6 +63,24 @@ class CallLogCommand extends ContainerAwareCommand {
 				$output->writeln("");
 				$this->checkLogFiles($output, 31, $pathLogs31, $tmpDir31);
 
+			}
+			else if ($input->getOption('date')) {
+				$date = ($input->getOption('date'));
+				$output->writeln("Checking only the ".$date." log file...");
+
+				//Check the calls on Unit 16
+				$output->writeln("");
+				$output->write("  UNIT 16: ");
+				$output->writeln("");
+				$this->checkLogFiles($output, 16, $pathLogs16, $tmpDir16, $date);
+
+
+
+				//Check the calls on Unit 31
+				$output->writeln("");
+				$output->write("  UNIT 31: ");
+				$output->writeln("");
+				$this->checkLogFiles($output, 31, $pathLogs31, $tmpDir31, $date);
 			}
 			else {
 				$output->writeln("Checking only the today log file...");
