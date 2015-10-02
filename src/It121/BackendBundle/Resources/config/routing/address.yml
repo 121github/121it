@@ -1,0 +1,13 @@
+address:
+    path:     /
+    defaults: { _controller: "BackendBundle:Address:index" }
+address_paf_update:
+    path:     /pafupdate
+    defaults: { _controller: "BackendBundle:Address:pafupdate" }
+address_paf_import:
+    path:     /pafimport
+    defaults: { _controller: "BackendBundle:Address:pafimport" }
+    requirements: { _method: post }
+address_paf_show:
+    path:     /{id}/pafshow
+    defaults: { _controller: "BackendBundle:Address:pafshow" }

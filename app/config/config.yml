@@ -67,6 +67,13 @@ doctrine:
                 user:     "%database_user_121sys%"
                 password: "%database_password_121sys%"
                 charset:  UTF8
+            uk_postcodes:
+                driver:   "%database_driver_uk_postcodes%"
+                host:     "%database_host_uk_postcodes%"
+                port:     "%database_port_uk_postcodes%"
+                dbname:   "%database_name_uk_postcodes%"
+                user:     "%database_user_uk_postcodes%"
+                password: "%database_password_uk_postcodes%"
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         # path:     "%database_path%"
@@ -87,6 +94,10 @@ doctrine:
                 connection: 121sys
                 mappings:
                     CallSysBundle: ~
+            uk_postcodes:
+                connection: uk_postcodes
+                mappings:
+                    AddressBundle: ~
 
 
 # Parameters (global vars)
@@ -104,3 +115,44 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+sensio_framework_extra:
+    view: { annotations: false }
+    router: { annotations: true }
+    request: { converters: true }
+
+fos_rest:
+    param_fetcher_listener: true
+    view:
+        view_response_listener: 'force'
+        formats:
+            xml:  true
+            json: true
+        templating_formats:
+            html: false
+    format_listener:
+        rules:
+            - { path: ^/, priorities: [ html, json, xml ], fallback_format: ~, prefer_extension: true }
+    exception:
+        codes:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+        messages:
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+    allowed_methods_listener: true
+    access_denied_listener:
+        json: true
+    body_listener: true
+    disable_csrf_role: IS_AUTHENTICATED_ANONYMOUSLY
+
+
+nelmio_api_doc:
+    name: API
+
+services:
+    my.listener:
+        class: It121\AddressBundle\EventListener\PafPostcodeListener
+        calls:
+            - [ setPostcodeIoAPIService, [@service_container]]
+        tags:
+            - { name: doctrine.event_listener, event: onFlush, method: onFlush, connection: uk_postcodes }

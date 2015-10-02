@@ -16,4 +16,8 @@ project:
 
 projectgroup:
      resource: "@BackendBundle/Resources/config/routing/projectgroup.yml"
-     prefix:   /projectgroup   
+     prefix:   /projectgroup
+
+address:
+     resource: "@BackendBundle/Resources/config/routing/address.yml"
+     prefix:   /address

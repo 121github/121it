@@ -1,0 +1,98 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	<h4 class="modal-title" id="myModalLabel">{{ address.postcode }}</h4>
+</div>
+<div class="modal-body">
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<th>#</th>
+				<td>{{ address.id }}</td>
+			</tr>
+            <tr>
+                <th>Postcode</th>
+                <td>{{ address.postcode }}</td>
+            </tr>
+            <tr>
+                <th>Post Town</th>
+                <td>{{ address.postTown }}</td>
+            </tr>
+            <tr>
+                <th>Dependent Locality</th>
+                <td>{{ address.DependentLocality }}</td>
+            </tr>
+            <tr>
+                <th>Double Dependent Locality</th>
+                <td>{{ address.DoubleDependentLocality }}</td>
+            </tr>
+            <tr>
+                <th>Thoroughfare & Descriptor</th>
+                <td>{{ address.ThoroughfareAndDescriptor }}</td>
+            </tr>
+            <tr>
+                <th>Dependent Thoroughfare & Descriptor</th>
+                <td>{{ address.DependentThoroughfareAndDescriptor }}</td>
+            </tr>
+            <tr>
+                <th>Building Number</th>
+                <td>{{ address.BuildingNumber }}</td>
+            </tr>
+            <tr>
+                <th>Building Number</th>
+                <td>{{ address.BuildingNumber }}</td>
+            </tr>
+            <tr>
+                <th>Building Name</th>
+                <td>{{ address.BuildingName }}</td>
+            </tr>
+            <tr>
+                <th>Sub Building Name</th>
+                <td>{{ address.SubBuildingName }}</td>
+            </tr>
+            <tr>
+                <th>PO Box</th>
+                <td>{{ address.POBox }}</td>
+            </tr>
+            <tr>
+                <th>Department Name</th>
+                <td>{{ address.DepartmentName }}</td>
+            </tr>
+            <tr>
+                <th>Organisation Name</th>
+                <td>{{ address.OrganisationName }}</td>
+            </tr>
+            <tr>
+                <th>UDPRN</th>
+                <td>{{ address.udprn }}</td>
+            </tr>
+            <tr>
+                <th>Postcode Type</th>
+                <td>{{ address.PostcodeType }}</td>
+            </tr>
+            <tr>
+                <th>SU Organisation Indicator</th>
+                <td>{{ address.SUOrganisationIndicator }}</td>
+            </tr>
+            <tr>
+                <th>Delivery Point Suffix</th>
+                <td>{{ address.DeliveryPointSuffix }}</td>
+            </tr>
+            <tr>
+                <th>Createddate</th>
+                <td>{{ address.createdDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ address.postcodeIo.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ address.postcodeIo.longitude }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	{#<a href="{{ path('user_edit', { 'id': address.id }) }}" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{ address.id }}">Edit</a>#}
+</div>

@@ -1,0 +1,111 @@
+{% extends '::backend.html.twig' %}
+
+{% block title %}Address List{% endblock %}
+
+{% block content -%}
+
+<div style="margin-bottom: 10px;">
+	<a href="{{ path('address_paf_update') }}" class="btn btn-success fa fa-refresh" data-toggle="modal" data-target="#updatePaf" > Update PAF Postcodes</a>
+	<a href="{{ path('nelmio_api_doc_index') }}" class="btn btn-warning fa fa-eye" target="_blank" > API</a>
+	<!-- Modal New -->
+	<div class="modal fade" id="new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		</div>
+	  </div>
+	</div>
+</div>
+
+<div class="row pagination">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-10">
+				{# display navigation #}
+				<div class="navigation">
+					{{ knp_pagination_render(entities) }}
+				</div>
+			</div>
+			<div class="col-md-2">
+				{# total items count #}
+				<div class="count pull-right">
+					{{ entities.getTotalItemCount ~ " Addresses" }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<table class="table table-striped jumbotron">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Postcode</th>
+					<th>Post Town</th>
+					<th>Dependent Locality</th>
+					<th>Double Dependent Locality</th>
+					<th>Thoroughfare & Descriptor</th>
+					<th>Dependent Thoroughfare & Descriptor</th>
+					<th>Building Number</th>
+					<th>Building Name</th>
+					<th>Sub Building Name</th>
+					<th>PO Box</th>
+					<th>Department Name</th>
+					<th>Organisation Name</th>
+					<th>UDPRN</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for entity in entities %}
+				<tr>
+					<td><a href="{{ path('address_paf_show', { 'id': entity.id }) }}" data-toggle="modal" data-target="#show_{{ entity.id }}">{{ entity.id }}</a></td>
+					<td>{{ entity.postcode }}</td>
+					<td>{{ entity.postTown }}</td>
+					<td>{{ entity.dependentLocality }}</td>
+					<td>{{ entity.doubleDependentLocality }}</td>
+					<td>{{ entity.thoroughfareAndDescriptor }}</td>
+					<td>{{ entity.dependentThoroughfareAndDescriptor }}</td>
+					<td>{{ entity.buildingNumber }}</td>
+					<td>{{ entity.buildingName }}</td>
+					<td>{{ entity.subBuildingName }}</td>
+					<td>{{ entity.poBox }}</td>
+					<td>{{ entity.departmentName }}</td>
+					<td>{{ entity.organisationName }}</td>
+					<td>{{ entity.udprn }}</td>
+				</tr>
+
+				<!-- Modal Show -->
+				<div class="modal fade" id="show_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+					<div class="modal-content">
+					</div>
+				  </div>
+				</div>
+				<!-- Modal Edit -->
+				<div class="modal fade" id="edit_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+					<div class="modal-content">
+					</div>
+				  </div>
+				</div>
+				<!-- Modal Change Password -->
+				<div class="modal fade" id="password_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+					<div class="modal-content">
+					</div>
+				  </div>
+				</div>
+				<!-- Modal Edit -->
+				<div class="modal fade" id="delete_{{ entity.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+					<div class="modal-content">
+					</div>
+				  </div>
+				</div>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+    
+    {% include 'DashboardBundle:Default:includes/modalViews.html.twig' %}
+    
+    {% endblock %}

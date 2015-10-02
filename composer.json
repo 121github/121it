@@ -23,8 +23,13 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "jms/serializer-bundle": "0.13.*",
-        "knplabs/knp-paginator-bundle": "~2.4"
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "boxuk/postcodes-io-bundle": "~1.0",
+        "jms/serializer-bundle" : "dev-master",
+        "friendsofsymfony/rest-bundle" : "1.2.*@dev",
+        "nelmio/api-doc-bundle" : "~2.4",
+        "ddeboer/data-import-bundle": "~0.1",
+        "symfony/console": "^2.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

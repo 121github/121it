@@ -13,6 +13,13 @@ parameters:
     database_user_121sys: 121sys_test
     database_password_121sys: SRKuMbrmBGm8evZd
 
+    database_driver_uk_postcodes: pdo_mysql
+    database_host_uk_postcodes: 127.0.0.1
+    database_port_uk_postcodes: null
+    database_name_uk_postcodes: uk_postcodes
+    database_user_uk_postcodes: uk_postcodes
+    database_password_uk_postcodes: jbTWRjnBdBTMn29y
+
     mailer_transport: smtp
     mailer_host: mail.leadcontrol.co.uk
     mailer_user: admin@leadcontrol.co.uk

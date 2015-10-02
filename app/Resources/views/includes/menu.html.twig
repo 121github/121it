@@ -173,6 +173,14 @@
                                                 href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
                                 </ul>
                             </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="trigger right-caret">{{ "Addresses" }}</a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li class=" {{ (app.request.attributes.get('_route') == 'address')?'active' : '' }}"><a
+                                                href="{{ path('address') }}"><span class="fa fa-institution"></span> PAF Postcodes</a>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                 {% endif %}

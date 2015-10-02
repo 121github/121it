@@ -27,6 +27,11 @@ class AppKernel extends Kernel
             new It121\LogBundle\LogBundle(),
             new It121\CallSysBundle\CallSysBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new BoxUk\PostcodesIoBundle\BoxUkPostcodesIoBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new It121\AddressBundle\AddressBundle(),
+            new Ddeboer\DataImportBundle\DdeboerDataImportBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
