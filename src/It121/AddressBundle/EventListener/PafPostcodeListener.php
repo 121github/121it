@@ -101,8 +101,6 @@ class PafPostcodeListener
         $uow = $em->getUnitOfWork();
         $client = $this->PostcodeIoAPIService->get('box_uk_postcodes_io.client');
 
-        var_dump(count($uow->getScheduledEntityInsertions()));
-
         foreach ($uow->getScheduledEntityInsertions() as $entity) {
             if ($entity instanceof PafPostcode) {
 

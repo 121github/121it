@@ -47,6 +47,10 @@ class AddressCommand extends ContainerAwareCommand {
 			$filePath = ($input->getOption('file'));
 			$output->writeln("Importing from ".$filePath." ...");
 
+            //Truncate data from the file
+            $output->writeln("");
+            $this->truncatePafPostcode($output);
+
 			//Import data from the file
 			$output->writeln("");
 			$this->importPafFile($output, $filePath);
@@ -62,13 +66,43 @@ class AddressCommand extends ContainerAwareCommand {
 		$output->writeln("");
 	}
 
+    /**
+     * Truncate table
+     */
+    private function truncatePafPostcode($output) {
+        $output->write("Truncating the data...");
+
+        $entityManager = $this->getContainer()->get('doctrine')->getManager('uk_postcodes');
+
+        $cmdPostcodeIo = $entityManager->getClassMetadata("It121\AddressBundle\Entity\PafPostcode");
+        $cmdPafPostcode = $entityManager->getClassMetadata("It121\AddressBundle\Entity\PostcodeIo");
+        $connection = $entityManager->getConnection();
+        $dbPlatform = $connection->getDatabasePlatform();
+        $connection->beginTransaction();
+        try {
+            $connection->query('SET FOREIGN_KEY_CHECKS=0');
+            $q = $dbPlatform->getTruncateTableSql($cmdPostcodeIo->getTableName());
+            $connection->executeUpdate($q);
+            $q = $dbPlatform->getTruncateTableSql($cmdPafPostcode->getTableName());
+            $connection->executeUpdate($q);
+            $connection->query('SET FOREIGN_KEY_CHECKS=1');
+            $connection->commit();
+
+            $output->writeln(" OK");
+        }
+        catch (\Exception $e) {
+            $connection->rollback();
+            $output->writeln(" ERROR");
+        }
+    }
+
 	/**
 	 * Get all the log files
 	 */
 	private function importPafFile($output, $pathFile) {
 		$entityManager = $this->getContainer()->get('doctrine')->getManager('uk_postcodes');
 
-		$output->writeln("Reading the file...");
+		$output->write("Reading the file...");
 
 		// Create and configure the reader
 		$file = new \SplFileObject($pathFile);
@@ -95,6 +129,8 @@ class AddressCommand extends ContainerAwareCommand {
 			'suOrganisationIndicator',
 			'deliveryPointSuffix'
 		));
+
+        $output->writeln(" OK");
 
 		// Create the workflow from the reader
 		$workflow = new Workflow($csvReader);
