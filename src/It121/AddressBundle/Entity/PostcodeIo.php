@@ -23,12 +23,12 @@ class PostcodeIo
      */
     private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\OneToOne(targetEntity="It121\AddressBundle\Entity\PafPostcode", inversedBy="postcodeIo")
-     */
-    private $pafPostcode;
+//    /**
+//     * @var string
+//     *
+//     * @ORM\OneToOne(targetEntity="It121\AddressBundle\Entity\PafPostcode", inversedBy="postcodeIo")
+//     */
+//    private $pafPostcode;
 
     /**
      * @var string
@@ -224,29 +224,29 @@ class PostcodeIo
         return $this->id;
     }
 
-    /**
-     * Set pafPostcode
-     *
-     * @param \It121\AddressBundle\Entity\PafPostcode $user
-     * @return poscodeIo
-     */
-    public function setPafPostcode(\It121\AddressBundle\Entity\PafPostcode $pafPostcode = null)
-    {
-        $this->pafPostcode = $pafPostcode;
-
-        return $this;
-    }
-
-
-    /**
-     * Get pafPostcode
-     *
-     * @return \It121\AddressBundle\Entity\PafPostcode
-     */
-    public function getPafPostcode()
-    {
-        return $this->pafPostcode;
-    }
+//    /**
+//     * Set pafPostcode
+//     *
+//     * @param \It121\AddressBundle\Entity\PafPostcode $user
+//     * @return poscodeIo
+//     */
+//    public function setPafPostcode(\It121\AddressBundle\Entity\PafPostcode $pafPostcode = null)
+//    {
+//        $this->pafPostcode = $pafPostcode;
+//
+//        return $this;
+//    }
+//
+//
+//    /**
+//     * Get pafPostcode
+//     *
+//     * @return \It121\AddressBundle\Entity\PafPostcode
+//     */
+//    public function getPafPostcode()
+//    {
+//        return $this->pafPostcode;
+//    }
 
     /**
      * @return int

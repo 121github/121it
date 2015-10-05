@@ -135,8 +135,14 @@ class PafPostcode
      */
     private $deliveryPointSuffix;
 
+//    /**
+//     * @ORM\OneToOne(targetEntity="It121\AddressBundle\Entity\PostcodeIo", mappedBy="pafPostcode", cascade={"persist", "remove" })
+//     */
+//    private $postcodeIo;
+
     /**
-     * @ORM\OneToOne(targetEntity="It121\AddressBundle\Entity\PostcodeIo", mappedBy="pafPostcode", cascade={"persist", "remove" })
+     *
+     * @ORM\ManyToOne(targetEntity="It121\AddressBundle\Entity\PostcodeIo")
      */
     private $postcodeIo;
 
