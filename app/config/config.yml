@@ -155,4 +155,4 @@ services:
         calls:
             - [ setPostcodeIoAPIService, [@service_container]]
         tags:
-            - { name: doctrine.event_listener, event: onFlush, method: onFlush, connection: uk_postcodes }
+            - { name: doctrine.event_listener, event: postFlush, method: postFlush, connection: uk_postcodes }

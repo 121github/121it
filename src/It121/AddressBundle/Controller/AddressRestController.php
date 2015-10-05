@@ -19,7 +19,6 @@ use It121\AddressBundle\Entity\PafPostcode;
 
 class AddressRestController extends FOSRestController
 {
-
 	/**
 	 * Get Address by postcode
 	 *
@@ -33,7 +32,7 @@ class AddressRestController extends FOSRestController
 	 *   }
 	 * )
 	 *
-//	 * @Annotations\View(template="BackendBundle:Address:pafShow.html.twig", templateVar="address")
+	 //* @Annotations\View(template="BackendBundle:Address:pafShow.html.twig", templateVar="address")
 	 *
 	 * @param Request $request the request object
 	 * @param string $postcode the address postcode
@@ -53,8 +52,8 @@ class AddressRestController extends FOSRestController
 		}
 
 		// Do something on pre update.
-		$client = $this->container->get('box_uk_postcodes_io.client');
-		$response = $client->lookup(array('postcode' => 'CF10 1DD'));
+//		$client = $this->container->get('box_uk_postcodes_io.client');
+//		$response = $client->lookup(array('postcode' => 'CF10 1DD'));
 
 		return $address;
 	}
