@@ -149,10 +149,10 @@ fos_rest:
 nelmio_api_doc:
     name: API
 
-services:
-    pafPostcode.listener:
-        class: It121\AddressBundle\EventListener\PafPostcodeListener
-        calls:
-            - [ setPostcodeIoAPIService, [@service_container]]
-        tags:
-            - { name: doctrine.event_listener, event: postFlush, method: postFlush, connection: uk_postcodes }
+#services:
+#    pafPostcode.listener:
+#        class: It121\AddressBundle\EventListener\PafPostcodeListener
+#        calls:
+#            - [ setPostcodeIoAPIService, [@service_container]]
+#        tags:
+#            - { name: doctrine.event_listener, event: postFlush, method: postFlush, connection: uk_postcodes }

@@ -9,7 +9,10 @@ use Ddeboer\DataImport\Workflow;
 use Ddeboer\DataImport\Writer\ConsoleProgressWriter;
 use Ddeboer\DataImport\Writer\ConsoleTableWriter;
 use Ddeboer\DataImport\Writer\DoctrineWriter;
+use It121\AddressBundle\Entity\PostcodeIo;
+use Proxies\__CG__\It121\AddressBundle\Entity\PafPostcode;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -54,6 +57,10 @@ class AddressCommand extends ContainerAwareCommand {
 			//Import data from the file
 			$output->writeln("");
 			$this->importPafFile($output, $filePath);
+
+			//Set postcodeIo
+			$output->writeln("");
+			$this->setPostcodeIo($output);
 		}
 		else {
 			$output->writeln("You need to specify the complete file path");
@@ -108,9 +115,6 @@ class AddressCommand extends ContainerAwareCommand {
 		$file = new \SplFileObject($pathFile);
 		$csvReader = new CsvReader($file, ',');
 
-		// Tell the reader that the first row in the CSV file contains column headers
-		//$csvReader->setHeaderRowNumber(0, CsvReader::DUPLICATE_HEADERS_INCREMENT);
-
 		$csvReader->setColumnHeaders(array(
 			'postcode',
 			'postTown',
@@ -156,4 +160,76 @@ class AddressCommand extends ContainerAwareCommand {
 		// Process the workflow
 		$result = $workflow->process();
 	}
+
+    /**
+     * Set postcodesIo
+     */
+    private function setPostcodeIo($output)
+    {
+		$output->writeln("");
+		$output->writeln("Get the postcodeIo details...");
+
+		//Get the PafPostcodes
+        $entityManager = $this->getContainer()->get('doctrine')->getManager('uk_postcodes');
+		$pafPostcodes = $entityManager->getRepository('It121\AddressBundle\Entity\PafPostcode')->findAll();
+
+        // create a new progress bar (50 units)
+        $progress = new ProgressBar($output, 1);
+
+        // start and displays the progress bar
+        $progress->start();
+
+		$client = $this->getContainer()->get('box_uk_postcodes_io.client');
+
+		$i = 0;
+		foreach($pafPostcodes as $pafPostcode) {
+			$postcodeIo = new PostcodeIo();
+
+			try{
+				$response = $client->lookup(array('postcode' => $pafPostcode->getPostcode()));
+
+				$postcodeIo->setPostcode($response['result']['postcode']);
+				$postcodeIo->setQuality($response['result']['quality']);
+				$postcodeIo->setEastings($response['result']['eastings']);
+				$postcodeIo->setNorthings($response['result']['northings']);
+				$postcodeIo->setCountry($response['result']['country']);
+				$postcodeIo->setNhsHa($response['result']['nhs_ha']);
+				$postcodeIo->setLongitude($response['result']['longitude']);
+				$postcodeIo->setLatitude($response['result']['latitude']);
+				$postcodeIo->setParliamentaryConstituency($response['result']['parliamentary_constituency']);
+				$postcodeIo->setEuropeanElectoralRegion($response['result']['european_electoral_region']);
+				$postcodeIo->setPrimaryCareTrust($response['result']['primary_care_trust']);
+				$postcodeIo->setRegion($response['result']['region']);
+				$postcodeIo->setLsoa($response['result']['lsoa']);
+				$postcodeIo->setMsoa($response['result']['msoa']);
+				$postcodeIo->setIncode($response['result']['incode']);
+				$postcodeIo->setOutcode($response['result']['outcode']);
+				$postcodeIo->setAdminDistrict($response['result']['admin_district']);
+				$postcodeIo->setParish($response['result']['parish']);
+				$postcodeIo->setAdminCounty($response['result']['admin_county']);
+				$postcodeIo->setAdminWard($response['result']['admin_ward']);
+				$postcodeIo->setCcg($response['result']['ccg']);
+				$postcodeIo->setNuts($response['result']['nuts']);
+
+				$entityManager->persist($postcodeIo);
+
+				$pafPostcode->setPostcodeIo($postcodeIo);
+
+				// advance the progress bar 1 unit
+				$progress->advance();
+				$i++;
+
+			} catch(\Exception $e){
+
+			}
+		}
+
+		$entityManager->flush();
+
+        // ensure that the progress bar is at 100%
+        $progress->finish();
+
+		$output->writeln("");
+
+    }
 }
