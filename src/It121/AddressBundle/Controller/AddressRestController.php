@@ -11,6 +11,7 @@ use FOS\RestBundle\View\View;
 
 use It121\AddressBundle\Entity\OpenPostcode;
 use It121\AddressBundle\Entity\PostcodeIo;
+use It121\BackendBundle\Util\Util;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -83,7 +84,9 @@ class AddressRestController extends FOSRestController
 	 */
 	public function getAddressOpenAction($postcode)
 	{
-		$emukpostcodes = $this->getDoctrine('doctrine')->getManager('uk_postcodes');
+        $emukpostcodes = $this->getDoctrine('doctrine')->getManager('uk_postcodes');
+
+        $postcode = Util::postcodeFormat($postcode);
 
         $openPostcodeList = $emukpostcodes->getRepository('AddressBundle:OpenPostcode')->findBy(array('postcode' => $postcode));
 
