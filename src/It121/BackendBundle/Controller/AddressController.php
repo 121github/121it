@@ -90,7 +90,7 @@ class AddressController extends DefaultController
     /******************************************************************************************************************************/
 
     /**
-     * Finds and displays a Address entity.
+     * Finds and displays a PAF Address entity.
      *
      */
     public function pafShowAction($id)
@@ -109,6 +109,25 @@ class AddressController extends DefaultController
     }
 
     /**
+     * Finds and displays a PAF Address entity.
+     *
+     */
+    public function openShowAction($id)
+    {
+        $emukpostcodes = $this->getDoctrine('doctrine')->getManager('uk_postcodes');
+
+        $openPostcode = $emukpostcodes->getRepository('AddressBundle:OpenPostcode')->find($id);
+
+        if (!$openPostcode) {
+            throw $this->createNotFoundException('Unable to find OpenPostcode entity.');
+        }
+
+        return $this->render('BackendBundle:Address:openShow.html.twig', array(
+            'address'      => $openPostcode,
+        ));
+    }
+
+    /**
      * Get postcodeIo details
      *
      */
@@ -116,20 +135,80 @@ class AddressController extends DefaultController
     {
         $postcode = $request->get('postcode');
         $pafPostcodeId = $request->get('pafPostcodeId');
+        $openPostcodeId = $request->get('openPostcodeId');
 
+        $emukpostcodes = $this->getDoctrine('doctrine')->getManager('uk_postcodes');
+
+        $data = array(
+            "success" => false,
+            "data" => array()
+        );
+
+        if ($pafPostcodeId) {
+            $pafPostcode = $emukpostcodes->getRepository('AddressBundle:PafPostcode')->find($pafPostcodeId);
+            if (!$pafPostcode) {
+                throw $this->createNotFoundException('Unable to find PafPostcode entity.');
+            }
+            $postcodeIoId = ($pafPostcode->getPostcodeIo()?$pafPostcode->getPostcodeIo()->getId():null);
+            $postcodeIo = $this->getPostcodeIo($postcode, $postcodeIoId);
+            $pafPostcode->setPostcodeIo($postcodeIo);
+
+            $emukpostcodes->persist($pafPostcode);
+            $emukpostcodes->flush();
+
+            $data = array(
+                "success" => (!empty($pafPostcode)),
+                "data" => $pafPostcode
+            );
+        }
+        else if ($openPostcodeId) {
+            $openPostcode = $emukpostcodes->getRepository('AddressBundle:OpenPostcode')->find($openPostcodeId);
+            if (!$openPostcode) {
+                throw $this->createNotFoundException('Unable to find OpenPostcode entity.');
+            }
+
+            $postcodeIoId = ($openPostcode->getPostcodeIo()?$openPostcode->getPostcodeIo()->getId():null);
+            $postcodeIo = $this->getPostcodeIo($postcode, $postcodeIoId);
+            $openPostcode->setPostcodeIo($postcodeIo);
+
+            $openPostcode->setPostcodeIo($postcodeIo);
+            $emukpostcodes->persist($openPostcode);
+            $emukpostcodes->flush();
+
+            $data = array(
+                "success" => (!empty($openPostcode)),
+                "data" => $openPostcode
+            );
+        }
+
+
+        $serializer = SerializerBuilder::create()->build();
+        $data = $serializer->serialize($data, 'json');
+
+        $response = new Response($data);
+
+        $response->headers->set('Content-Type', 'application/json');
+
+
+        return $response;
+    }
+
+    /**
+     * Get PostcodeIo
+     */
+    private function getPostcodeIo($postcode, $postcodeIoId = null) {
         $emukpostcodes = $this->getDoctrine('doctrine')->getManager('uk_postcodes');
         $client = $this->container->get('box_uk_postcodes_io.client');
 
-        $pafPostcode = $emukpostcodes->getRepository('AddressBundle:PafPostcode')->find($pafPostcodeId);
-
-        if (!$pafPostcode) {
-            throw $this->createNotFoundException('Unable to find PafPostcode entity.');
+        if ($postcodeIoId) {
+            $postcodeIo = $emukpostcodes->getRepository('AddressBundle:PostcodeIo')->find($postcodeIoId);
+        }
+        else {
+            $postcodeIo = new PostcodeIo();
         }
 
-        $postcodeIo = new PostcodeIo();
-
         try{
-            $response = $client->lookup(array('postcode' => $pafPostcode->getPostcode()));
+            $response = $client->lookup(array('postcode' => $postcode));
 
             $postcodeIo->setPostcode($response['result']['postcode']);
             $postcodeIo->setQuality($response['result']['quality']);
@@ -156,28 +235,11 @@ class AddressController extends DefaultController
 
             $emukpostcodes->persist($postcodeIo);
 
-            $pafPostcode->setPostcodeIo($postcodeIo);
-            $emukpostcodes->persist($pafPostcode);
-
-            $emukpostcodes->flush();
-
         } catch(\Exception $e){
 
         }
 
-        $pafPostcode = array(
-            "success" => (!empty($pafPostcode)),
-            "data" => $pafPostcode
-        );
-
-        $serializer = SerializerBuilder::create()->build();
-        $pafPostcode = $serializer->serialize($pafPostcode, 'json');
-
-        $response = new Response($pafPostcode);
-
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        return $postcodeIo;
     }
 
 
