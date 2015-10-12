@@ -73,9 +73,9 @@ class OpenPostcode
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=100, nullable=true)
+     * @ORM\Column(name="county", type="string", length=100, nullable=true)
      */
-    private $country;
+    private $county;
 
     /**
      * @var decimal
@@ -260,17 +260,17 @@ class OpenPostcode
     /**
      * @return string
      */
-    public function getCountry()
+    public function getCounty()
     {
-        return $this->country;
+        return $this->county;
     }
 
     /**
-     * @param string $country
+     * @param string $county
      */
-    public function setCountry($country)
+    public function setCounty($county)
     {
-        $this->country = $country;
+        $this->county = $county;
     }
 
     /**

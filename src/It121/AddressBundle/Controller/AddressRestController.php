@@ -114,7 +114,7 @@ class AddressRestController extends FOSRestController
                 $openPostcode->setAdd4($address_ar[3]);
                 $openPostcode->setLocality($address_ar[4]);
                 $openPostcode->setCity($address_ar[5]);
-                $openPostcode->setCountry($address_ar[6]);
+                $openPostcode->setCounty($address_ar[6]);
 
                 $openPostcode->setPostcodeIo($postcodeIo);
 
