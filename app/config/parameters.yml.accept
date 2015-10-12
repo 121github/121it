@@ -41,3 +41,7 @@ parameters:
 
     call_logs_16:    '/mnt/121datasvr'
     call_logs_31:    '/mnt/unit34phonesvr'
+    address:
+            get_address_io:
+                url: 'https://api.getAddress.io/v2/uk/'
+                key: '3otNwJrPjk-BLcUfTvIYPA1851'

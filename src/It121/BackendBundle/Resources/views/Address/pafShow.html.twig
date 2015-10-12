@@ -3,96 +3,232 @@
 	<h4 class="modal-title" id="myModalLabel">{{ address.postcode }}</h4>
 </div>
 <div class="modal-body">
-	<table class="table table-striped">
-		<tbody>
-			<tr>
-				<th>#</th>
-				<td>{{ address.id }}</td>
-			</tr>
-            <tr>
-                <th>Postcode</th>
-                <td>{{ address.postcode }}</td>
-            </tr>
-            <tr>
-                <th>Post Town</th>
-                <td>{{ address.postTown }}</td>
-            </tr>
-            <tr>
-                <th>Dependent Locality</th>
-                <td>{{ address.DependentLocality }}</td>
-            </tr>
-            <tr>
-                <th>Double Dependent Locality</th>
-                <td>{{ address.DoubleDependentLocality }}</td>
-            </tr>
-            <tr>
-                <th>Thoroughfare & Descriptor</th>
-                <td>{{ address.ThoroughfareAndDescriptor }}</td>
-            </tr>
-            <tr>
-                <th>Dependent Thoroughfare & Descriptor</th>
-                <td>{{ address.DependentThoroughfareAndDescriptor }}</td>
-            </tr>
-            <tr>
-                <th>Building Number</th>
-                <td>{{ address.BuildingNumber }}</td>
-            </tr>
-            <tr>
-                <th>Building Number</th>
-                <td>{{ address.BuildingNumber }}</td>
-            </tr>
-            <tr>
-                <th>Building Name</th>
-                <td>{{ address.BuildingName }}</td>
-            </tr>
-            <tr>
-                <th>Sub Building Name</th>
-                <td>{{ address.SubBuildingName }}</td>
-            </tr>
-            <tr>
-                <th>PO Box</th>
-                <td>{{ address.POBox }}</td>
-            </tr>
-            <tr>
-                <th>Department Name</th>
-                <td>{{ address.DepartmentName }}</td>
-            </tr>
-            <tr>
-                <th>Organisation Name</th>
-                <td>{{ address.OrganisationName }}</td>
-            </tr>
-            <tr>
-                <th>UDPRN</th>
-                <td>{{ address.udprn }}</td>
-            </tr>
-            <tr>
-                <th>Postcode Type</th>
-                <td>{{ address.PostcodeType }}</td>
-            </tr>
-            <tr>
-                <th>SU Organisation Indicator</th>
-                <td>{{ address.SUOrganisationIndicator }}</td>
-            </tr>
-            <tr>
-                <th>Delivery Point Suffix</th>
-                <td>{{ address.DeliveryPointSuffix }}</td>
-            </tr>
-            <tr>
-                <th>Createddate</th>
-                <td>{{ address.createdDate|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Latitude</th>
-                <td>{{ address.postcodeIo.latitude }}</td>
-            </tr>
-            <tr>
-                <th>Longitude</th>
-                <td>{{ address.postcodeIo.longitude }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="panel-group" id="accordion_{{ address.id }}">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent='#accordion_{{ address.id }}' href="#collapseOne_{{ address.id }}">
+                        Address (PAF)
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne_{{ address.id }}" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    {#<table class="table table-striped">#}
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>#ID</th>
+                            <td>{{ address.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Postcode</th>
+                            <td>{{ address.postcode }}</td>
+                        </tr>
+                        <tr>
+                            <th>Post Town</th>
+                            <td>{{ address.postTown }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dependent Locality</th>
+                            <td>{{ address.DependentLocality }}</td>
+                        </tr>
+                        <tr>
+                            <th>Double Dependent Locality</th>
+                            <td>{{ address.DoubleDependentLocality }}</td>
+                        </tr>
+                        <tr>
+                            <th>Thoroughfare & Descriptor</th>
+                            <td>{{ address.ThoroughfareAndDescriptor }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dependent Thoroughfare & Descriptor</th>
+                            <td>{{ address.DependentThoroughfareAndDescriptor }}</td>
+                        </tr>
+                        <tr>
+                            <th>Building Number</th>
+                            <td>{{ address.BuildingNumber }}</td>
+                        </tr>
+                        <tr>
+                            <th>Building Number</th>
+                            <td>{{ address.BuildingNumber }}</td>
+                        </tr>
+                        <tr>
+                            <th>Building Name</th>
+                            <td>{{ address.BuildingName }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sub Building Name</th>
+                            <td>{{ address.SubBuildingName }}</td>
+                        </tr>
+                        <tr>
+                            <th>PO Box</th>
+                            <td>{{ address.POBox }}</td>
+                        </tr>
+                        <tr>
+                            <th>Department Name</th>
+                            <td>{{ address.DepartmentName }}</td>
+                        </tr>
+                        <tr>
+                            <th>Organisation Name</th>
+                            <td>{{ address.OrganisationName }}</td>
+                        </tr>
+                        <tr>
+                            <th>UDPRN</th>
+                            <td>{{ address.udprn }}</td>
+                        </tr>
+                        <tr>
+                            <th>Postcode Type</th>
+                            <td>{{ address.PostcodeType }}</td>
+                        </tr>
+                        <tr>
+                            <th>SU Organisation Indicator</th>
+                            <td>{{ address.SUOrganisationIndicator }}</td>
+                        </tr>
+                        <tr>
+                            <th>Delivery Point Suffix</th>
+                            <td>{{ address.DeliveryPointSuffix }}</td>
+                        </tr>
+                        <tr>
+                            <th>Createddate</th>
+                            <td>{{ address.createdDate|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default postcodeIo-panel">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent='#accordion_{{ address.id }}' href="#collapseTwo_{{ address.id }}">
+                        PostcodeIO Details
+                    </a>
+                    {#{% if entity.server.status.name == 'Ok' %}#}
+                        {#{% set status = "success" %}#}
+                        {#{% set icon_status = "fa-check green" %}#}
+                    {#{% elseif entity.server.status.name == 'Error' %}#}
+                        {#{% set status = "danger" %}#}
+                        {#{% set icon_status = "fa-remove" %}#}
+                    {#{% elseif entity.server.status.name == 'Warning' %}#}
+                        {#{% set status = "warning" %}#}
+                        {#{% set icon_status = "fa-eye" %}#}
+                    {#{% endif %}#}
+                    <span class="btn fa fa-refresh fa-1x pointer refresh-postcodeio-btn" data-postcode="{{ address.postcode }}" data-pafPostcodeId="{{ address.id }}"></span>
+                    <span style="font-size: 10px" class="update-date">
+                        {% if address.postcodeIo is not null %}
+                            {{ "(Last update: " }}{{ address.postcodeIo.createdDate|date('Y-m-d H:i:s') }}{{ ")" }}
+                        {% endif %}
+                    </span>
+                </h4>
+            </div>
+            <div id="collapseTwo_{{ address.id }}" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table table-hover postcodeIo-details">
+                        <tbody>
+                        <tr>
+                            <th>#ID</th>
+                            <td>{{ address.postcodeIo.id|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Postcode</th>
+                            <td>{{ address.postcodeIo.postcode|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Quality</th>
+                            <td>{{ address.postcodeIo.quality|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Eastings</th>
+                            <td>{{ address.postcodeIo.eastings|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Northings</th>
+                            <td>{{ address.postcodeIo.northings|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Country</th>
+                            <td>{{ address.postcodeIo.country|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>NHS_HA</th>
+                            <td>{{ address.postcodeIo.nhsHa|default('-')  }}</td>
+                        </tr>
+                        <tr class="success">
+                            <th>Latitude</th>
+                            <td>{{ address.postcodeIo.latitude|default('-')  }}</td>
+                        </tr>
+                        <tr class="success">
+                            <th>Longitude</th>
+                            <td>{{ address.postcodeIo.longitude|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Pariamentary Constituency</th>
+                            <td>{{ address.postcodeIo.parliamentaryConstituency|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>European Electoral Region</th>
+                            <td>{{ address.postcodeIo.europeanElectoralRegion|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Primary Care Trust</th>
+                            <td>{{ address.postcodeIo.primaryCareTrust|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Region</th>
+                            <td>{{ address.postcodeIo.region|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>LSOA</th>
+                            <td>{{ address.postcodeIo.lsoa|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>MSOA</th>
+                            <td>{{ address.postcodeIo.msoa|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Incode</th>
+                            <td>{{ address.postcodeIo.incode|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Admin District</th>
+                            <td>{{ address.postcodeIo.adminDistrict|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Parish</th>
+                            <td>{{ address.postcodeIo.parish|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Admin County</th>
+                            <td>{{ address.postcodeIo.adminCounty|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Admin Ward</th>
+                            <td>{{ address.postcodeIo.adminWard|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>CCG</th>
+                            <td>{{ address.postcodeIo.ccg|default('-')  }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nuts</th>
+                            <td>{{ address.postcodeIo.nuts|default('-')  }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	{#<a href="{{ path('user_edit', { 'id': address.id }) }}" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{ address.id }}">Edit</a>#}
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        show.init();
+        show.setLoaderUrl("{{ asset('bundles/backend/images/ajax-loader.gif') }}");
+    });
+</script>

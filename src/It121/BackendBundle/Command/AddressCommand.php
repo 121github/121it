@@ -183,45 +183,51 @@ class AddressCommand extends ContainerAwareCommand {
 
 		$i = 0;
 		foreach($pafPostcodes as $pafPostcode) {
-			$postcodeIo = new PostcodeIo();
+            $postcodeIo = $entityManager->getRepository('AddressBundle:PostcodeIo')->findBy(array('postcode' => $pafPostcode->getPostcode()));
 
-			try{
-				$response = $client->lookup(array('postcode' => $pafPostcode->getPostcode()));
+            if (!$postcodeIo) {
+                $postcodeIo = new PostcodeIo();
 
-				$postcodeIo->setPostcode($response['result']['postcode']);
-				$postcodeIo->setQuality($response['result']['quality']);
-				$postcodeIo->setEastings($response['result']['eastings']);
-				$postcodeIo->setNorthings($response['result']['northings']);
-				$postcodeIo->setCountry($response['result']['country']);
-				$postcodeIo->setNhsHa($response['result']['nhs_ha']);
-				$postcodeIo->setLongitude($response['result']['longitude']);
-				$postcodeIo->setLatitude($response['result']['latitude']);
-				$postcodeIo->setParliamentaryConstituency($response['result']['parliamentary_constituency']);
-				$postcodeIo->setEuropeanElectoralRegion($response['result']['european_electoral_region']);
-				$postcodeIo->setPrimaryCareTrust($response['result']['primary_care_trust']);
-				$postcodeIo->setRegion($response['result']['region']);
-				$postcodeIo->setLsoa($response['result']['lsoa']);
-				$postcodeIo->setMsoa($response['result']['msoa']);
-				$postcodeIo->setIncode($response['result']['incode']);
-				$postcodeIo->setOutcode($response['result']['outcode']);
-				$postcodeIo->setAdminDistrict($response['result']['admin_district']);
-				$postcodeIo->setParish($response['result']['parish']);
-				$postcodeIo->setAdminCounty($response['result']['admin_county']);
-				$postcodeIo->setAdminWard($response['result']['admin_ward']);
-				$postcodeIo->setCcg($response['result']['ccg']);
-				$postcodeIo->setNuts($response['result']['nuts']);
+                try{
+                    $response = $client->lookup(array('postcode' => $pafPostcode->getPostcode()));
 
-				$entityManager->persist($postcodeIo);
+                    $postcodeIo->setPostcode($response['result']['postcode']);
+                    $postcodeIo->setQuality($response['result']['quality']);
+                    $postcodeIo->setEastings($response['result']['eastings']);
+                    $postcodeIo->setNorthings($response['result']['northings']);
+                    $postcodeIo->setCountry($response['result']['country']);
+                    $postcodeIo->setNhsHa($response['result']['nhs_ha']);
+                    $postcodeIo->setLongitude($response['result']['longitude']);
+                    $postcodeIo->setLatitude($response['result']['latitude']);
+                    $postcodeIo->setParliamentaryConstituency($response['result']['parliamentary_constituency']);
+                    $postcodeIo->setEuropeanElectoralRegion($response['result']['european_electoral_region']);
+                    $postcodeIo->setPrimaryCareTrust($response['result']['primary_care_trust']);
+                    $postcodeIo->setRegion($response['result']['region']);
+                    $postcodeIo->setLsoa($response['result']['lsoa']);
+                    $postcodeIo->setMsoa($response['result']['msoa']);
+                    $postcodeIo->setIncode($response['result']['incode']);
+                    $postcodeIo->setOutcode($response['result']['outcode']);
+                    $postcodeIo->setAdminDistrict($response['result']['admin_district']);
+                    $postcodeIo->setParish($response['result']['parish']);
+                    $postcodeIo->setAdminCounty($response['result']['admin_county']);
+                    $postcodeIo->setAdminWard($response['result']['admin_ward']);
+                    $postcodeIo->setCcg($response['result']['ccg']);
+                    $postcodeIo->setNuts($response['result']['nuts']);
 
-				$pafPostcode->setPostcodeIo($postcodeIo);
+                    $entityManager->persist($postcodeIo);
 
-				// advance the progress bar 1 unit
-				$progress->advance();
-				$i++;
+                    // advance the progress bar 1 unit
+                    $progress->advance();
+                    $i++;
 
-			} catch(\Exception $e){
+                } catch(\Exception $e){
 
-			}
+                }
+            }
+
+            $pafPostcode->setPostcodeIo($postcodeIo);
+
+            $entityManager->persist($pafPostcode);
 		}
 
 		$entityManager->flush();

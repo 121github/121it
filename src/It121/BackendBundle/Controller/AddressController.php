@@ -3,7 +3,9 @@
 namespace It121\BackendBundle\Controller;
 
 use It121\AddressBundle\Entity\ImportPaf;
+use It121\AddressBundle\Entity\PostcodeIo;
 use It121\AddressBundle\Form\ImportPafType;
+use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -19,13 +21,13 @@ class AddressController extends DefaultController
     /******************************************************************************************************************************/
 	/******************************************************************************************************************************/
 	/******************************************************************************************************************************/
-	/********************************  ADDRESS ACTION ********************************************************************************/
+	/********************************  ADDRESS ACTION ******************************************************************************/
 	/******************************************************************************************************************************/
 	/******************************************************************************************************************************/
 	/******************************************************************************************************************************/
 	
     /**
-     * User List view
+     * PAF Addresses List view
      *
      */
     public function indexAction(Request $request = null)
@@ -53,10 +55,36 @@ class AddressController extends DefaultController
         return $this->render('BackendBundle:Address:index.html.twig', array_merge($options, $elementsForMenu));
     }
 
+    /**
+     * Open Addresses List view
+     *
+     */
+    public function openAddressAction(Request $request = null)
+    {
+        $emukpostcodes = $this->getDoctrine('doctrine')->getManager('uk_postcodes');
+
+        $dql   = "SELECT p FROM AddressBundle:OpenPostcode p ORDER BY p.id ASC";
+        $query = $emukpostcodes->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $entities = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1), /* page number */
+            100 /* limit per page */
+        );
+
+        $options = array(
+            'entities' => $entities,
+        );
+        $elementsForMenu = $this->getElementsForMenu();
+
+        return $this->render('BackendBundle:Address:openAddress.html.twig', array_merge($options, $elementsForMenu));
+    }
+
     /******************************************************************************************************************************/
     /******************************************************************************************************************************/
     /******************************************************************************************************************************/
-    /******************************** SHOW ADDRESS ACTION ****************************************************************************/
+    /******************************** SHOW ADDRESS ACTION *************************************************************************/
     /******************************************************************************************************************************/
     /******************************************************************************************************************************/
     /******************************************************************************************************************************/
@@ -69,15 +97,87 @@ class AddressController extends DefaultController
     {
         $emukpostcodes = $this->getDoctrine('doctrine')->getManager('uk_postcodes');
 
-        $entity = $emukpostcodes->getRepository('AddressBundle:PafPostcode')->find($id);
+        $pafPostcode = $emukpostcodes->getRepository('AddressBundle:PafPostcode')->find($id);
 
-        if (!$entity) {
+        if (!$pafPostcode) {
             throw $this->createNotFoundException('Unable to find PafPostcode entity.');
         }
 
         return $this->render('BackendBundle:Address:pafShow.html.twig', array(
-            'address'      => $entity,
+            'address'      => $pafPostcode,
         ));
+    }
+
+    /**
+     * Get postcodeIo details
+     *
+     */
+    public function getPostcodeIoAction(Request $request)
+    {
+        $postcode = $request->get('postcode');
+        $pafPostcodeId = $request->get('pafPostcodeId');
+
+        $emukpostcodes = $this->getDoctrine('doctrine')->getManager('uk_postcodes');
+        $client = $this->container->get('box_uk_postcodes_io.client');
+
+        $pafPostcode = $emukpostcodes->getRepository('AddressBundle:PafPostcode')->find($pafPostcodeId);
+
+        if (!$pafPostcode) {
+            throw $this->createNotFoundException('Unable to find PafPostcode entity.');
+        }
+
+        $postcodeIo = new PostcodeIo();
+
+        try{
+            $response = $client->lookup(array('postcode' => $pafPostcode->getPostcode()));
+
+            $postcodeIo->setPostcode($response['result']['postcode']);
+            $postcodeIo->setQuality($response['result']['quality']);
+            $postcodeIo->setEastings($response['result']['eastings']);
+            $postcodeIo->setNorthings($response['result']['northings']);
+            $postcodeIo->setCountry($response['result']['country']);
+            $postcodeIo->setNhsHa($response['result']['nhs_ha']);
+            $postcodeIo->setLongitude($response['result']['longitude']);
+            $postcodeIo->setLatitude($response['result']['latitude']);
+            $postcodeIo->setParliamentaryConstituency($response['result']['parliamentary_constituency']);
+            $postcodeIo->setEuropeanElectoralRegion($response['result']['european_electoral_region']);
+            $postcodeIo->setPrimaryCareTrust($response['result']['primary_care_trust']);
+            $postcodeIo->setRegion($response['result']['region']);
+            $postcodeIo->setLsoa($response['result']['lsoa']);
+            $postcodeIo->setMsoa($response['result']['msoa']);
+            $postcodeIo->setIncode($response['result']['incode']);
+            $postcodeIo->setOutcode($response['result']['outcode']);
+            $postcodeIo->setAdminDistrict($response['result']['admin_district']);
+            $postcodeIo->setParish($response['result']['parish']);
+            $postcodeIo->setAdminCounty($response['result']['admin_county']);
+            $postcodeIo->setAdminWard($response['result']['admin_ward']);
+            $postcodeIo->setCcg($response['result']['ccg']);
+            $postcodeIo->setNuts($response['result']['nuts']);
+
+            $emukpostcodes->persist($postcodeIo);
+
+            $pafPostcode->setPostcodeIo($postcodeIo);
+            $emukpostcodes->persist($pafPostcode);
+
+            $emukpostcodes->flush();
+
+        } catch(\Exception $e){
+
+        }
+
+        $pafPostcode = array(
+            "success" => (!empty($pafPostcode)),
+            "data" => $pafPostcode
+        );
+
+        $serializer = SerializerBuilder::create()->build();
+        $pafPostcode = $serializer->serialize($pafPostcode, 'json');
+
+        $response = new Response($pafPostcode);
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
 

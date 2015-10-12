@@ -42,3 +42,7 @@ parameters:
 
     call_logs_16:    '/home/estebanc/logs/calllogs16'
     call_logs_31:    '/home/estebanc/logs/calllogs31'
+    address:
+            get_address_io:
+                url: 'https://api.getAddress.io/v2/uk/'
+                key: '3otNwJrPjk-BLcUfTvIYPA1851'

@@ -1,13 +1,23 @@
-address:
-    path:     /
+address_paf:
+    path:     /paf
     defaults: { _controller: "BackendBundle:Address:index" }
+address_paf_show:
+    path:     /paf/{id}/show
+    defaults: { _controller: "BackendBundle:Address:pafshow" }
+address_open:
+    path:     /open
+    defaults: { _controller: "BackendBundle:Address:openAddress" }
+address_open_show:
+    path:     /open/{id}/show
+    defaults: { _controller: "BackendBundle:Address:openshow" }
 address_paf_update:
-    path:     /pafupdate
+    path:     /paf/update
     defaults: { _controller: "BackendBundle:Address:pafupdate" }
 address_paf_import:
-    path:     /pafimport
+    path:     /paf/import
     defaults: { _controller: "BackendBundle:Address:pafimport" }
     requirements: { _method: post }
-address_paf_show:
-    path:     /{id}/pafshow
-    defaults: { _controller: "BackendBundle:Address:pafshow" }
+address_postcodeio_get:
+    path:     /getpostcodeio
+    defaults: { _controller: "BackendBundle:Address:getPostcodeIo" }
+    requirements: { _method: post }
