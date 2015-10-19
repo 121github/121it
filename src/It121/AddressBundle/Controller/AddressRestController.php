@@ -132,11 +132,11 @@ class AddressRestController extends FOSRestController
         else {
 
             foreach($openPostcodeList as $openPostcode) {
-                if (!$openPostcode->getPostcodeIo()) {
+                //if (!$openPostcode->getPostcodeIo()) {
                     $openPostcode->setPostcodeIo($postcodeIo);
                     $emukpostcodes->persist($openPostcode);
                     $emukpostcodes->persist($postcodeIo);
-                }
+                //}
             }
 
             $emukpostcodes->flush();
@@ -167,43 +167,44 @@ class AddressRestController extends FOSRestController
      */
     private function getPostcodeIo($postcode) {
         $emukpostcodes = $this->getDoctrine('doctrine')->getManager('uk_postcodes');
+        $client = $this->container->get('box_uk_postcodes_io.client');
 
         $postcodeIo = $emukpostcodes->getRepository('AddressBundle:PostcodeIo')->findOneBy(array('postcode' => $postcode));
 
         if (!$postcodeIo) {
             $postcodeIo = new PostcodeIo();
-            $client = $this->container->get('box_uk_postcodes_io.client');
-
-            try{
-                $response = $client->lookup(array('postcode' => $postcode));
-
-                $postcodeIo->setPostcode($response['result']['postcode']);
-                $postcodeIo->setQuality($response['result']['quality']);
-                $postcodeIo->setEastings($response['result']['eastings']);
-                $postcodeIo->setNorthings($response['result']['northings']);
-                $postcodeIo->setCountry($response['result']['country']);
-                $postcodeIo->setNhsHa($response['result']['nhs_ha']);
-                $postcodeIo->setLongitude($response['result']['longitude']);
-                $postcodeIo->setLatitude($response['result']['latitude']);
-                $postcodeIo->setParliamentaryConstituency($response['result']['parliamentary_constituency']);
-                $postcodeIo->setEuropeanElectoralRegion($response['result']['european_electoral_region']);
-                $postcodeIo->setPrimaryCareTrust($response['result']['primary_care_trust']);
-                $postcodeIo->setRegion($response['result']['region']);
-                $postcodeIo->setLsoa($response['result']['lsoa']);
-                $postcodeIo->setMsoa($response['result']['msoa']);
-                $postcodeIo->setIncode($response['result']['incode']);
-                $postcodeIo->setOutcode($response['result']['outcode']);
-                $postcodeIo->setAdminDistrict($response['result']['admin_district']);
-                $postcodeIo->setParish($response['result']['parish']);
-                $postcodeIo->setAdminCounty($response['result']['admin_county']);
-                $postcodeIo->setAdminWard($response['result']['admin_ward']);
-                $postcodeIo->setCcg($response['result']['ccg']);
-                $postcodeIo->setNuts($response['result']['nuts']);
-
-            } catch(\Exception $e){
-
-            }
         }
+
+        try{
+            $response = $client->lookup(array('postcode' => $postcode));
+
+            $postcodeIo->setPostcode($response['result']['postcode']);
+            $postcodeIo->setQuality($response['result']['quality']);
+            $postcodeIo->setEastings($response['result']['eastings']);
+            $postcodeIo->setNorthings($response['result']['northings']);
+            $postcodeIo->setCountry($response['result']['country']);
+            $postcodeIo->setNhsHa($response['result']['nhs_ha']);
+            $postcodeIo->setLongitude($response['result']['longitude']);
+            $postcodeIo->setLatitude($response['result']['latitude']);
+            $postcodeIo->setParliamentaryConstituency($response['result']['parliamentary_constituency']);
+            $postcodeIo->setEuropeanElectoralRegion($response['result']['european_electoral_region']);
+            $postcodeIo->setPrimaryCareTrust($response['result']['primary_care_trust']);
+            $postcodeIo->setRegion($response['result']['region']);
+            $postcodeIo->setLsoa($response['result']['lsoa']);
+            $postcodeIo->setMsoa($response['result']['msoa']);
+            $postcodeIo->setIncode($response['result']['incode']);
+            $postcodeIo->setOutcode($response['result']['outcode']);
+            $postcodeIo->setAdminDistrict($response['result']['admin_district']);
+            $postcodeIo->setParish($response['result']['parish']);
+            $postcodeIo->setAdminCounty($response['result']['admin_county']);
+            $postcodeIo->setAdminWard($response['result']['admin_ward']);
+            $postcodeIo->setCcg($response['result']['ccg']);
+            $postcodeIo->setNuts($response['result']['nuts']);
+
+        } catch(\Exception $e){
+
+        }
+
 
         return $postcodeIo;
     }
