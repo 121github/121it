@@ -145,6 +145,34 @@ class AddressRestController extends FOSRestController
 		return $openPostcodeList;
 	}
 
+    /**
+     * Get PostcodeIO Info by postcode
+     *
+     * @ApiDoc(
+     *   resource = true,
+     *   description = "Gets the info for postcodeIO (using getPostcodeIo)",
+     *   output = "It121\AddressBundle\Entity\PostcodeIo",
+     *   statusCodes = {
+     *     200 = "Returned when successful",
+     *     404 = "Returned when the address is not found"
+     *   }
+     * )
+     *
+     *
+     * @param Request $request the request object
+     * @param string $postcode the address postcode
+     *
+     * @return array
+     *
+     * @throws NotFoundHttpException when address not exist
+     */
+    public function getPostcodeioAction($postcode)
+    {
+        $postcodeIo = $this->getPostcodeIo($postcode);
+
+        return $postcodeIo;
+    }
+
 	/**
 	 * GetAddressIo API
 	 */
