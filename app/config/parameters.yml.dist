@@ -44,4 +44,4 @@ parameters:
     address:
             get_address_io:
                 url: 'https://api.getAddress.io/v2/uk/'
-                key: '3otNwJrPjk-BLcUfTvIYPA1851'
+                key: 'iYPpH-Rre0ec1MQH62OtZA2047'
