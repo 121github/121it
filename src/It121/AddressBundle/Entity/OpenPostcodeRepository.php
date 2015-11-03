@@ -10,4 +10,22 @@ namespace It121\AddressBundle\Entity;
  */
 class OpenPostcodeRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Get openPostcodes order by add1 (using the length)
+     */
+    public function findByPostcodeOrdered($postcode) {
+
+        $emukpostcodes = $this->getEntityManager('uk_postcodes');
+
+        $repo = $emukpostcodes->getRepository('AddressBundle:OpenPostcode');
+        $query = $repo->createQueryBuilder('a')
+            ->addSelect('length(a.add1) AS HIDDEN add1_ord')
+            ->where('a.postcode = :postcode')
+            ->addOrderBy('add1_ord')
+            ->addOrderBy('a.add1')
+            ->setParameter('postcode', $postcode)
+        ;
+
+        return $query->getQuery()->getResult();
+    }
 }

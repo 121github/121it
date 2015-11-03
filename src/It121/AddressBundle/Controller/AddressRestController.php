@@ -88,7 +88,7 @@ class AddressRestController extends FOSRestController
 
         $postcode = Util::postcodeFormat($postcode);
 
-        $openPostcodeList = $emukpostcodes->getRepository('AddressBundle:OpenPostcode')->findBy(array('postcode' => $postcode));
+        $openPostcodeList = $emukpostcodes->getRepository('AddressBundle:OpenPostcode')->findByPostcodeOrdered($postcode);
 
         $postcodeIo = $this->getPostcodeIo($postcode);
 
@@ -127,7 +127,7 @@ class AddressRestController extends FOSRestController
 
             $emukpostcodes->flush();
 
-            $openPostcodeList = $emukpostcodes->getRepository('AddressBundle:OpenPostcode')->findBy(array('postcode' => $postcode));
+            $openPostcodeList = $emukpostcodes->getRepository('AddressBundle:OpenPostcode')->findByPostcodeOrdered($postcode);
 		}
         else {
 
