@@ -9,7 +9,7 @@ deployment:
     - web/bundles/*
 releases:
   enabled: true
-  max: 10
+  max: 6
   symlink: 121it
   directory: releases/121it_releases
 hosts:
