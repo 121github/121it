@@ -20,7 +20,7 @@ class DatabaseBackup extends AbstractTask
 
 
         if ($user && $pass && $host && $database) {
-            $name = "121itDB_bkp";
+            $name = $database."_DB_bkp";
             $path =  '../backup';
 
             $commandList = array(
