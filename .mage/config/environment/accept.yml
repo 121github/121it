@@ -24,4 +24,5 @@ tasks:
     - permissionsGroup
   post-release:
     - databaseBackup: {user: 121it_accept, pass: nJwCuNBpJpUWu87B, host: localhost, database: 121it_accept}
+    - databaseBackup: {user: 121it_accept, pass: nJwCuNBpJpUWu87B, host: localhost, database: 121it_accept_uk_postcodes}
   post-deploy:
