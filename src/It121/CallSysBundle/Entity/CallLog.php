@@ -113,6 +113,13 @@ class CallLog
     private $file;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="campaign_id", type="integer", nullable=true)
+     */
+    private $campaignId;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -370,5 +377,21 @@ class CallLog
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCampaignId()
+    {
+        return $this->campaignId;
+    }
+
+    /**
+     * @param int $campaignId
+     */
+    public function setCampaignId($campaignId)
+    {
+        $this->campaignId = $campaignId;
     }
 }

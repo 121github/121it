@@ -325,6 +325,13 @@ class CallLogCommand extends ContainerAwareCommand {
 			$callLog121Sys->setNameTo($callLog->getNameTo());
 			$callLog121Sys->setFile($callLogFile121sys);
 
+			//Check if the campaign id is defined
+			$position = strpos($callLog121Sys->getCallTo(),'#');
+			if ($position) {
+				$campaign_id = substr($callLog121Sys->getCallTo(), $position+1);
+				$callLog121Sys->setCampaignId($campaign_id);
+			}
+
 			$em121sys->persist($callLog121Sys);
 		}
 		$em->flush();
