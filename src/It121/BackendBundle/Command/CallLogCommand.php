@@ -41,13 +41,13 @@ class CallLogCommand extends ContainerAwareCommand {
 		$startDate = new \DateTime('now');
 
 		$pathLogs16 = ($this->getContainer()->getParameter('call_logs_16'));
-		$tmpDir16 = $tmpDir ='docs/tmp/log/call/unit16';
+		$tmpDir16 = 'docs/tmp/log/call/unit16';
 		$pathLogs31 = ($this->getContainer()->getParameter('call_logs_31'));
-		$tmpDir31 = 			$tmpDir ='docs/tmp/log/call/unit31';
+		$tmpDir31 = 'docs/tmp/log/call/unit31';
 
 		//Check if exist any tmp file (the process is still running)
-		$filesTmp16 = glob($tmpDir.'/*.txt');
-		$filesTmp31 = glob($tmpDir.'/*.txt');
+		$filesTmp16 = glob($tmpDir16.'/*.txt');
+		$filesTmp31 = glob($tmpDir31.'/*.txt');
 		if (empty($filesTmp16) || empty($filesTmp31)) {
 			if ($input->getOption('all')) {
 				$output->writeln("Checking all the files");
