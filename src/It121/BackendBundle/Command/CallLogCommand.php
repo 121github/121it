@@ -329,7 +329,9 @@ class CallLogCommand extends ContainerAwareCommand {
 			$position = strpos($callLog121Sys->getCallTo(),'#');
 			if ($position) {
 				$campaign_id = substr($callLog121Sys->getCallTo(), $position+1);
-				$callLog121Sys->setCampaignId($campaign_id);
+				if ($campaign_id) {
+					$callLog121Sys->setCampaignId($campaign_id);
+				}
 			}
 
 			$em121sys->persist($callLog121Sys);
