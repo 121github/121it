@@ -119,6 +119,10 @@ class StatusProjectCommand extends ContainerAwareCommand {
 				$status = "In Progress";
 				$success = "IN PROGRESS";
 			}
+            else {
+                $status = "Unknown";
+                $success = "UNKNOWN";
+            }
 		}
 		else {
 			$status = "Unknown";
