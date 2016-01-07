@@ -120,7 +120,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         }
         
         // Project Status
-        foreach (array('Ok','Error', 'Warning', 'In Progress' ) as $name) {
+        foreach (array('Ok','Error', 'Warning', 'In Progress', 'Unknown' ) as $name) {
         	$projectStatus = new ProjectStatus();
         	$projectStatus->setName($name);
         	Util::setCreateAuditFields($projectStatus, 1);

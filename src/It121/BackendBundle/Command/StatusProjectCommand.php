@@ -98,26 +98,33 @@ class StatusProjectCommand extends ContainerAwareCommand {
 		$deployment = $this->getRss($url, $username, $password);
 		
 		$publishDate = $deployment[0]['published'];
-		
-		if ($deployment[0]['status'] == 'stable') {
-			$status = "Ok";
-			$project->setLastDeployment(new \DateTime($publishDate));
-			$success = "OK";
+
+		if (isset($deployment[0]['status'])) {
+			if ($deployment[0]['status'] == 'stable') {
+				$status = "Ok";
+				$project->setLastDeployment(new \DateTime($publishDate));
+				$success = "OK";
+			}
+			else if (strpos($deployment[0]['status'],'broken') !== false) {
+				$status = "Error";
+				$project->setLastDeployment(new \DateTime($publishDate));
+				$success = "ERROR";
+			}
+			else if ($deployment[0]['status'] == 'back to normal') {
+				$status = "Warning";
+				$project->setLastDeployment(new \DateTime($publishDate));
+				$success = "WARNING";
+			}
+			else if (strpos($deployment[0]['status'],'?') !== false) {
+				$status = "In Progress";
+				$success = "IN PROGRESS";
+			}
 		}
-		else if (strpos($deployment[0]['status'],'broken') !== false) {
-			$status = "Error";
-			$project->setLastDeployment(new \DateTime($publishDate));
-			$success = "ERROR";
+		else {
+			$status = "Unknown";
+			$success = "UNKNOWN";
 		}
-		else if ($deployment[0]['status'] == 'back to normal') {
-			$status = "Warning";
-			$project->setLastDeployment(new \DateTime($publishDate));
-			$success = "WARNING";
-		}
-		else if (strpos($deployment[0]['status'],'?') !== false) {
-			$status = "In Progress";
-			$success = "IN PROGRESS";
-		}
+
 		
 		$project->setStatus($entityManager->getRepository('ProjectBundle:ProjectStatus')->findOneBy(array(
 				'name' => $status
