@@ -14,8 +14,21 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="{{ (app.request.attributes.get('_route') == 'dashboard_homepage')?'active' : '' }}"><a
-                            href="{{ path('dashboard_homepage') }}">Dashboard</a></li>
+
+                {#/******************************************************************************************************************************/#}
+                {#/********************************  DASHBOARDS ************************************************************************************/#}
+                {#/******************************************************************************************************************************/#}
+                {% set dashboard_menu = ['dashboard_homepage', 'dashboard_data'] %}
+                <li class="dropdown {{(app.request.attributes.get('_route') in dashboard_menu)?'active' : '' }}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dashboards<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="{{ (app.request.attributes.get('_route') == 'dashboard_homepage')?'active' : '' }}"><a
+                                    href="{{ path('dashboard_homepage') }}">Overview</a></li>
+                        <li class="{{ (app.request.attributes.get('_route') == 'dashboard_data')?'active' : '' }}"><a
+                                    href="{{ path('dashboard_data') }}">Data Usage</a></li>
+                    </ul>
+                </li>
+
                 {#/******************************************************************************************************************************/#}
                 {#/********************************  PROJECTS ***********************************************************************************/#}
                 {#/******************************************************************************************************************************/#}
@@ -127,10 +140,11 @@
                 {#/******************************************************************************************************************************/#}
                 {#/********************************  LOGS ***************************************************************************************/#}
                 {#/******************************************************************************************************************************/#}
-                <li class="dropdown">
+                {% set logs_menu = ['call_logs'] %}
+                <li class="dropdown {{ (app.request.attributes.get('_route') in logs_menu)?'active' : '' }}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logs<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>
+                        <li class=" {{ (app.request.attributes.get('_route') == 'call_logs')?'active' : '' }}">
                             <a href="{{ path('call_logs') }}">Call Logs</a>
                         </li>
                     </ul>
@@ -141,11 +155,12 @@
                 {#/********************************  ADMIN **************************************************************************************/#}
                 {#/******************************************************************************************************************************/#}
                 {% if is_granted('ROLE_ADMINISTRATOR') %}
-                    {% set server = ['server', 'project', 'projectgroup', 'user'] %}
-                    <li class="dropdown {{ (app.request.attributes.get('_route') in server)?'active' : '' }}">
+                    {% set admin_menu = ['server', 'project', 'projectgroup', 'user', 'address_paf', 'address_open'] %}
+                    <li class="dropdown {{ (app.request.attributes.get('_route') in admin_menu)?'active' : '' }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>
+                            {% set adm_servers = ['server'] %}
+                            <li class="{{ (app.request.attributes.get('_route') in adm_servers)?'active' : '' }}" >
                                 <a class="trigger right-caret">{{ "Servers" }}</a>
                                 <ul class="dropdown-menu sub-menu">
                                     <li class=" {{ (app.request.attributes.get('_route') == 'server')?'active' : '' }}">
@@ -153,8 +168,8 @@
                                             List</a>
                                 </ul>
                             </li>
-                            <li class="divider"></li>
-                            <li>
+                            {% set adm_projects = ['project', 'projectgroup'] %}
+                            <li class="{{ (app.request.attributes.get('_route') in adm_projects)?'active' : '' }}" >
                                 <a class="trigger right-caret">{{ "Projects" }}</a>
                                 <ul class="dropdown-menu sub-menu">
                                     <li class=" {{ (app.request.attributes.get('_route') == 'project')?'active' : '' }}">
@@ -165,22 +180,22 @@
                                             List</a>
                                 </ul>
                             </li>
-                            <li class="divider"></li>
-                            <li>
+                            {% set adm_users = ['user'] %}
+                            <li class="{{ (app.request.attributes.get('_route') in adm_users)?'active' : '' }}" >
                                 <a class="trigger right-caret">{{ "Users" }}</a>
                                 <ul class="dropdown-menu sub-menu">
                                     <li class=" {{ (app.request.attributes.get('_route') == 'user')?'active' : '' }}"><a
                                                 href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
                                 </ul>
                             </li>
-                            <li class="divider"></li>
-                            <li>
+                            {% set adm_address = ['address_paf', 'address_open'] %}
+                            <li class="{{ (app.request.attributes.get('_route') in adm_address)?'active' : '' }}" >
                                 <a class="trigger right-caret">{{ "Addresses" }}</a>
                                 <ul class="dropdown-menu sub-menu">
-                                    <li class=" {{ (app.request.attributes.get('_route') == 'address')?'active' : '' }}"><a
+                                    <li class=" {{ (app.request.attributes.get('_route') == 'address_paf')?'active' : '' }}"><a
                                                 href="{{ path('address_paf') }}"><span class="fa fa-institution"></span> PAF</a>
                                     <li class="divider"></li>
-                                    <li class=" {{ (app.request.attributes.get('_route') == 'address')?'active' : '' }}"><a
+                                    <li class=" {{ (app.request.attributes.get('_route') == 'address_open')?'active' : '' }}"><a
                                                 href="{{ path('address_open') }}"><span class="fa fa-home"></span> Open Maps</a>
                                 </ul>
                             </li>

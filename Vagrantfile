@@ -22,7 +22,20 @@ Vagrant.configure('2') do |config|
 
   config.vm.network :private_network, ip: '192.168.111.226'
 
-  config.vm.synced_folder '.', '/vagrant', owner: 'www-data', group: 'www-data', :mount_options => ['dmode=777,fmode=777']
+  config.vm.synced_folder '.', '/vagrant',
+                          owner: 'vagrant',
+                          group: 'vagrant',
+                          :mount_options => ['dmode=775,fmode=664']
+
+  config.vm.synced_folder 'app/cache', '/vagrant/app/cache',
+                          owner: 'vagrant',
+                          group: 'vagrant',
+                          :mount_options => ['dmode=777,fmode=666']
+
+  config.vm.synced_folder 'app/logs', '/vagrant/app/logs',
+                          owner: 'vagrant',
+                          group: 'vagrant',
+                          :mount_options => ['dmode=777,fmode=666']
 
   config.vm.provision "shell", path: "vagrant/provision.sh"
 
