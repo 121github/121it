@@ -16,7 +16,7 @@ symfony_actions() {
     cd /vagrant/
 
 	echo "Clear symfony cache"
-	php app/console cache:clear --env=dev
+	php app/console cache:clear --env=dev --no-warmup
 
 	echo "Dump assetic assets"
 	php app/console assetic:dump --env=dev
