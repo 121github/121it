@@ -24,10 +24,8 @@
                     <ul class="dropdown-menu" role="menu">
                         <li class="{{ (app.request.attributes.get('_route') == 'dashboard_homepage')?'active' : '' }}"><a
                                     href="{{ path('dashboard_homepage') }}">Overview</a></li>
-                        {% if is_granted('ROLE_ADMINISTRATOR') %}
-                            <li class="{{ (app.request.attributes.get('_route') == 'dashboard_data')?'active' : '' }}"><a
-                                        href="{{ path('dashboard_data') }}">Data Usage</a></li>
-                        {% endif %}
+                        <li class="{{ (app.request.attributes.get('_route') == 'dashboard_data')?'active' : '' }}"><a
+                                    href="{{ path('dashboard_data') }}">Data Usage</a></li>
                     </ul>
                 </li>
 
