@@ -24,14 +24,14 @@ parameters:
     database_host_calldev: 127.0.0.1
     database_port_calldev: null
     database_name_calldev: calldev
-    database_user_calldev: 121it
+    database_user_calldev: 121sys_test
     database_password_calldev: NXWa5HmBstr3YRXe
 
     database_driver_cronjobs: pdo_mysql
     database_host_cronjobs: 127.0.0.1
     database_port_cronjobs: null
     database_name_cronjobs: cronjobs
-    database_user_cronjobs: 121it
+    database_user_cronjobs: 121sys_test
     database_password_cronjobs: NXWa5HmBstr3YRXe
 
     mailer_transport: smtp
