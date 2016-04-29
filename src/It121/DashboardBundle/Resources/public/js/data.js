@@ -46,8 +46,8 @@ var data = {
 
                         $tbody
 							.append("<tr class='"+status+"'>"
-										+ "<td>"+dataleft.callbacks+"</td>"
 										+ "<td>"+dataleft.campaign+"</td>"
+										+ "<td>"+dataleft.callbacks+"</td>"
                                         + "<td>"+dataleft.average_dials+"</td>"
                                         + "<td>"+dataleft.agents+"</td>"
                                         + "<td>"+dataleft.mins_remain+"</td>"
