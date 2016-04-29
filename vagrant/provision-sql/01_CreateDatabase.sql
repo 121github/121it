@@ -18,4 +18,10 @@ GRANT ALL PRIVILEGES ON 121sys.* TO '121it'@'%';
 CREATE database uk_postcodes;
 GRANT ALL PRIVILEGES ON uk_postcodes.* TO '121it'@'%';
 
+CREATE database calldev;
+GRANT ALL PRIVILEGES ON calldev.* TO '121it'@'%';
+
+CREATE database cronjobs;
+GRANT ALL PRIVILEGES ON cronjobs.* TO '121it'@'%';
+
 FLUSH PRIVILEGES;

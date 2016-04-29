@@ -74,6 +74,22 @@ doctrine:
                 dbname:   "%database_name_uk_postcodes%"
                 user:     "%database_user_uk_postcodes%"
                 password: "%database_password_uk_postcodes%"
+            calldev:
+                driver:   "%database_driver_calldev%"
+                host:     "%database_host_calldev%"
+                port:     "%database_port_calldev%"
+                dbname:   "%database_name_calldev%"
+                user:     "%database_user_calldev%"
+                password: "%database_password_calldev%"
+                charset:  UTF8
+            cronjobs:
+                driver:   "%database_driver_cronjobs%"
+                host:     "%database_host_cronjobs%"
+                port:     "%database_port_cronjobs%"
+                dbname:   "%database_name_cronjobs%"
+                user:     "%database_user_cronjobs%"
+                password: "%database_password_cronjobs%"
+                charset:  UTF8
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         # path:     "%database_path%"
@@ -98,6 +114,14 @@ doctrine:
                 connection: uk_postcodes
                 mappings:
                     AddressBundle: ~
+            calldev:
+                connection: calldev
+                mappings:
+                    CalldevBundle: ~
+            cronjobs:
+                connection: cronjobs
+                mappings:
+                    CronjobsBundle: ~
 
 
 # Parameters (global vars)

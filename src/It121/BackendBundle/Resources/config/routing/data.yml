@@ -1,0 +1,3 @@
+data:
+    path:     /
+    defaults: { _controller: "BackendBundle:Data:index" }

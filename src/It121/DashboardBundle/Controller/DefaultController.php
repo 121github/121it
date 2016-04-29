@@ -91,6 +91,36 @@ class DefaultController extends Controller
     	
     	return $this->render('DashboardBundle:Default:index.html.twig', array_merge($options, $elementsForMenu));
     }
+
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+	/********************************  DATA LIST ACTION ********************************************************************/
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+	/******************************************************************************************************************************/
+
+	/**
+	 * Environment view
+	 *
+	 */
+	public function dataAction()
+	{
+        $em = $this->getDoctrine()->getManager();
+
+//        $shortcutProductionApps = $em->getRepository('ServerBundle:Server')->findWithShortcutProductionApps();
+//        $shortcutManagementApps = $em->getRepository('ServerBundle:Server')->findWithShortcutManagementApps();
+
+        $options = array(
+//            'shortcutProductionApps' => $shortcutProductionApps,
+//            'shortcutManagementApps' => $shortcutManagementApps
+        );
+
+        $elementsForMenu = $this->getElementsForMenu();
+
+        return $this->render('DashboardBundle:Default:data.html.twig', array_merge($options, $elementsForMenu));
+
+	}
     
     /******************************************************************************************************************************/
     /******************************************************************************************************************************/

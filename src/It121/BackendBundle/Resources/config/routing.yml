@@ -21,3 +21,7 @@ projectgroup:
 address:
      resource: "@BackendBundle/Resources/config/routing/address.yml"
      prefix:   /address
+
+data:
+    resource: "@BackendBundle/Resources/config/routing/data.yml"
+    prefix:   /data

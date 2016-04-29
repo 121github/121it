@@ -24,8 +24,10 @@
                     <ul class="dropdown-menu" role="menu">
                         <li class="{{ (app.request.attributes.get('_route') == 'dashboard_homepage')?'active' : '' }}"><a
                                     href="{{ path('dashboard_homepage') }}">Overview</a></li>
-                        <li class="{{ (app.request.attributes.get('_route') == 'dashboard_data')?'active' : '' }}"><a
-                                    href="{{ path('dashboard_data') }}">Data Usage</a></li>
+                        {% if is_granted('ROLE_ADMINISTRATOR') %}
+                            <li class="{{ (app.request.attributes.get('_route') == 'dashboard_data')?'active' : '' }}"><a
+                                        href="{{ path('dashboard_data') }}">Data Usage</a></li>
+                        {% endif %}
                     </ul>
                 </li>
 
@@ -159,6 +161,16 @@
                     <li class="dropdown {{ (app.request.attributes.get('_route') in admin_menu)?'active' : '' }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+
+                            {% set adm_data = ['data'] %}
+                            <li class="{{ (app.request.attributes.get('_route') in adm_data)?'active' : '' }}" >
+                                <a class="trigger right-caret">{{ "Data" }}</a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li class=" {{ (app.request.attributes.get('_route') == 'data')?'active' : '' }}">
+                                        <a href="{{ path('data') }}"><span class="fa fa-laptop"></span> Data Usage</a>
+                                </ul>
+                            </li>
+
                             {% set adm_servers = ['server'] %}
                             <li class="{{ (app.request.attributes.get('_route') in adm_servers)?'active' : '' }}" >
                                 <a class="trigger right-caret">{{ "Servers" }}</a>
@@ -168,6 +180,7 @@
                                             List</a>
                                 </ul>
                             </li>
+
                             {% set adm_projects = ['project', 'projectgroup'] %}
                             <li class="{{ (app.request.attributes.get('_route') in adm_projects)?'active' : '' }}" >
                                 <a class="trigger right-caret">{{ "Projects" }}</a>
@@ -180,6 +193,7 @@
                                             List</a>
                                 </ul>
                             </li>
+
                             {% set adm_users = ['user'] %}
                             <li class="{{ (app.request.attributes.get('_route') in adm_users)?'active' : '' }}" >
                                 <a class="trigger right-caret">{{ "Users" }}</a>
@@ -188,6 +202,7 @@
                                                 href="{{ path('user') }}"><span class="fa fa-user"></span> User List</a>
                                 </ul>
                             </li>
+
                             {% set adm_address = ['address_paf', 'address_open'] %}
                             <li class="{{ (app.request.attributes.get('_route') in adm_address)?'active' : '' }}" >
                                 <a class="trigger right-caret">{{ "Addresses" }}</a>

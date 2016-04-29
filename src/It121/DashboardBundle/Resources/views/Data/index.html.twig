@@ -1,0 +1,75 @@
+{% extends '::dashboard.html.twig' %}
+
+{% block title %}Data Dashboard{% endblock %}
+
+{% block content -%}
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseDataLeft">
+                            Data Left
+                            <small> Calculating how long before data runs out</small>
+                        </a>
+                        <div class="pull-right">
+                            <a href="#" class="fa fa-refresh  fa-1x dataleft-check-btn"></a>
+                        </div>
+                    </h4>
+                </div>
+                <div id="collapseDataLeft" class="panel-collapse collapse in">
+                    <div class="panel-body" style="max-height: 250px; overflow-y:scroll;">
+                        <table class="table small table-hover dataleft">
+                            <thead>
+                                <th>Callback</th>
+                                <th>Campaign</th>
+                                <th>Average Dials</th>
+                                <th>Agents</th>
+                                <th>Mins Remain</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapseOutcomes">
+                            Outcomes
+                            <small> Identifying bad quality data files</small>
+                        </a>
+                        <div class="pull-right">
+                            <a href="#" class="fa fa-refresh  fa-1x outcomes-check-btn"></a>
+                        </div>
+                    </h4>
+                </div>
+                <div id="collapseOutcomes" class="panel-collapse collapse in">
+                    <div class="panel-body" style="max-height: 250px; overflow-y:scroll;">
+                        <table class="table small table-hover outcomes">
+                            <thead>
+                                <th>Outcomes</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            data.setLoaderUrl("{{ asset('bundles/backend/images/ajax-loader.gif') }}");
+            data.init();
+        });
+    </script>
+
+{% endblock %}

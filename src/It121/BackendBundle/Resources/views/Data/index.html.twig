@@ -1,0 +1,12 @@
+{% extends '::backend.html.twig' %}
+
+{% block title %}Data Usage{% endblock %}
+
+{% block content -%}
+
+    {% for data in dataLeft %}
+        {{ data.campaign }}
+    {% endfor %}
+
+
+{% endblock %}

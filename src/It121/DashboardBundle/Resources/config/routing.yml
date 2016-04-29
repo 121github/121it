@@ -1,7 +1,7 @@
 dashboard_homepage:
     path:     /
     defaults: { _controller: "DashboardBundle:Default:index" }
-    
+
 dashboard_environment:
     path:     /environment/{name}
     defaults: { _controller: "DashboardBundle:Default:environment", "name":null }
@@ -17,23 +17,27 @@ dashboard_server_show:
 dashboard_server_check:
     path:     /servers/check
     defaults: { _controller: "DashboardBundle:Default:checkServer" }
-    requirements: { _method: post }
+    methods: [POST]
 
 dashboard_deployment_check:
     path:     /deployment/check
     defaults: { _controller: "DashboardBundle:Default:checkDeployment" }
-    requirements: { _method: post }
+    methods: [POST]
 
 dashboard_call_log_check:
     path:     /calllog/check
     defaults: { _controller: "DashboardBundle:Default:checkCallLog" }
-    requirements: { _method: post }
+    methods: [POST]
 
 dashboard_today_call_log_check:
     path:     /todaycalllog/check
     defaults: { _controller: "DashboardBundle:Default:checkTodayCallLog" }
-    requirements: { _method: post }
+    methods: [POST]
 
 dashboard_call_log:
      resource: "@DashboardBundle/Resources/config/routing/calllog.yml"
      prefix:   /log/call
+
+dashboard_data:
+    resource: "@DashboardBundle/Resources/config/routing/data.yml"
+    prefix:   /data

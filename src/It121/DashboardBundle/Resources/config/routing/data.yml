@@ -1,0 +1,8 @@
+dashboard_data:
+    path:     /
+    defaults: { _controller: "DashboardBundle:Data:index" }
+
+dashboard_dataleft_check:
+    path:     /dataleft/check
+    defaults: { _controller: "DashboardBundle:Data:checkDataLeft" }
+    methods: [POST]
