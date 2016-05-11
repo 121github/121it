@@ -6,3 +6,8 @@ dashboard_dataleft_check:
     path:     /dataleft/check
     defaults: { _controller: "DashboardBundle:Data:checkDataLeft" }
     methods: [POST]
+
+dashboard_outcomes_check:
+    path:     /outcomes/check
+    defaults: { _controller: "DashboardBundle:Data:checkOutcomes" }
+    methods: [POST]

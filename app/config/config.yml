@@ -118,6 +118,9 @@ doctrine:
                 connection: calldev
                 mappings:
                     CalldevBundle: ~
+                dql:
+                    datetime_functions:
+                        DATE: DoctrineExtensions\Query\Mysql\Date
             cronjobs:
                 connection: cronjobs
                 mappings:
