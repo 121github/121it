@@ -334,6 +334,20 @@ class CallLogCommand extends ContainerAwareCommand {
 				}
 			}
 
+			//Set the real extension and the user
+            $callDevEntityManager = $this->getContainer()->get('doctrine')->getManager('calldev');
+            $userExtensions = $callDevEntityManager->getRepository('CalldevBundle:AdvisorPhones')->getRealExtension($callLog->getCallDate(), $callLog->getCallFrom());
+            if (!empty($userExtensions)) {
+                foreach ($userExtensions as $userExtension) {
+                    $callLog121Sys->setExt($userExtension->getExt());
+                    $callLog121Sys->setUser($userExtension->getAdvisor());
+                    break;
+                }
+            }
+            else {
+                $callLog121Sys->setExt($callLog->getCallFrom());
+            }
+
 			$em121sys->persist($callLog121Sys);
 		}
 		$em->flush();

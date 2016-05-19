@@ -24,7 +24,6 @@ class DataLeft
      * @var string
      *
      * @ORM\Column(name="campaign", type="string", length=30)
-     * @ORM\Id
      */
     private $campaign;
 
@@ -32,7 +31,6 @@ class DataLeft
      * @var string
      *
      * @ORM\Column(name="averageDials", type="string", length=10)
-     * @ORM\Id
      */
     private $averageDials;
 
@@ -47,7 +45,6 @@ class DataLeft
      * @var string
      *
      * @ORM\Column(name="minsRemain", type="string", length=10)
-     * @ORM\Id
      */
     private $minsRemain;
 

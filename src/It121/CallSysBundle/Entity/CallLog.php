@@ -120,6 +120,20 @@ class CallLog
     private $campaignId;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="ext", type="string", length=3, nullable=true)
+     */
+    private $ext;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user", type="string", length=40, nullable=true)
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -394,4 +408,37 @@ class CallLog
     {
         $this->campaignId = $campaignId;
     }
+
+    /**
+     * @return string
+     */
+    public function getExt()
+    {
+        return $this->ext;
+    }
+
+    /**
+     * @param string $ext
+     */
+    public function setExt($ext)
+    {
+        $this->ext = $ext;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param string $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
 }
