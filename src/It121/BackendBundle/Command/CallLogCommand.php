@@ -340,11 +340,11 @@ class CallLogCommand extends ContainerAwareCommand {
             if (!empty($userExtensions)) {
                 foreach ($userExtensions as $userExtension) {
                     $callLog121Sys->setExt($userExtension->getExt());
-                    $callLog121Sys->setUser($userExtension->getAdvisor());
+                    $callLog121Sys->setUser($userExtension->getAdvisor()->getName());
                     break;
                 }
             }
-            else {
+			else if ($callLog->getInbound()==0 && strlen($callLog->getCallFrom())==3) {
                 $callLog121Sys->setExt($callLog->getCallFrom());
             }
 
